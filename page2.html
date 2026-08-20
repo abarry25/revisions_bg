@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bear Guardian — Revision Notes & Book Two Bible</title>
+<style>
+  :root{
+    --bg:#0f1114;
+    --bg-raised:#161a1f;
+    --bg-card:#1b2027;
+    --ink:#e8e4dc;
+    --ink-dim:#a49f96;
+    --ink-faint:#6f6a62;
+    --rule:#2a3037;
+    --moon:#9fc3e8;
+    --bear:#c98f4e;
+    --maeren:#b892d8;
+    --rian:#7fb3c8;
+    --brynna:#cf6a5a;
+    --aurelian:#7fbd97;
+    --warn:#e0b341;
+    --font:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,sans-serif;
+    --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);
+    font:16px/1.65 var(--font);-webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--moon)}
+
+  /* ---------- layout ---------- */
+  .wrap{display:flex;min-height:100vh;align-items:flex-start}
+  aside{
+    width:262px;flex:0 0 262px;position:sticky;top:0;height:100vh;
+    overflow-y:auto;border-right:1px solid var(--rule);background:var(--bg-raised);
+    padding:26px 0 40px;
+  }
+  main{flex:1;min-width:0;padding:44px 52px 140px;max-width:920px}
+  @media(max-width:900px){
+    aside{display:none}
+    main{padding:28px 20px 100px}
+  }
+
+  /* ---------- sidebar ---------- */
+  .brand{padding:0 22px 20px;border-bottom:1px solid var(--rule);margin-bottom:16px}
+  .brand h1{font:600 17px/1.3 var(--serif);margin:0 0 4px;letter-spacing:.2px}
+  .brand p{margin:0;font-size:11.5px;color:var(--ink-faint);text-transform:uppercase;letter-spacing:.13em}
+  nav a{
+    display:block;padding:7px 22px;font-size:13.5px;color:var(--ink-dim);
+    text-decoration:none;border-left:2px solid transparent;transition:.15s;
+  }
+  nav a:hover{color:var(--ink);background:#1c2128}
+  nav a.active{color:var(--ink);border-left-color:var(--bear);background:#1c2128}
+  nav .grp{
+    padding:18px 22px 6px;font-size:10.5px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--ink-faint);font-weight:600;
+  }
+  nav a.sub{padding-left:34px;font-size:13px}
+
+  .toolbar{padding:14px 22px 0;border-top:1px solid var(--rule);margin-top:20px}
+  .toolbar button{
+    width:100%;margin-bottom:7px;padding:7px 10px;font-size:12.5px;font-family:inherit;
+    background:#20262e;color:var(--ink-dim);border:1px solid var(--rule);
+    border-radius:6px;cursor:pointer;transition:.15s;
+  }
+  .toolbar button:hover{color:var(--ink);border-color:#3a434d}
+
+  /* ---------- typography ---------- */
+  h2.sec{
+    font:600 27px/1.25 var(--serif);margin:0 0 6px;letter-spacing:.2px;
+    scroll-margin-top:24px;
+  }
+  .sec-kicker{
+    font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--ink-faint);margin:0 0 26px;
+  }
+  h3{font:600 18px/1.35 var(--font);margin:34px 0 10px;letter-spacing:.1px}
+  p{margin:0 0 14px}
+  .lede{font-size:17px;color:var(--ink-dim);max-width:66ch}
+  hr.div{border:0;border-top:1px solid var(--rule);margin:46px 0}
+  .pull{
+    font:italic 17px/1.6 var(--serif);color:var(--ink);
+    border-left:2px solid var(--bear);padding:2px 0 2px 18px;margin:18px 0;max-width:62ch;
+  }
+  .note{font-size:14px;color:var(--ink-dim)}
+  strong{color:#fff;font-weight:600}
+
+  /* ---------- tags ---------- */
+  .tag{
+    display:inline-block;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+    padding:2px 8px;border-radius:99px;border:1px solid;font-weight:600;vertical-align:2px;
+  }
+  .t-maeren{color:var(--maeren);border-color:#4b3b5c}
+  .t-rian{color:var(--rian);border-color:#33505c}
+  .t-brynna{color:var(--brynna);border-color:#5c3630}
+  .t-aurelian{color:var(--aurelian);border-color:#31513e}
+  .t-theme{color:var(--warn);border-color:#584518}
+
+  /* ---------- cards / accordion ---------- */
+  .card{
+    background:var(--bg-card);border:1px solid var(--rule);border-radius:10px;
+    margin:12px 0;overflow:hidden;
+  }
+  .card > summary{
+    list-style:none;cursor:pointer;padding:15px 18px;display:flex;gap:12px;
+    align-items:baseline;transition:.15s;
+  }
+  .card > summary::-webkit-details-marker{display:none}
+  .card > summary:hover{background:#20262e}
+  .card[open] > summary{border-bottom:1px solid var(--rule);background:#1e242c}
+  .chev{
+    flex:0 0 auto;color:var(--ink-faint);font-size:11px;transition:transform .18s;
+    transform:translateY(-1px);
+  }
+  .card[open] .chev{transform:rotate(90deg) translateX(-1px)}
+  .beat-n{
+    flex:0 0 auto;font:600 11px/1 var(--font);letter-spacing:.1em;color:var(--bear);
+    border:1px solid #4a3821;border-radius:4px;padding:5px 7px;
+  }
+  .card-title{flex:1;font-weight:600;font-size:15.5px}
+  .card-sub{display:block;font-weight:400;font-size:13px;color:var(--ink-dim);margin-top:3px}
+  .card-body{padding:16px 18px 6px}
+  .card-body > *:last-child{margin-bottom:14px}
+
+  /* ---------- compare grid ---------- */
+  .compare{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:18px 0}
+  @media(max-width:700px){.compare{grid-template-columns:1fr}}
+  .compare > div{
+    background:var(--bg-card);border:1px solid var(--rule);
+    border-radius:9px;padding:14px 16px;
+  }
+  .compare h4{
+    margin:0 0 8px;font-size:11px;letter-spacing:.13em;text-transform:uppercase;
+    color:var(--ink-faint);font-weight:600;
+  }
+  .compare p{margin:0;font-size:14.5px}
+  .cmp-before{border-left:2px solid #4a4a52}
+  .cmp-after{border-left:2px solid var(--bear)}
+
+  /* ---------- toggle switch (arc mirror) ---------- */
+  .switcher{display:flex;gap:6px;margin:18px 0 14px;flex-wrap:wrap}
+  .switcher button{
+    font:600 13px/1 var(--font);padding:9px 15px;border-radius:99px;cursor:pointer;
+    background:transparent;color:var(--ink-dim);border:1px solid var(--rule);transition:.15s;
+  }
+  .switcher button:hover{color:var(--ink)}
+  .switcher button.on{background:#252c35;color:var(--ink);border-color:#465060}
+  .pane{display:none}
+  .pane.on{display:block;animation:fade .2s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(3px)}to{opacity:1;transform:none}}
+
+  /* ---------- causal chain ---------- */
+  .chain{margin:20px 0;padding:0;list-style:none;counter-reset:c}
+  .chain li{
+    position:relative;padding:11px 14px 11px 46px;margin:0;
+    border-left:2px solid var(--rule);
+  }
+  .chain li::before{
+    counter-increment:c;content:counter(c);
+    position:absolute;left:-13px;top:12px;width:24px;height:24px;border-radius:50%;
+    background:var(--bg-card);border:1px solid var(--rule);color:var(--ink-faint);
+    font:600 11px/23px var(--font);text-align:center;
+  }
+  .chain li.hit{border-left-color:var(--bear)}
+  .chain li.hit::before{border-color:var(--bear);color:var(--bear)}
+  .chain li b{display:block;font-size:15px;font-weight:600}
+  .chain li span{font-size:13.5px;color:var(--ink-dim)}
+
+  /* ---------- checklist ---------- */
+  .checks{margin:18px 0;padding:0;list-style:none}
+  .checks li{
+    display:flex;gap:12px;align-items:flex-start;padding:11px 14px;
+    background:var(--bg-card);border:1px solid var(--rule);border-radius:8px;margin-bottom:7px;
+    cursor:pointer;transition:.15s;font-size:14.5px;
+  }
+  .checks li:hover{border-color:#3a434d}
+  .checks li.done{opacity:.45}
+  .checks li.done .box{background:var(--aurelian);border-color:var(--aurelian);color:#0f1114}
+  .checks li.done .txt{text-decoration:line-through}
+  .box{
+    flex:0 0 auto;width:19px;height:19px;border:1.5px solid #414a54;border-radius:5px;
+    font:700 12px/17px var(--font);text-align:center;color:transparent;margin-top:1px;
+  }
+  .progress{font-size:12.5px;color:var(--ink-faint);margin:0 0 14px}
+
+  /* ---------- misc ---------- */
+  .arrowline{
+    font-size:14.5px;color:var(--ink-dim);background:#141920;border:1px solid var(--rule);
+    border-radius:8px;padding:12px 15px;margin:14px 0;
+  }
+  .arrowline b{color:var(--ink)}
+  .arrow{color:var(--bear);padding:0 5px}
+  ul.plain{margin:0 0 14px;padding-left:20px}
+  ul.plain li{margin-bottom:5px}
+  .traits{display:flex;flex-wrap:wrap;gap:5px;margin:8px 0 14px}
+  .traits span{
+    font-size:12.5px;padding:3px 9px;border-radius:5px;
+    background:#20262e;border:1px solid var(--rule);color:var(--ink-dim);
+  }
+  .traits span.flip{background:#2b1f18;border-color:#4a3821;color:var(--bear)}
+  .flag{
+    background:#241f12;border:1px solid #584518;border-radius:8px;
+    padding:13px 16px;margin:18px 0;font-size:14.5px;
+  }
+  .flag b{color:var(--warn)}
+  footer{
+    margin-top:60px;padding-top:20px;border-top:1px solid var(--rule);
+    font-size:12.5px;color:var(--ink-faint);
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<aside>
+  <div class="brand">
+    <h1>Bear Guardian</h1>
+    <p>Revision notes &amp; Book Two bible</p>
+  </div>
+  <nav id="nav">
+    <div class="grp">Part One · The Veil</div>
+    <a href="#veil" class="sub">Ending revision: two choices</a>
+    <a href="#maeren" class="sub">Maeren's choice</a>
+    <a href="#rian" class="sub">Rían's choice</a>
+    <a href="#chain" class="sub">Causal sequence</a>
+    <a href="#mirror" class="sub">Storm / Veil mirror</a>
+    <div class="grp">Part Two · Seradon</div>
+    <a href="#b2" class="sub">Brynna &amp; Aurelian</a>
+    <a href="#journey" class="sub">The journey north</a>
+    <a href="#beats" class="sub">The seven beats</a>
+    <a href="#parallel" class="sub">The hidden parallel</a>
+    <a href="#strength" class="sub">Aurelian's realization</a>
+    <a href="#payoff" class="sub">Endgame &amp; payoff</a>
+    <div class="grp">Reference</div>
+    <a href="#donotbreak" class="sub">Things not to break</a>
+  </nav>
+  <div class="toolbar">
+    <button onclick="setAll(true)">Expand all</button>
+    <button onclick="setAll(false)">Collapse all</button>
+    <button onclick="window.print()">Print / save PDF</button>
+  </div>
+</aside>
+
+<main>
+
+<!-- ===================== PART ONE ===================== -->
+<h2 class="sec" id="veil">Ending Revision — Maeren + Rían at the Veil</h2>
+<p class="sec-kicker">Part One · climax</p>
+
+<p class="lede">The climax contains <strong>two separate choices</strong>, each completing a Book One movement.</p>
+
+<div class="compare">
+  <div class="cmp-after">
+    <h4><span class="tag t-maeren">Maeren</span></h4>
+    <p>Chooses the transformation.</p>
+  </div>
+  <div class="cmp-after">
+    <h4><span class="tag t-rian">Rían</span></h4>
+    <p>Chooses not to stop her.</p>
+  </div>
+</div>
+
+<h3 id="maeren">Maeren's choice</h3>
+<p>She still does <strong>not</strong> know the moonstone is suppressing/protecting her from her own power. That realization belongs to Rían.</p>
+<p>After the humiliation, the betrayal, and the revelation of how thoroughly others have controlled and manipulated her, she consciously decides to <strong>stop containing herself</strong>.</p>
+<div class="pull">You have spent my entire life deciding what I should be, what I should know, and how much of myself is safe for the world. You're terrified of what I might become? Fine. Be terrified.</div>
+<p>She doesn't know what transformation will mean or what it will cost. Consequences be damned.</p>
+<p><strong>This is not healthy self-acceptance yet.</strong> It is rage-fueled refusal of containment. Her survival mechanism inverts rather than heals:</p>
+
+<div class="compare">
+  <div class="cmp-before">
+    <h4>Beginning Maeren</h4>
+    <p>Make yourself <em>small</em> enough that they leave you alone.</p>
+  </div>
+  <div class="cmp-after">
+    <h4>Ending Maeren</h4>
+    <p>Make yourself <em>terrifying</em> enough that they cannot hurt you.</p>
+  </div>
+</div>
+<p class="note">Neither is freedom — which leaves substantial growth for Book Two.</p>
+
+<h3 id="rian">Rían's choice</h3>
+<p>Maeren <strong>begins transforming before Rían intervenes.</strong> Critical: the reader must understand unequivocally that the transformation is her choice.</p>
+<p>Then he notices what she cannot yet know: <strong>the moonstone is fighting her transformation. It is suppressing her.</strong></p>
+<p>This creates his moral choice. Everything he's been taught says the transformation is dangerous — the Elders fear the Bear Guardian, Orlíen's prophecy suggests Maeren could destroy everything, removing the amulet could unleash something catastrophic. But he finally understands the difference between <em>doing what authority tells him is necessary</em> and <em>doing what he believes is right.</em></p>
+<p>So he removes the amulet anyway.</p>
+<div class="pull">I will not imprison her because I am afraid of what she might choose.</div>
+
+<p><strong>Why this works:</strong> it reverses his surveillance history using the same skill set.</p>
+<div class="compare">
+  <div class="cmp-before">
+    <h4>Beginning Rían</h4>
+    <p>Observe → understand her → identify vulnerabilities → use that knowledge to <strong>control</strong> the outcome.</p>
+  </div>
+  <div class="cmp-after">
+    <h4>Ending Rían</h4>
+    <p>Observe → understand what's happening → identify the thing controlling her → use that knowledge to <strong>release</strong> control.</p>
+  </div>
+</div>
+<p>His ability to read Maeren hasn't changed. What he does with that knowledge has.</p>
+<div class="flag"><b>Not redemption.</b> One good decision doesn't erase the surveillance, the betrayal, or the cowardice. It only proves he is finally <em>capable</em> of choosing differently.</div>
+
+<h3 id="chain">The causal sequence to protect</h3>
+<p class="note">Click any step to trace the chain. The load-bearing beats are 1, 5 and 6.</p>
+<ol class="chain" id="chain">
+  <li><b>Maeren chooses to let go</b><span>Her decision, uninfluenced and uninformed about the amulet.</span></li>
+  <li><b>Transformation begins</b><span>Visibly underway before anyone intervenes.</span></li>
+  <li><b>The amulet resists / constricts her</b><span>The suppression becomes physically legible.</span></li>
+  <li><b>Rían notices</b><span>His observational skill, finally pointed at something useful.</span></li>
+  <li><b>Rían understands what the amulet actually does</b><span>The knowledge Maeren does not have.</span></li>
+  <li><b>Rían chooses to remove it despite the danger</b><span>Believing it may be catastrophic. That's the point.</span></li>
+  <li><b>Maeren is fully unleashed</b><span>No longer held back by anyone else's fear.</span></li>
+  <li><b>The Bear emerges / disappears</b><span>End of Book One.</span></li>
+</ol>
+<div class="flag"><b>Net effect:</b> Rían no longer <em>causes</em> Maeren's transformation. He honors a choice she has already made.</div>
+
+<h3 id="mirror">Thematic mirror — Storm vs. Veil</h3>
+<div class="arrowline"><b>Storm</b><span class="arrow">→</span>I won't control nature. I'll stop holding it back.</div>
+<div class="arrowline"><b>Veil</b><span class="arrow">→</span>I won't control myself to make you comfortable anymore.</div>
+<p>The Veil is darker, because Maeren's decision comes from betrayal, humiliation, grief, and rage. She has learned something <em>true</em> — <em>I don't have to remain contained for other people's comfort</em> — for reasons that may lead her somewhere dangerous.</p>
+<div class="compare">
+  <div class="cmp-after"><h4><span class="tag t-maeren">Maeren</span></h4><p>I refuse to contain myself for you anymore.</p></div>
+  <div class="cmp-after"><h4><span class="tag t-rian">Rían</span></h4><p>I refuse to contain you because they taught me to fear you.</p></div>
+</div>
+<p>Neither knows what their decision will unleash. They choose anyway.</p>
+
+<hr class="div">
+
+<!-- ===================== PART TWO ===================== -->
+<h2 class="sec" id="b2">Brynna &amp; Aurelian — From Blame to Forgiveness</h2>
+<p class="sec-kicker">Part Two · Book Two relationship arc</p>
+
+<div class="pull">Nyara is the bridge between Brynna and Aurelian. Maeren is the proof.</div>
+<p class="note">Nyara lets Brynna understand Aurelian's grief. Maeren lets Brynna understand his love. His actions let her understand who he actually is.</p>
+
+<h3>The core arc</h3>
+<p>They begin Book Two deeply estranged over Nyara and Maeren. Brynna sees Aurelian as the man who killed Nyara — and more broadly as someone whose passivity and hunger for approval let the systems that destroyed their lives continue. Aurelian carries enormous guilt over Nyara, but he is <strong>not</strong> simply seeking her forgiveness. He also carries anger toward <em>her</em> over Maeren.</p>
+
+<div class="switcher" data-group="shape">
+  <button class="on" data-pane="shape-avoid">The shape to avoid</button>
+  <button data-pane="shape-real">The actual shape</button>
+</div>
+<div class="pane on" id="shape-avoid">
+  <div class="arrowline">Brynna condemns<span class="arrow">→</span>Aurelian proves himself<span class="arrow">→</span>Brynna forgives.</div>
+  <p class="note">Too clean. It makes him a supplicant and her a judge, and it resolves the ledger in one direction.</p>
+</div>
+<div class="pane" id="shape-real">
+  <p>Two grieving people who have both failed someone they love.</p>
+  <div class="compare">
+    <div class="cmp-after"><h4><span class="tag t-brynna">Brynna</span></h4><p>You killed Nyara.</p></div>
+    <div class="cmp-after"><h4><span class="tag t-aurelian">Aurelian</span></h4><p>You left Maeren.</p></div>
+  </div>
+  <p class="note">Neither accusation is the whole truth. Both contain enough truth to wound.</p>
+</div>
+
+<div class="arrowline" style="margin-top:18px">
+  <b>Progression</b><span class="arrow">→</span>contempt<span class="arrow">→</span>conflict<span class="arrow">→</span>reluctant cooperation<span class="arrow">→</span>recognition<span class="arrow">→</span>shared grief<span class="arrow">→</span>respect<span class="arrow">→</span>forgiveness / love as family
+</div>
+<div class="flag"><b>Hold this line:</b> Aurelian does not campaign for Brynna's forgiveness. Part of his growth is moving away from his lifelong need for everyone's approval.</div>
+
+<h3 id="journey">The journey to Seradon</h3>
+<p>The journey must take <strong>weeks</strong>. Velmora sits on the southwestern coast of Talauvmor; Seradon on the northwestern coast — a significant overland journey.</p>
+<p><strong>Structural necessity:</strong> Maeren breaking the Veil ≈ the Grove burning. While Brynna, Aurelian, and Vaela deal with the Grove's destruction and travel north, Maeren runs her own trajectory:</p>
+<div class="arrowline"><span class="tag t-maeren">Maeren</span><span class="arrow">→</span>reach Seradon<span class="arrow">→</span>her Seradon plot<span class="arrow">→</span>transform<span class="arrow">→</span>leave Seradon<span class="arrow">→</span><b>then</b> the others arrive</div>
+<p>So the travel time is not dead space. It is the crucible for the Brynna/Aurelian relationship.</p>
+
+<h3 id="beats">The seven beats</h3>
+<p class="note">Expand each beat. Order matters most between Beats 4 and 6.</p>
+
+<details class="card" open>
+  <summary><span class="chev">▶</span><span class="beat-n">01</span><span class="card-title">The Grove Burns<span class="card-sub">Aftermath, accusation, and a destination nobody wants</span></span></summary>
+  <div class="card-body">
+    <p>The Grove/Haven is destroyed. The dogs eventually return.</p>
+    <p>Brynna, already deeply distrustful, physically throws Aurelian down: <em>Did you know?</em> He insists he didn't. She doesn't particularly care — <em>I didn't know</em> is not an adequate defense to her. His ignorance doesn't undo his participation in Velmora's system or anything that has happened.</p>
+    <p>Vaela intervenes. Brynna listens because she trusts <strong>Vaela</strong>, not because she trusts Aurelian.</p>
+    <p>The group determines Seradon — Vaela's homeland — is their only viable destination. This is dangerous for Vaela, but she recognizes it as necessary. They leave together under extreme tension.</p>
+  </div>
+</details>
+
+<details class="card">
+  <summary><span class="chev">▶</span><span class="beat-n">02</span><span class="card-title">Brynna Is Awful to Aurelian<span class="card-sub">Grief with teeth — let her be</span></span></summary>
+  <div class="card-body">
+    <p>Her cruelty isn't banter. When she looks at Aurelian she sees:</p>
+    <div class="traits"><span>Nyara</span><span>Eamon</span><span>Velmora</span><span>The Order</span><span>The destroyed Grove</span><span>Maeren's disappearance</span></div>
+    <p>Aurelian may still reach for his Book One reflexes — <em>I didn't know. I didn't mean—. I was trying—</em> — but increasingly he stops defending himself. He understands that intentions cannot erase consequences.</p>
+    <div class="flag"><b>But:</b> he must not become her emotional punching bag — because of Beat 3.</div>
+  </div>
+</details>
+
+<details class="card">
+  <summary><span class="chev">▶</span><span class="beat-n">03</span><span class="card-title">Aurelian Learns What Happened With Maeren<span class="card-sub">The first real crack — he answers with anger, not shame</span></span></summary>
+  <div class="card-body">
+    <p>On the journey, Aurelian overhears Brynna telling Vaela what happened between her and Maeren.</p>
+    <p><strong>Important: Brynna has not forgiven Maeren yet.</strong> She feels guilty. She misses her. She loves her. But she still believes some version of:</p>
+    <div class="traits"><span>Maeren chose Rían</span><span>Maeren left me</span><span>Maeren wouldn't listen</span><span>Maeren chose that world over us</span></div>
+    <p>Aurelian hears how she describes Maeren and becomes <strong>angry</strong> — because he loves Maeren enormously, not romantically but as family. Maeren has consistently seen him, understood him, forgiven him, and loved him without requiring him to become something else.</p>
+    <p>The moral ledger complicates:</p>
+    <div class="compare">
+      <div class="cmp-after"><h4><span class="tag t-brynna">Brynna thinks</span></h4><p>You failed Nyara.</p></div>
+      <div class="cmp-after"><h4><span class="tag t-aurelian">Aurelian thinks</span></h4><p>You failed Maeren.</p></div>
+    </div>
+    <p>He does not believe she has the right to reduce Maeren to the worst interpretation of her choices. Brynna expects shame or submission — and encounters his anger instead.</p>
+  </div>
+</details>
+
+<details class="card">
+  <summary><span class="chev">▶</span><span class="beat-n">04</span><span class="card-title">They Arrive in Seradon After Maeren<span class="card-sub">Aurelian loses it — and Brynna sees why</span></span></summary>
+  <div class="card-body">
+    <p>By arrival, Maeren has already arrived → affected Seradon → transformed → left. They are entering the <strong>aftermath of Maeren</strong>, reconstructing what happened through other people's accounts.</p>
+    <p>Seradon's interpretation of Maeren matters. Someone (or several people) reduces her to:</p>
+    <div class="traits"><span>dangerous</span><span>unnatural</span><span>unstable</span><span>wild</span><span>destructive</span><span>uncontrollable</span></div>
+    <p>Or characterizes the pre-transformation Maeren as:</p>
+    <div class="traits"><span>passive</span><span>weak</span><span>useless</span><span>apathetic</span><span>ghostlike</span></div>
+    <p>And Aurelian loses it. Not strategically. Not to impress Brynna. He genuinely cannot tolerate it anymore.</p>
+    <div class="pull">Not Maeren. Not in front of him.</div>
+    <p>Major moment for Brynna: she witnesses the depth of his love for her sister. <em>Oh. Maeren is his family too.</em></p>
+  </div>
+</details>
+
+<details class="card">
+  <summary><span class="chev">▶</span><span class="beat-n">05</span><span class="card-title">Maeren Collides With Nyara in Aurelian's Mind<span class="card-sub">The pattern he's heard before — and helped enforce</span></span></summary>
+  <div class="card-body">
+    <p>The deeper psychological reason for his rage: he has heard these exact descriptions before.</p>
+    <div class="switcher" data-group="pattern">
+      <button class="on" data-pane="pat-nyara">Nyara</button>
+      <button data-pane="pat-maeren">Maeren</button>
+    </div>
+    <div class="pane on" id="pat-nyara">
+      <p class="note">Before:</p>
+      <div class="traits"><span>passive</span><span>weak</span><span>ghostlike</span><span>irrelevant</span><span>controlled</span><span>useless</span></div>
+      <p class="note">Then her true power is revealed — the Bear:</p>
+      <div class="traits"><span class="flip">unnatural</span><span class="flip">dangerous</span><span class="flip">incomprehensible</span></div>
+    </div>
+    <div class="pane" id="pat-maeren">
+      <p class="note">Before:</p>
+      <div class="traits"><span>passive</span><span>apathetic</span><span>useless</span><span>invisible</span><span>afraid</span></div>
+      <p class="note">Then her power becomes undeniable:</p>
+      <div class="traits"><span class="flip">wild</span><span class="flip">dangerous</span><span class="flip">unnatural</span><span class="flip">uncontrollable</span></div>
+    </div>
+    <div class="flag"><b>The recognition:</b> the world dismisses these women while their power is quiet, and fears them the moment it becomes undeniable. And he has participated in that worldview.</div>
+  </div>
+</details>
+
+<details class="card">
+  <summary><span class="chev">▶</span><span class="beat-n">06</span><span class="card-title">The Nyara Breakdown<span class="card-sub">The core wound — must come after Beat 4</span></span></summary>
+  <div class="card-body">
+    <div class="flag"><b>Sequencing:</b> first Brynna witnesses his rage over Maeren; <em>later</em> she discovers the grief underneath it.</div>
+    <p>At some point Aurelian truly comes undone over Nyara. His grief is not simply <em>I killed my mother.</em> It is:</p>
+    <div class="pull">I didn't know my mother.</div>
+    <p>And more painfully:</p>
+    <div class="pull">I didn't understand how much she loved me until she was gone.</div>
+    <p>He spent his life pursuing Luctar's conditional approval — <em>Am I strong enough? Can I make him proud? Can I become the son he wants?</em> — while Nyara's love was already there, taken for granted.</p>
+    <p><strong>The core wound:</strong> his attempt to finally become the son his father would respect — hunter, warrior, leader — is what led him to kill the parent whose love he already possessed. He was starving for his father's love while failing to recognize the value of his mother's. And now she's gone.</p>
+  </div>
+</details>
+
+<details class="card">
+  <summary><span class="chev">▶</span><span class="beat-n">07</span><span class="card-title">Brynna Finally Sees Nyara's Son<span class="card-sub">Humanizing is not absolving</span></span></summary>
+  <div class="card-body">
+    <p>Potentially the most important turning point in her forgiveness.</p>
+    <p>Until now Aurelian has been <em>the man who killed Nyara.</em> But Brynna lost her own mother. She knows that grief. Watching him come apart lets her see, perhaps for the first time, <strong>Nyara's son.</strong></p>
+    <p>Both truths coexist:</p>
+    <div class="compare">
+      <div class="cmp-after"><h4><span class="tag t-brynna">Brynna lost</span></h4><p>Her aunt, mentor, and advocate — the woman who made it possible for her to pursue the Blade when society was suffocating her.</p></div>
+      <div class="cmp-after"><h4><span class="tag t-aurelian">Aurelian lost</span></h4><p>His mother.</p></div>
+    </div>
+    <div class="flag"><b>The distinction that matters:</b> understanding his grief does not absolve him of killing her. It humanizes him.</div>
+  </div>
+</details>
+
+<h3 id="parallel">The hidden parallel</h3>
+<p>Both believe they failed someone they loved <strong>because they didn't fully see them.</strong></p>
+<div class="compare">
+  <div class="cmp-after">
+    <h4><span class="tag t-aurelian">Aurelian</span></h4>
+    <p><em>I should have seen my mother.</em> He misread Nyara's quietness as weakness and missed the enormous person underneath until she was gone.</p>
+  </div>
+  <div class="cmp-after">
+    <h4><span class="tag t-brynna">Brynna</span></h4>
+    <p><em>I should have seen my sister.</em> She interpreted Maeren's choices through her own hurt and failed to understand what Maeren was becoming.</p>
+  </div>
+</div>
+<p>So when Brynna condemns Aurelian, she is partly confronting something she fears about herself. When Aurelian condemns her treatment of Maeren, he is confronting his own greatest regret. <strong>They're mirrors.</strong></p>
+
+<h3 id="strength">Aurelian's larger Book Two realization</h3>
+<p>Aurelian, Nyara, and Maeren have all been dismissed because their strengths aren't strengths Velmoran society recognizes:</p>
+<div class="traits"><span>healing</span><span>empathy</span><span>observation</span><span>knowledge</span><span>restraint</span><span>gentleness</span><span>care</span><span>perception</span></div>
+<p>Brynna's strength is culturally legible — warrior, leader, fighter, commander. His isn't. Neither was Nyara's. Neither was Maeren's.</p>
+<div class="pull">He does not need to become strong. He needs to stop accepting everyone else's definition of strength.</div>
+<p class="note">This is crucial to his eventual embrace of himself as a <strong>healer</strong>.</p>
+
+<h3 id="payoff">Endgame — Brynna's forgiveness</h3>
+<p>Aurelian slowly makes it impossible for her to maintain her original interpretation of him — not by arguing, but because she watches him. She sees:</p>
+<ul class="plain">
+  <li>his grief for Nyara</li>
+  <li>his love for Maeren</li>
+  <li>his willingness to challenge people who misrepresent them</li>
+  <li>his growing refusal to seek approval</li>
+  <li>his choices when nobody is watching</li>
+  <li>the kind of strength he actually possesses</li>
+</ul>
+<div class="arrowline">contempt<span class="arrow">→</span>reluctant reliance<span class="arrow">→</span>recognition<span class="arrow">→</span>respect<span class="arrow">→</span>protectiveness<span class="arrow">→</span>forgiveness</div>
+<div class="flag"><b>Craft goal:</b> her behavior reveals she has forgiven him <em>before</em> she consciously realizes it. Maybe she protects him instinctively. Maybe she trusts him with something. Maybe she starts accounting for his safety alongside Vaela's and her own. Her body treats him as one of hers before her mind will admit it.</div>
+
+<h3>Payoff — Aurelian saves Maeren</h3>
+<p>Eventually he chooses to sacrifice himself to save her. Brynna realizes what he's about to do.</p>
+<div class="pull">"Aurelian."</div>
+<p>That single use of his name should carry the entire accumulated relationship. And possibly:</p>
+<div class="pull">"I forgive you. You don't have to do this."</div>
+<p>Because some part of her still believes he's spent all this time trying to atone — to earn forgiveness, to make Nyara's death mean something, to prove he's good. And he essentially tells her: <strong>I'm not doing this to prove anything.</strong></p>
+
+<div class="compare">
+  <div class="cmp-before">
+    <h4>Not why he acts</h4>
+    <p>For Brynna's forgiveness. To atone for Nyara. So history remembers him differently.</p>
+  </div>
+  <div class="cmp-after">
+    <h4>Why he acts</h4>
+    <p>Maeren is dying. He can save her. He loves her.</p>
+  </div>
+</div>
+
+<p>That completes the transformation from the Aurelian who began Book One asking:</p>
+<div class="traits"><span>What will my father think?</span><span>What will the Order think?</span><span>Will the Blade respect me?</span><span>Does Brynna think I'm weak?</span><span>Does Maeren believe in me?</span></div>
+<p>— to the Aurelian who no longer requires an audience or approval. He knows what he believes. He knows who he loves. And he acts accordingly.</p>
+
+<hr class="div">
+
+<!-- ===================== CHECKLIST ===================== -->
+<h2 class="sec" id="donotbreak">Things Not to Break</h2>
+<p class="sec-kicker">Reference · draft sanity check</p>
+<p class="progress" id="prog">0 of 10 confirmed</p>
+<ul class="checks" id="checks">
+  <li><span class="box">✓</span><span class="txt">Maeren does not learn the moonstone's true function in Book One. That knowledge is Rían's.</span></li>
+  <li><span class="box">✓</span><span class="txt">Maeren's transformation begins <strong>before</strong> Rían acts.</span></li>
+  <li><span class="box">✓</span><span class="txt">Rían removes the amulet believing it may be catastrophic. That's the point.</span></li>
+  <li><span class="box">✓</span><span class="txt">Ending Maeren is not healed — she's inverted. Growth remains for Book Two.</span></li>
+  <li><span class="box">✓</span><span class="txt">Rían is not redeemed by one choice.</span></li>
+  <li><span class="box">✓</span><span class="txt">The journey to Seradon takes weeks; Maeren's Seradon arc completes before the others arrive.</span></li>
+  <li><span class="box">✓</span><span class="txt">Aurelian never campaigns for Brynna's forgiveness.</span></li>
+  <li><span class="box">✓</span><span class="txt">Aurelian's rage over Maeren (Beat 4) precedes his breakdown over Nyara (Beat 6).</span></li>
+  <li><span class="box">✓</span><span class="txt">Brynna has not forgiven Maeren yet at the start of Book Two.</span></li>
+  <li><span class="box">✓</span><span class="txt">Aurelian's final sacrifice is motivated by love, not atonement.</span></li>
+</ul>
+<p class="note">Checkmarks are a working scratchpad for a single pass — they reset when the file is reopened.</p>
+
+<footer>Bear Guardian · revision notes and Book Two bible · compiled from working notes</footer>
+
+</main>
+</div>
+
+<script>
+(function(){
+  /* --- accordion bulk controls --- */
+  window.setAll = function(open){
+    document.querySelectorAll('details.card').forEach(function(d){ d.open = open; });
+  };
+
+  /* --- pane switchers --- */
+  document.querySelectorAll('.switcher').forEach(function(sw){
+    sw.addEventListener('click', function(e){
+      var btn = e.target.closest('button');
+      if(!btn) return;
+      sw.querySelectorAll('button').forEach(function(b){ b.classList.remove('on'); });
+      btn.classList.add('on');
+      var ids = Array.prototype.map.call(sw.querySelectorAll('button'), function(b){ return b.dataset.pane; });
+      ids.forEach(function(id){
+        var el = document.getElementById(id);
+        if(el) el.classList.toggle('on', id === btn.dataset.pane);
+      });
+    });
+  });
+
+  /* --- causal chain highlight --- */
+  var chain = document.getElementById('chain');
+  chain.addEventListener('click', function(e){
+    var li = e.target.closest('li');
+    if(li) li.classList.toggle('hit');
+  });
+  [0,4,5].forEach(function(i){ chain.children[i].classList.add('hit'); });
+
+  /* --- checklist (in-memory only) --- */
+  var checks = document.getElementById('checks'), prog = document.getElementById('prog');
+  checks.addEventListener('click', function(e){
+    var li = e.target.closest('li');
+    if(!li) return;
+    li.classList.toggle('done');
+    var n = checks.querySelectorAll('li.done').length;
+    prog.textContent = n + ' of ' + checks.children.length + ' confirmed';
+  });
+
+  /* --- scrollspy --- */
+  var links = Array.prototype.slice.call(document.querySelectorAll('#nav a'));
+  var targets = links.map(function(a){ return document.querySelector(a.getAttribute('href')); });
+  function spy(){
+    var best = 0, bestTop = -Infinity;
+    targets.forEach(function(t, i){
+      if(!t) return;
+      var top = t.getBoundingClientRect().top - 90;
+      if(top <= 0 && top > bestTop){ bestTop = top; best = i; }
+    });
+    links.forEach(function(a, i){ a.classList.toggle('active', i === best); });
+  }
+  window.addEventListener('scroll', spy, {passive:true});
+  spy();
+})();
+</script>
+</body>
+</html>
