@@ -191,6 +191,33 @@
   .phase.p3{border-top:2px solid var(--maeren)} .phase.p3 h4{color:var(--maeren)}
   .phase p{margin:0;font-size:14px;color:var(--ink-dim)}
   .phase b{color:var(--ink);display:block;font-size:14.5px;margin-bottom:5px}
+
+  /* --- pull-language tracker --- */
+  .track{border:1px solid var(--rule);border-radius:10px;overflow:hidden;margin:18px 0}
+  .trow{display:grid;grid-template-columns:186px 1fr;border-bottom:1px solid var(--rule)}
+  .trow:last-child{border-bottom:0}
+  .trow > .tlab{background:var(--bg-sunk);padding:12px 14px;border-right:1px solid var(--rule)}
+  .trow > .tchips{background:var(--bg-card);padding:10px 12px;display:flex;flex-wrap:wrap;gap:6px;align-content:flex-start}
+  .tlab b{display:block;font-size:14px}
+  .tlab span{display:block;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-faint);margin-top:4px}
+  @media(max-width:760px){.trow{grid-template-columns:1fr}.trow > .tlab{border-right:0;border-bottom:1px solid var(--rule)}}
+  .chip{font:12.5px/1.4 var(--mono);padding:4px 9px;border-radius:5px;border:1px solid;max-width:100%}
+  .c-a{color:#e08b7d;border-color:#5c3630;background:#241816}
+  .c-b{color:#e0b341;border-color:#584518;background:#241f12}
+  .c-c{color:#9fc3e8;border-color:#2c4257;background:#141d26}
+  .c-d{color:#8fd3a7;border-color:#31513e;background:#16211a}
+  .keylist{display:flex;flex-wrap:wrap;gap:14px;margin:14px 0 6px;font-size:13px;color:var(--ink-dim)}
+  .keylist b{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:7px;vertical-align:0}
+  .gradbar{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;border:1px solid var(--rule);border-radius:9px;overflow:hidden;margin:16px 0}
+  .gradbar div{padding:13px 15px;font-size:13.5px}
+  .gradbar div:nth-child(1){background:#241816;border-right:1px solid var(--rule)}
+  .gradbar div:nth-child(2){background:#141d26;border-right:1px solid var(--rule)}
+  .gradbar div:nth-child(3){background:#16211a}
+  .gradbar h5{margin:0 0 5px;font:600 10.5px/1 var(--font);letter-spacing:.12em;text-transform:uppercase}
+  .gradbar div:nth-child(1) h5{color:#e08b7d}
+  .gradbar div:nth-child(2) h5{color:#9fc3e8}
+  .gradbar div:nth-child(3) h5{color:#8fd3a7}
+  @media(max-width:760px){.gradbar{grid-template-columns:1fr}.gradbar div{border-right:0 !important;border-bottom:1px solid var(--rule)}}
   footer{margin-top:60px;padding-top:20px;border-top:1px solid var(--rule);font-size:12.5px;color:var(--ink-faint)}
 </style>
 </head>
@@ -231,6 +258,7 @@
     <a href="#arc-dream" class="sub">The dream revision</a>
     <a href="#arc-payoff" class="sub">The reread payoff</a>
     <a href="#arc-debt" class="sub">Open thread: who was she?</a>
+    <a href="#lexicon" class="sub">Pull-language tracker</a>
     <a href="#punch" class="sub">Draft punch list · Pass 2</a>
     <div class="grp">Reference</div>
     <a href="#donotbreak" class="sub">Things not to break</a>
@@ -1105,6 +1133,143 @@
 <div class="flag">
   <b>3 · Timeline check.</b> Where does Cydar sit relative to Brynna reaching the haven? If he has already been taken, the identifier must be someone else — or the information has to be <em>left behind</em> rather than spoken, which may be the better version anyway.
 </div>
+
+<h3 id="lexicon">Pull-language tracker — prologue through <em>Answers</em></h3>
+<p class="note">Every instance of thread / pull / guide / instinct / compulsion language in Maeren's POV, sorted by what the sentence says is <em>doing the deciding</em>.</p>
+
+<div class="keylist">
+  <span><b style="background:#e08b7d"></b>A · external force acts on her</span>
+  <span><b style="background:#e0b341"></b>B · body or instinct as the agent</span>
+  <span><b style="background:#9fc3e8"></b>C · involuntary cognition — it happens <em>in</em> her mind</span>
+  <span><b style="background:#8fd3a7"></b>D · Maeren as grammatical subject of an active verb</span>
+</div>
+
+<div class="track">
+  <div class="trow">
+    <div class="tlab"><b>Prologue</b><span>Bear POV · sets the dictionary</span></div>
+    <div class="tchips">
+      <span class="chip c-a">pulled in by a great force</span>
+      <span class="chip c-a">drawn like moths to a sacred flame</span>
+      <span class="chip c-a">magic reclaimed her</span>
+      <span class="chip c-a">the power skittered away from his body</span>
+    </div>
+  </div>
+  <div class="trow">
+    <div class="tlab"><b>Meet Maeren</b><span>Phase 1 · survive</span></div>
+    <div class="tchips">
+      <span class="chip c-b">allowed Brynna to guide her blindly</span>
+      <span class="chip c-c">an urge blossomed into a full storm</span>
+      <span class="chip c-c">crawling through arms and legs</span>
+      <span class="chip c-d">hand hovered just above her throat, checking</span>
+    </div>
+  </div>
+  <div class="trow">
+    <div class="tlab"><b>Bear Strikes Again</b><span>incl. the Riven flashback</span></div>
+    <div class="tchips">
+      <span class="chip c-b">found herself wandering over to the pen</span>
+      <span class="chip c-b">couldn't help the question from falling out</span>
+      <span class="chip c-a">never felt so drawn to a creature</span>
+      <span class="chip c-c">her vision was tunnled</span>
+      <span class="chip c-c">the anxiety that rooted her to the spot</span>
+      <span class="chip c-c">helplessness paralyzed her</span>
+    </div>
+  </div>
+  <div class="trow">
+    <div class="tlab"><b>Throne Room</b><span>Beats 1–3 · the contradiction</span></div>
+    <div class="tchips">
+      <span class="chip c-d">Maeren noted their unease</span>
+      <span class="chip c-c">Maeren's mind snagged on the information</span>
+      <span class="chip c-c">a flurried energy shot through Maeren</span>
+      <span class="chip c-d">wringing her hands beneath the table</span>
+    </div>
+  </div>
+  <div class="trow">
+    <div class="tlab"><b>The Invitation</b><span>"purge," first plant</span></div>
+    <div class="tchips">
+      <span class="chip c-c">the word "purge" hung in the air</span>
+      <span class="chip c-d">Maeren knew it was the kind of word kings used</span>
+    </div>
+  </div>
+  <div class="trow">
+    <div class="tlab"><b>The Hunt Begins</b><span>Beat 3 · suppression holding</span></div>
+    <div class="tchips">
+      <span class="chip c-c">a thought floated through her mind</span>
+      <span class="chip c-b">her intuition telling her to listen in</span>
+      <span class="chip c-a">a familiar vibration coursed through her limbs… a signal</span>
+      <span class="chip c-d">she questioned whether the bear was truly to blame</span>
+      <span class="chip c-d">Maeren was well read enough to understand</span>
+    </div>
+  </div>
+  <div class="trow">
+    <div class="tlab"><b>Answers</b><span>Beats 4–9 · the hinge chapter</span></div>
+    <div class="tchips">
+      <span class="chip c-c">questions would float across her mind like spirits</span>
+      <span class="chip c-d">when she captured one</span>
+      <span class="chip c-b">allowed her bones to guide her</span>
+      <span class="chip c-a">a forceful tug pulling on her feet</span>
+      <span class="chip c-a">a faint thread connected the mystery</span>
+      <span class="chip c-a">fluttered before her like a ribbon on the breeze</span>
+      <span class="chip c-b">an instinctual understanding kept moving over the depiction</span>
+      <span class="chip c-a">the amulet vibrated lightly against her chest</span>
+      <span class="chip c-d">she pushed: "It is as if the creature is… aware."</span>
+      <span class="chip c-d">Maeren Ario knew exactly where to start looking</span>
+      <span class="chip c-d">but she had to understand</span>
+    </div>
+  </div>
+</div>
+
+<div class="flag">
+  <b>The headline finding.</b> <em>Answers</em> has both the most <span style="color:#8fd3a7">D</span> language and the most <span style="color:#e08b7d">A</span>/<span style="color:#e0b341">B</span> language in the section. The chapter where she becomes most active is also where the magic-agency vocabulary peaks. The registers aren't escalating — they're <strong>interleaved</strong>, and they cancel each other out inside the same scene.
+</div>
+
+<div class="flag">
+  <b>The root cause.</b> The prologue teaches the reader that in this world, magic <em>literally</em> pulls, draws, and reclaims. Every later use of that dictionary in Maeren's POV inherits the literal meaning, whether you intend it or not. This is why the ribbon still reads as magic even though it now describes her reasoning.
+</div>
+
+<h4 class="mini">The escalation you're after</h4>
+<div class="gradbar">
+  <div>
+    <h5>Phase 1 · Survive</h5>
+    <p style="margin:0">Keep <b>A</b> and <b>B</b> dense. She genuinely isn't choosing yet, and this is the baseline you will escalate away from. The reader must feel her being moved before they can feel her move.</p>
+  </div>
+  <div>
+    <h5>Phase 2 · Pressure</h5>
+    <p style="margin:0">Shift from <b>A</b> to <b>C</b>: things happen <em>in</em> her mind rather than <em>to</em> her body. <em>"Her mind snagged on the information"</em> is the model — involuntary, but cognitive, and hers.</p>
+  </div>
+  <div>
+    <h5>Phase 3 · Pursuit</h5>
+    <p style="margin:0">Concrete transitive verbs, Maeren as subject. She notices, tests, deduces, climbs, opens, decides. <b>A</b> and <b>B</b> should be nearly absent by the archive.</p>
+  </div>
+</div>
+
+<div class="win">
+  <b>One rule that does most of the work.</b> Reserve the magic dictionary — <em>thread, pull, drawn, tug, vibration, compulsion</em> — for things that are <strong>literally magic</strong>: the amulet, the dreams, the Wild. Then when it appears it is <em>information</em>, not mood. Everywhere else, use the concrete vocabulary of a woman who reads people and remembers what she's read.
+</div>
+
+<h4 class="mini">Swap candidates</h4>
+<table>
+  <thead><tr><th>Currently</th><th>Why it costs you</th><th>Direction</th></tr></thead>
+  <tbody>
+    <tr><td class="k">"found herself wandering over to the pen" / "couldn't help the question from falling out"</td><td>The Riven scene is her boldest act in the first act — the one and only time she asks for something — and it's narrated as though it happened to her.</td><td>She walks over. She asks. Let the boldness be legible; the fear can live in what it costs her to ask.</td></tr>
+    <tr><td class="k">"her intuition telling her to listen in"</td><td>Intuition instructs; she obeys. But reading people is her <em>skill</em>, established two chapters earlier with Alai.</td><td>She notices the man lean in, and decides to listen. Skill, not signal.</td></tr>
+    <tr><td class="k">"allowed her bones to guide her"</td><td>Hands the walk to her body at the top of the chapter where she must become active.</td><td>The path is habitual and the hydrangeas are hers. She goes where she always goes.</td></tr>
+    <tr><td class="k">"an instinctual understanding of its importance kept moving over the depiction"</td><td>At the moment of discovery, the finger is moving on its own. This is the beat that has to be hers.</td><td>She traces the lines because she is trying to decode them.</td></tr>
+    <tr><td class="k">"a faint thread… fluttered before her like a ribbon on the breeze"</td><td>Right idea, wrong dictionary — see the root cause above.</td><td>Keep the connective image, lose the magic word. Something with edges: a seam, a join, two facts that won't sit apart.</td></tr>
+  </tbody>
+</table>
+
+<h4 class="mini">Keep exactly as written</h4>
+<div class="compare">
+  <div class="cmp-good">
+    <h4>"Her mind snagged on the information"</h4>
+    <p>Involuntary and cognitive. Nothing external acts on her; her own attention catches. This is the Phase 2 register in one verb.</p>
+  </div>
+  <div class="cmp-good">
+    <h4>"a forceful tug pulling on her feet" — and she fights it</h4>
+    <p>The only place in the section where the pull is her <em>survival instinct</em> and she overrides it. The magic dictionary is doing honest work: the thing pulling her is the thing she's about to defeat.</p>
+  </div>
+</div>
+<p class="note">Also keep the amulet's vibration and the pre-dream <em>signal</em> — both are literally magic, and under the rule above they become legible as data rather than atmosphere.</p>
 
 <h3 id="punch">Draft punch list — Pass 2</h3>
 <p class="note">From the read of the revised prologue through <em>Answers</em>. Verdict: the chain is on the page, and two beats are outperforming the plan.</p>
