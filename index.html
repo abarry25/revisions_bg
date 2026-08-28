@@ -160,6 +160,37 @@
   .stat b{display:block;font:600 22px/1.2 var(--serif);color:var(--ink)}
   .stat span{font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint)}
   .hidden{display:none !important}
+
+  /* --- arc chart + swimlanes --- */
+  .chartbox{background:var(--bg-card);border:1px solid var(--rule);border-radius:10px;padding:16px 14px 10px;margin:18px 0}
+  .chartbox svg{width:100%;height:auto;display:block}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;margin:10px 4px 2px;font-size:12.5px;color:var(--ink-dim)}
+  .legend i{display:inline-block;width:22px;height:2px;vertical-align:4px;margin-right:7px}
+  .lane{display:grid;grid-template-columns:34px 1.1fr 1fr 1fr;gap:0;border:1px solid var(--rule);
+    border-radius:10px;overflow:hidden;margin:18px 0;font-size:14px}
+  .lane > div{padding:11px 13px;border-bottom:1px solid var(--rule);background:var(--bg-card)}
+  .lane > div.h{background:#1e242c;font:600 10.5px/1.4 var(--font);letter-spacing:.11em;
+    text-transform:uppercase;color:var(--ink-faint);padding:10px 13px}
+  .lane > div.n{background:var(--bg-sunk);color:var(--ink-faint);font:600 12px/1.5 var(--font);text-align:center}
+  .lane .r-survive .n{color:var(--bad)}
+  .lane .r-hinge .n{color:var(--warn)}
+  .lane .r-pursue .n{color:var(--maeren)}
+  .lane .sub2{display:block;color:var(--ink-faint);font-size:12.5px;margin-top:4px}
+  .lane .hinge{background:#241f12}
+  @media(max-width:760px){
+    .lane{grid-template-columns:1fr}
+    .lane > div.h{display:none}
+    .lane > div.n{text-align:left;border-bottom:0;padding-bottom:0}
+  }
+  .phaserow{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:18px 0}
+  @media(max-width:760px){.phaserow{grid-template-columns:1fr}}
+  .phase{background:var(--bg-card);border:1px solid var(--rule);border-radius:9px;padding:14px 16px}
+  .phase h4{margin:0 0 6px;font:600 11px/1 var(--font);letter-spacing:.13em;text-transform:uppercase}
+  .phase.p1{border-top:2px solid var(--bad)} .phase.p1 h4{color:var(--bad)}
+  .phase.p2{border-top:2px solid var(--warn)} .phase.p2 h4{color:var(--warn)}
+  .phase.p3{border-top:2px solid var(--maeren)} .phase.p3 h4{color:var(--maeren)}
+  .phase p{margin:0;font-size:14px;color:var(--ink-dim)}
+  .phase b{color:var(--ink);display:block;font-size:14.5px;margin-bottom:5px}
   footer{margin-top:60px;padding-top:20px;border-top:1px solid var(--rule);font-size:12.5px;color:var(--ink-faint)}
 </style>
 </head>
@@ -194,6 +225,11 @@
     <a href="#evidence" class="sub">Evidence appendix</a>
     <a href="#protect" class="sub">Protect these</a>
     <a href="#passes" class="sub">Recommended sequence</a>
+    <div class="grp">Part Four · Maeren's arc</div>
+    <a href="#arc" class="sub">Survive → curious → understands</a>
+    <a href="#arc-chain" class="sub">The causal chain, four lanes</a>
+    <a href="#arc-dream" class="sub">The dream revision</a>
+    <a href="#arc-payoff" class="sub">The reread payoff</a>
     <div class="grp">Reference</div>
     <a href="#donotbreak" class="sub">Things not to break</a>
   </nav>
@@ -873,6 +909,166 @@
 
 <hr class="div">
 
+<!-- ===================== PART FOUR ===================== -->
+<h2 class="sec" id="arc">Maeren's Early Arc — Survive → Curious → Understands</h2>
+<p class="sec-kicker">Part Four · the causal spine of Book One's first movement <span class="tag t-new">NEW</span></p>
+
+<p class="lede">Her Book One movement is not <em>passive → brave</em>. It is <strong>self-suppression → permission to know → pursuit of truth</strong> — which is subtler than Brynna's arc, and is why it has been harder to execute.</p>
+
+<div class="phaserow">
+  <div class="phase p1">
+    <h4>Phase 1 · Survive</h4>
+    <b>Self-suppression</b>
+    <p>Curiosity is the most natural thing about her, and she has learned it is dangerous. Questions attract attention; attention threatens invisibility; losing invisibility threatens Brynna.</p>
+  </div>
+  <div class="phase p2">
+    <h4>Phase 2 · Curious</h4>
+    <b>Permission to know</b>
+    <p>Pressure accumulates until suppression fails. She doesn't decide to rebel — she grants herself a loophole. <em>Knowing isn't doing.</em></p>
+  </div>
+  <div class="phase p3">
+    <h4>Phase 3 · Understands</h4>
+    <b>Pursuit of truth</b>
+    <p>Investigation becomes the character development. Every answer she pursues is Maeren choosing her authentic self over her survival self.</p>
+  </div>
+</div>
+
+<h4 class="mini">The two forces, and where they cross</h4>
+<div class="chartbox">
+<svg viewBox="0 0 860 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Chart showing survival containment falling and curiosity rising, crossing at the bargain">
+  <rect x="60" y="34" width="245" height="200" fill="#cf6a5a" opacity="0.055"/>
+  <rect x="305" y="34" width="280" height="200" fill="#e0b341" opacity="0.06"/>
+  <rect x="585" y="34" width="245" height="200" fill="#b892d8" opacity="0.055"/>
+  <text x="70" y="26" fill="#cf6a5a" font-family="sans-serif" font-size="11" font-weight="700" letter-spacing="1.6">SURVIVE</text>
+  <text x="315" y="26" fill="#e0b341" font-family="sans-serif" font-size="11" font-weight="700" letter-spacing="1.6">CURIOUS</text>
+  <text x="595" y="26" fill="#b892d8" font-family="sans-serif" font-size="11" font-weight="700" letter-spacing="1.6">UNDERSTANDS</text>
+  <line x1="60" y1="234" x2="830" y2="234" stroke="#2a3037" stroke-width="1"/>
+  <line x1="539" y1="34" x2="539" y2="234" stroke="#e0b341" stroke-width="1" stroke-dasharray="4 4" opacity="0.75"/>
+  <text x="547" y="52" fill="#e0b341" font-family="sans-serif" font-size="11.5" font-weight="700">THE HINGE — the bargain</text>
+  <text x="547" y="68" fill="#a49f96" font-family="sans-serif" font-size="11.5" font-style="italic">“I don't have to do anything. I just need to know.”</text>
+  <polyline points="70,60 164,58 258,55 351,70 445,86 539,120 632,156 726,182 820,206"
+    fill="none" stroke="#cf6a5a" stroke-width="2.5" stroke-linejoin="round"/>
+  <polyline points="70,216 164,198 258,206 351,172 445,142 539,120 632,86 726,62 820,46"
+    fill="none" stroke="#b892d8" stroke-width="2.5" stroke-linejoin="round"/>
+  <g fill="#0f1114">
+    <circle cx="70" cy="60" r="4" stroke="#cf6a5a" stroke-width="2"/><circle cx="164" cy="58" r="4" stroke="#cf6a5a" stroke-width="2"/>
+    <circle cx="258" cy="55" r="4" stroke="#cf6a5a" stroke-width="2"/><circle cx="351" cy="70" r="4" stroke="#cf6a5a" stroke-width="2"/>
+    <circle cx="445" cy="86" r="4" stroke="#cf6a5a" stroke-width="2"/><circle cx="632" cy="156" r="4" stroke="#cf6a5a" stroke-width="2"/>
+    <circle cx="726" cy="182" r="4" stroke="#cf6a5a" stroke-width="2"/><circle cx="820" cy="206" r="4" stroke="#cf6a5a" stroke-width="2"/>
+    <circle cx="70" cy="216" r="4" stroke="#b892d8" stroke-width="2"/><circle cx="164" cy="198" r="4" stroke="#b892d8" stroke-width="2"/>
+    <circle cx="258" cy="206" r="4" stroke="#b892d8" stroke-width="2"/><circle cx="351" cy="172" r="4" stroke="#b892d8" stroke-width="2"/>
+    <circle cx="445" cy="142" r="4" stroke="#b892d8" stroke-width="2"/><circle cx="632" cy="86" r="4" stroke="#b892d8" stroke-width="2"/>
+    <circle cx="726" cy="62" r="4" stroke="#b892d8" stroke-width="2"/><circle cx="820" cy="46" r="4" stroke="#b892d8" stroke-width="2"/>
+  </g>
+  <circle cx="539" cy="120" r="7" fill="#0f1114" stroke="#e0b341" stroke-width="2.5"/>
+  <g font-family="sans-serif" font-size="12" font-weight="600" fill="#6f6a62" text-anchor="middle">
+    <text x="70" y="256">1</text><text x="164" y="256">2</text><text x="258" y="256">3</text>
+    <text x="351" y="256">4</text><text x="445" y="256">5</text>
+    <text x="539" y="256" fill="#e0b341">6</text>
+    <text x="632" y="256">7</text><text x="726" y="256">8</text><text x="820" y="256">9</text>
+  </g>
+  <text x="445" y="284" fill="#6f6a62" font-family="sans-serif" font-size="11.5" text-anchor="middle" letter-spacing="1.2">BEATS — see the four-lane table below</text>
+</svg>
+<div class="legend">
+  <span><i style="background:#cf6a5a"></i>Survival containment — <em>stay invisible</em></span>
+  <span><i style="background:#b892d8"></i>Curiosity — <em>I need to understand this</em></span>
+</div>
+</div>
+<p class="note">The two lines don't swap because something dramatic happens. They swap because Maeren gives herself a loophole at beat 6. Externally it's the smallest moment in the sequence; structurally it's the whole arc.</p>
+
+<h3 id="arc-chain">The causal chain, in four lanes</h3>
+<p class="note">This is the working method: for each beat, track what the reader sees, what Maeren consciously permits herself, and what's pressing from underneath. The fourth lane is what only pays on reread.</p>
+
+<div class="lane">
+  <div class="h"></div><div class="h">On the page</div><div class="h">Maeren's conscious position</div><div class="h">Underneath</div>
+
+  <div class="n r-survive">1</div>
+  <div><b>The burned woman surfaces.</b><span class="sub2">After the Throne Room, Eamon identifies or supplies information about her.</span></div>
+  <div>Received, not sought. She isn't investigating — she's being told.</div>
+  <div>Connects the opening Bear POV to the main plot. The woman stops being atmosphere.</div>
+
+  <div class="n r-survive">2</div>
+  <div><b>The contradiction lands.</b><span class="sub2">Two bodies in Syrithien. The priest was mauled. The woman was burned. The Bear did not burn her.</span></div>
+  <div><em>What was an Order priest doing in the Wood with a burning woman?</em> A concrete unanswered question, not a vague distrust.</div>
+  <div>This is the connective tissue her early suspicion has been missing.</div>
+
+  <div class="n r-survive">3</div>
+  <div><b>She puts it away.</b></div>
+  <div>Suppression, on purpose. Questions attract attention; attention endangers Brynna.</div>
+  <div>Establishes the cost of the arc before the arc moves — the reader must feel the lid go on.</div>
+
+  <div class="n r-hinge">4</div>
+  <div><b>The dream returns the burning woman.</b><span class="sub2">Repeatedly.</span></div>
+  <div>She can't dismiss it. She logs and studies her dreams; this is the one that won't file.</div>
+  <div>Her subconscious refusing her suppression: <em>fine — then I'll make you look at it while you're asleep.</em></div>
+
+  <div class="n r-hinge">5</div>
+  <div><b>"Purge."</b><span class="sub2">Alai's language, in the garden.</span></div>
+  <div>Purge → burn → the woman → the Order → Syrithien. Not an answer. Just pieces rubbing together.</div>
+  <div>External pressure meets internal pressure. Now she can't <em>stop</em> asking.</div>
+
+  <div class="n r-hinge hinge">6</div>
+  <div class="hinge"><b>THE BARGAIN.</b><span class="sub2">The intermediate beat the draft is currently missing.</span></div>
+  <div class="hinge"><em>I don't have to do anything with it. I just need to know.</em> Not permission to rebel — permission to <strong>know</strong>.</div>
+  <div class="hinge">The first crack in a survival strategy she has spent fifteen years building. First read: Maeren being Maeren. Reread: <em>oh — that's where it started.</em></div>
+
+  <div class="n r-pursue">7</div>
+  <div><b>She begins investigating.</b></div>
+  <div>Under the loophole. She is still telling herself this is safe because it is only knowledge.</div>
+  <div>The investigation <em>is</em> the character development — not a delivery mechanism for lore.</div>
+
+  <div class="n r-pursue">8</div>
+  <div><b>The sphere becomes recognizable.</b><span class="sub2">The half-light/half-dark image from the dream, on the book in the library.</span></div>
+  <div>Her own reasoning gets her to the northwest tower — the thread doesn't need to.</div>
+  <div>Why the sphere must survive the dream revision: it's the plot key even after it stops being the emotional centre.</div>
+
+  <div class="n r-pursue">9</div>
+  <div><b>She finds the book.</b></div>
+  <div>Curiosity now outweighs survival. The loophole has quietly become a life.</div>
+  <div>She hasn't become Brynna. She's become <strong>more Maeren</strong>.</div>
+</div>
+
+<div class="flag"><b>Wiring note.</b> Beat 8 is one of the four flagged legibility scenes (<a href="#threads">Thread 1</a>). The chain above fixes it structurally rather than cosmetically: once beats 1–6 exist, <em>"She let it guide her to the northwest tower"</em> has a reasoned replacement already on the page, because she has been carrying a question for five beats.</div>
+
+<h4 class="mini">Why this shape is Maeren's and not Brynna's</h4>
+<div class="compare">
+  <div class="cmp-before">
+    <h4><span class="tag t-brynna">Brynna · declarative</span></h4>
+    <p>Sees injustice <span class="arrow">→</span> decides it's wrong <span class="arrow">→</span> acts.</p>
+  </div>
+  <div class="cmp-after">
+    <h4><span class="tag t-maeren">Maeren · investigative</span></h4>
+    <p>Sees something that doesn't make sense <span class="arrow">→</span> needs to understand it completely <span class="arrow">→</span> then decides what she believes.</p>
+  </div>
+</div>
+<p>Her central early conflict is therefore <strong>curiosity vs. survival</strong>, not fear vs. courage. In a safe world she'd be a little detective. She has learned that being curious is dangerous, so she survives by suppressing the thing that is most herself.</p>
+
+<h3 id="arc-dream">The dream revision — split the plot centre from the emotional centre</h3>
+<div class="compare">
+  <div class="cmp-before">
+    <h4>As written</h4>
+    <p>The sphere is both the plot key <em>and</em> the emotional centre of the Search for Answers dream.</p>
+  </div>
+  <div class="cmp-after">
+    <h4>Revised</h4>
+    <p><strong>Plot centre:</strong> the sphere — kept, because she must recognise its image on the book later.<br><br><strong>Emotional centre:</strong> the burning woman. She holds the sphere, or gives it to Maeren, or stands beside it. Then the fire.</p>
+  </div>
+</div>
+<p>When Maeren wakes she barely cares about the sphere — she retains just enough for her subconscious to recognise it in the library. <strong>The person is what haunts her.</strong></p>
+<div class="pull">She's human-driven, not object-driven. An abstract magical object wouldn't obsess her. A person suffering absolutely would.</div>
+
+<h3 id="arc-payoff">The reread payoff — the woman has her mother's face</h3>
+<p>The burning woman in the dream is <em>not</em> literally the murdered woman from Syrithien. Maeren never met her; her subconscious doesn't know what she looked like. Dream logic gives the figure a strangely familiar face instead.</p>
+<div class="arrowline">
+  <b>The dream</b><span class="arrow">→</span>Maeren can't place her; something about the woman bothers her, as though she should know her
+  <span class="arrow">→</span><b>Gwernas chapter</b><span class="arrow">→</span>Gwernas describes Maeren's mother, and the physical details quietly match
+</div>
+<div class="flag"><b>Delivery rule — do not break it.</b> No announcement. No <em>"Maeren suddenly realized this was the woman from her dream."</em> Just matching details. A very attentive first-time reader might catch it; most won't. On reread it detonates, and the dream becomes retroactively loaded with grief.</div>
+
+<div class="win"><b>What this unlocks.</b> The investigation stops being the plot's delivery mechanism for lore and becomes the arc itself. Every answer Maeren pursues is her choosing her authentic curious self over the frightened survival-self that kept her invisible.</div>
+
+<hr class="div">
+
 <!-- ===================== CHECKLIST ===================== -->
 <h2 class="sec" id="donotbreak">Things Not to Break</h2>
 <p class="sec-kicker">Reference · draft sanity check</p>
@@ -892,6 +1088,9 @@
   <li><span class="box">✓</span><span class="txt">Aurelian never campaigns for Brynna's forgiveness.</span></li>
   <li><span class="box">✓</span><span class="txt">Aurelian's rage over Maeren (Beat 4) precedes his breakdown over Nyara (Beat 6).</span></li>
   <li><span class="box">✓</span><span class="txt">Brynna has not forgiven Maeren yet at the start of Book Two; Aurelian's final sacrifice is love, not atonement.</span></li>
+  <li><span class="box">✓</span><span class="txt">The bargain exists on the page — <em>"I don't have to do anything. I just need to know."</em> It reads as small on the first pass.</span></li>
+  <li><span class="box">✓</span><span class="txt">The sphere survives the dream revision as the plot key, even though the burning woman becomes the emotional centre.</span></li>
+  <li><span class="box">✓</span><span class="txt">The mother resemblance is never announced. Matching details only.</span></li>
 </ul>
 <p class="note">Checkmarks and flag-word strikes are a working scratchpad for a single pass — they reset when the file is reopened.</p>
 
