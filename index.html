@@ -4,8 +4,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Bear Guardian — Revision Workbook</title>
-<link rel="icon" type="image/svg+xml" sizes="any" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✏️</text></svg>"/>
-
 <style>
   :root{
     --bg:#0f1114; --bg-raised:#161a1f; --bg-card:#1b2027; --bg-sunk:#141920;
@@ -208,6 +206,9 @@
   .c-b{color:#e0b341;border-color:#584518;background:#241f12}
   .c-c{color:#9fc3e8;border-color:#2c4257;background:#141d26}
   .c-d{color:#8fd3a7;border-color:#31513e;background:#16211a}
+  .chip.gone{opacity:.42;text-decoration:line-through}
+  .chip.new{box-shadow:0 0 0 1px #31513e inset}
+  .arrowchip{color:var(--ink-faint);font:12px var(--mono);align-self:center;padding:0 1px}
   .keylist{display:flex;flex-wrap:wrap;gap:14px;margin:14px 0 6px;font-size:13px;color:var(--ink-dim)}
   .keylist b{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:7px;vertical-align:0}
   .gradbar{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;border:1px solid var(--rule);border-radius:9px;overflow:hidden;margin:16px 0}
@@ -262,6 +263,11 @@
     <a href="#arc-debt" class="sub">Open thread: who was she?</a>
     <a href="#lexicon" class="sub">Pull-language tracker</a>
     <a href="#punch" class="sub">Draft punch list · Pass 2</a>
+    <div class="grp">Part Five · The institutions</div>
+    <a href="#inst" class="sub">Why this answers §6.1</a>
+    <a href="#order" class="sub">The Order — make it procedural</a>
+    <a href="#elders" class="sub">The Elders — coercion pattern</a>
+    <a href="#rhyme" class="sub">Rhyme, don't repeat</a>
     <div class="grp">Reference</div>
     <a href="#donotbreak" class="sub">Things not to break</a>
   </nav>
@@ -1168,8 +1174,8 @@
   <div class="trow">
     <div class="tlab"><b>Bear Strikes Again</b><span>incl. the Riven flashback</span></div>
     <div class="tchips">
-      <span class="chip c-b">found herself wandering over to the pen</span>
-      <span class="chip c-b">couldn't help the question from falling out</span>
+      <span class="chip c-b gone">found herself wandering over to the pen</span><span class="arrowchip">→</span><span class="chip c-d new">Maeren walked over to the pen</span>
+      <span class="chip c-b gone">couldn't help the question from falling out</span><span class="arrowchip">→</span><span class="chip c-d new">she had to know what it would take</span>
       <span class="chip c-a">never felt so drawn to a creature</span>
       <span class="chip c-c">her vision was tunnled</span>
       <span class="chip c-c">the anxiety that rooted her to the spot</span>
@@ -1196,8 +1202,8 @@
     <div class="tlab"><b>The Hunt Begins</b><span>Beat 3 · suppression holding</span></div>
     <div class="tchips">
       <span class="chip c-c">a thought floated through her mind</span>
-      <span class="chip c-b">her intuition telling her to listen in</span>
-      <span class="chip c-a">a familiar vibration coursed through her limbs… a signal</span>
+      <span class="chip c-b gone">her intuition telling her to listen in</span><span class="arrowchip">→</span><span class="chip c-d new">she leaned her ear towards the men</span>
+      <span class="chip c-a gone">a familiar vibration coursed through her limbs</span><span class="arrowchip">→</span><span class="chip c-c new">a familiar sensation of prickling nerves</span>
       <span class="chip c-d">she questioned whether the bear was truly to blame</span>
       <span class="chip c-d">Maeren was well read enough to understand</span>
     </div>
@@ -1207,11 +1213,11 @@
     <div class="tchips">
       <span class="chip c-c">questions would float across her mind like spirits</span>
       <span class="chip c-d">when she captured one</span>
-      <span class="chip c-b">allowed her bones to guide her</span>
-      <span class="chip c-a">a forceful tug pulling on her feet</span>
-      <span class="chip c-a">a faint thread connected the mystery</span>
-      <span class="chip c-a">fluttered before her like a ribbon on the breeze</span>
-      <span class="chip c-b">an instinctual understanding kept moving over the depiction</span>
+      <span class="chip c-b gone">allowed her bones to guide her</span><span class="arrowchip">→</span><span class="chip c-d new">she walked first through the courtyard</span>
+      <span class="chip c-a">a forceful tug pulling on her feet <em>— and she fights it</em></span>
+      <span class="chip c-a gone">a faint thread connected the mystery</span><span class="arrowchip">→</span><span class="chip c-d new">the fraying seam where… converged</span>
+      <span class="chip c-a gone">fluttered before her like a ribbon</span><span class="arrowchip">→</span><span class="chip c-d new">she traced her mind along its line</span>
+      <span class="chip c-b gone">an instinctual understanding kept moving over the depiction</span><span class="arrowchip">→</span><span class="chip c-d new">Maeren traced all the lines with her finger. The obscurity taunted her.</span>
       <span class="chip c-a">the amulet vibrated lightly against her chest</span>
       <span class="chip c-d">she pushed: "It is as if the creature is… aware."</span>
       <span class="chip c-d">Maeren Ario knew exactly where to start looking</span>
@@ -1220,12 +1226,16 @@
   </div>
 </div>
 
-<div class="flag">
-  <b>The headline finding.</b> <em>Answers</em> has both the most <span style="color:#8fd3a7">D</span> language and the most <span style="color:#e08b7d">A</span>/<span style="color:#e0b341">B</span> language in the section. The chapter where she becomes most active is also where the magic-agency vocabulary peaks. The registers aren't escalating — they're <strong>interleaved</strong>, and they cancel each other out inside the same scene.
+<div class="win">
+  <b>Second pass — the gradient now runs the right direction.</b> <em>Answers</em> has gone from the most interleaved chapter in the section to a predominantly <span style="color:#8fd3a7">D</span> chapter. The two surviving <span style="color:#e08b7d">A</span> instances are both legitimate under the rule: the tug on her feet is her survival instinct <em>and she overrides it</em>, and the amulet is literally magic. Nothing is now competing with her agency inside the hinge scene.
 </div>
 
 <div class="flag">
-  <b>The root cause.</b> The prologue teaches the reader that in this world, magic <em>literally</em> pulls, draws, and reclaims. Every later use of that dictionary in Maeren's POV inherits the literal meaning, whether you intend it or not. This is why the ribbon still reads as magic even though it now describes her reasoning.
+  <b>Original finding, for the record.</b> Before this pass, <em>Answers</em> carried both the most <span style="color:#8fd3a7">D</span> language <em>and</em> the most <span style="color:#e08b7d">A</span>/<span style="color:#e0b341">B</span> language in the section — the registers weren't escalating, they were <strong>interleaved</strong>, cancelling each other inside the same scene. Root cause: the prologue teaches the reader that magic <em>literally</em> pulls, draws, and reclaims, so every later use in Maeren's POV inherited the literal meaning whether intended or not.
+</div>
+
+<div class="win">
+  <b>Unplanned gift from the Riven fix.</b> <em>"She had to know what it would take to bring this horse home"</em> now rhymes with the bargain's <em>"But she had to understand."</em> The one and only time Maeren asked for anything was driven by needing to know — so the Riven flashback has quietly become a <strong>precedent</strong> for the loophole. She has done this before, for a horse. Consider whether to strengthen the echo or leave it exactly this quiet.
 </div>
 
 <h4 class="mini">The escalation you're after</h4>
@@ -1295,6 +1305,7 @@
 <div class="win"><b>Unplanned resonance worth keeping:</b> Alai invades the hydrangea garden holding a plucked hydrangea — he is literally uprooting the wild thing she loves — and Maeren's response is <em>Was he watching her?</em> That surveillance flicker pays forward into the Rían thread.</div>
 
 <h4 class="mini">Fixes, ordered by leverage</h4>
+<div class="win"><b>Status after the second pass.</b> Cleared: <strong>1</strong> (the bargain now sits between the check-for-witnesses and the climb — exactly the placement), <strong>3</strong> (the risk now attaches to her and Brynna), <strong>4</strong> (thread → fraying seam, and she is the subject of <em>traced</em> and <em>wove</em>). Outstanding: <strong>2, 5, 6</strong> — all three are single-clause additions, and all three are the reread layer.</div>
 <p class="progress" id="prog3">0 of 7 addressed</p>
 <ul class="checks" id="punch1">
   <li><span class="box">✓</span><span class="txt"><strong>1 · The bargain is one beat too late.</strong> <em>"Once she satiated her questions, she would tuck it all away… But she had to understand"</em> currently arrives <em>after</em> she has sprinted up the tower stairs — reproducing the Eamon-decision pattern (choice reported once the plan is moving). The hook is one line earlier: <em>"Maeren looked around quickly, ensuring she was unseen."</em> That's the survival self doing its check. Put the loophole at the threshold so it <strong>unlocks</strong> the climb instead of excusing it.</span></li>
@@ -1315,6 +1326,94 @@
   <li><span class="box">✓</span><span class="txt">Name drift: Aurelian / Aurelien / Aurlien</span></li>
   <li><span class="box">✓</span><span class="txt">"his eyelids disappeared behind his eyeballs" — reads oddly; consider "his eyes rolled back"</span></li>
 </ul>
+
+<hr class="div">
+
+<!-- ===================== PART FIVE ===================== -->
+<h2 class="sec" id="inst">The Institutions — Systemic Power</h2>
+<p class="sec-kicker">Part Five · Order &amp; Elders <span class="tag t-new">NEW</span></p>
+
+<p class="lede">Two developmental notes that, taken together, are the answer to a finding already sitting in this workbook.</p>
+
+<div class="win">
+  <b>These resolve <a href="#dropped">§6.1</a>.</b> The master document flagged that the Order and the Elders perform an identical function — suppress wildness, control a weak figurehead, discard what stops being useful, threaten elimination — and that Alai and Fenriel get near-identical beats. The reader effect: <em>Act II can feel like Act I in different clothing.</em> These two notes are the fix, and they fix it in the right direction: not by making the institutions <strong>less</strong> alike, but by making each one specific enough that the similarity registers as <strong>recognition</strong> rather than repetition.
+</div>
+
+<h3 id="order">1 · Make the Order's power systemic and procedural</h3>
+<p><strong>Core issue.</strong> The Order's power is clear, but it arrives through individual villains and confrontations rather than through visible systems. Right now the Order is Alai. It should be a machine that Alai happens to operate.</p>
+
+<h4 class="mini">Concrete details to place</h4>
+<p class="progress" id="prog5">0 of 7 placed</p>
+<ul class="checks" id="inst1">
+  <li><span class="box">✓</span><span class="txt">How suspected magic users are <strong>reported, arrested, and processed</strong>. Who informs. What form it takes. Where they go.</span></li>
+  <li><span class="box">✓</span><span class="txt">Who holds the <strong>authority to issue arrests or executions</strong> — and whether the crown or the Order signs.</span></li>
+  <li><span class="box">✓</span><span class="txt">How religious ritual, law, and public ceremony make persecution look <strong>legitimate</strong>.</span></li>
+  <li><span class="box">✓</span><span class="txt">What the Order controls beyond belief: <strong>information, education, healing, travel, political appointments</strong>.</span></li>
+  <li><span class="box">✓</span><span class="txt">What ordinary people must do to <strong>prove obedience</strong> — and what happens when they don't.</span></li>
+  <li><span class="box">✓</span><span class="txt">Why people <strong>cooperate</strong> even knowing it's cruel. This is the hardest and most important one.</span></li>
+  <li><span class="box">✓</span><span class="txt"><strong>Vaela's arrest and execution</strong> follows a recognisable legal or religious procedure — not an improvised cruelty.</span></li>
+</ul>
+
+<div class="flag"><b>Method.</b> A few concrete details threaded across existing scenes, not lengthy explanation. The goal is to show that the Order has made cruelty <em>normal, sacred, legal, and difficult to resist.</em></div>
+<div class="pull">Thematic purpose: the conflict becomes about inherited systems of oppression, not about defeating individual villains.</div>
+
+<h4 class="mini">Where the draft already gives you hooks</h4>
+<table>
+  <tbody>
+    <tr><td class="k">"Seers and healers of Velmora suddenly disappearing"</td><td>Currently rumour. Make it a <em>process</em> — someone reported them, something was signed, they were taken somewhere with a name.</td></tr>
+    <tr><td class="k">Maeren refusing the healers</td><td>She won't go because <em>"the Order has made it clear that such abnormalities are suspicious."</em> Show the mechanism: are healers required to report? To whom?</td></tr>
+    <tr><td class="k">Scripture attendance</td><td>Maeren stopped going. Nobody has made her pay for it yet. Attendance is a compliance record — let it be one.</td></tr>
+    <tr><td class="k">Alai in the balcony, then whispering to the king</td><td>Already the picture of institutional capture. One line on what the Order can <em>compel</em> versus merely advise turns it from atmosphere into architecture.</td></tr>
+    <tr><td class="k">The blight investigation</td><td>"Members of the Order had sent Spectors out to investigate. No verdict had been returned." The Order controls the finding. That's information control already on the page — name it.</td></tr>
+    <tr><td class="k">Druids pushed from the borders</td><td>By what instrument? A decree, a tax, a licence to trade, a refusal of safe passage. Any one of these makes the crusade procedural.</td></tr>
+  </tbody>
+</table>
+
+<h3 id="elders">2 · Develop the Elders' coercion and contradictions across multiple scenes</h3>
+<p><strong>Core issue.</strong> The Elders are compelling because they are <em>oppressed by the Order</em> and also control and manipulate Maeren. That tension should recur — it is currently concentrated into a single betrayal.</p>
+
+<h4 class="mini">The recurring pattern</h4>
+<p class="progress" id="prog6">0 of 9 placed</p>
+<ul class="checks" id="inst2">
+  <li><span class="box">✓</span><span class="txt">They withhold information from Maeren <strong>"for her safety."</strong></span></li>
+  <li><span class="box">✓</span><span class="txt">They control where she goes, what she learns, and whom she trusts.</span></li>
+  <li><span class="box">✓</span><span class="txt">They train or use her <strong>without fully explaining the consequences</strong>.</span></li>
+  <li><span class="box">✓</span><span class="txt">They speak about her destiny as if it belongs to the entire community.</span></li>
+  <li><span class="box">✓</span><span class="txt">They threaten or restrict <strong>Brynna</strong>, because they know Maeren will comply to protect her.</span></li>
+  <li><span class="box">✓</span><span class="txt">They justify the sacrifices of Maeren's mother and Nyara as <strong>necessary</strong>.</span></li>
+  <li><span class="box">✓</span><span class="txt">A sympathetic Elder objects to their methods — <strong>internal disagreement</strong> exists.</span></li>
+  <li><span class="box">✓</span><span class="txt">Someone <strong>genuinely cares</strong> about Maeren and still supports imprisoning or manipulating her.</span></li>
+  <li><span class="box">✓</span><span class="txt">Maeren recognises that the Elders use <strong>the same controlling logic as the Order</strong>.</span></li>
+</ul>
+
+<div class="flag"><b>Method.</b> Make the control a recurring pattern, not a single betrayal scene. Let their actions remain <em>understandable</em> while still causing real harm. Do not let them collapse into a second set of villains.</div>
+<div class="pull">Thematic purpose: oppressed people can inherit and reproduce the behaviours of the system that harmed them. Maeren's rebellion becomes resistance to the belief that survival justifies taking away someone else's agency.</div>
+
+<div class="win">
+  <b>This is the missing rung under Reading B.</b> The regression ending requires Maeren to seize control of her own wildness — to become, for one catastrophic moment, the thing the book is about. That reads as tragedy only if the reader has watched <em>two</em> institutions do it first, for reasons that sounded like love. The ninth item on the list above — <em>Maeren recognises the Elders use the Order's logic</em> — is the line that makes her final error legible as inheritance rather than accident.
+</div>
+
+<h4 class="mini">Sequencing note</h4>
+<p>Item 9 should land <strong>before</strong> the storm, not after. If she can name the pattern, then the storm becomes her articulating what she has learned (<a href="#diverge">§2.1, Caution 2</a>) — and the Veil becomes her doing the very thing she named. That converts a note about the Elders into the lesson she abandons.</p>
+
+<h3 id="rhyme">Rhyme, don't repeat</h3>
+<p>The two institutions should be structurally identical and texturally opposite. That contrast is what stops Act II reading as Act I in different clothing.</p>
+<div class="compare">
+  <div class="cmp-bad">
+    <h4>The Order · <span style="text-transform:none;letter-spacing:0">public, legal, sacred</span></h4>
+    <p>Coerces through <strong>procedure</strong>. Forms, decrees, ceremonies, attendance records, licences, verdicts withheld. It is cruel in the open and calls the cruelty law.</p>
+    <p class="note">The register is bureaucratic and liturgical. Nobody has to love you.</p>
+  </div>
+  <div class="cmp-after">
+    <h4>The Elders · <span style="text-transform:none;letter-spacing:0">private, protective, familial</span></h4>
+    <p>Coerces through <strong>care</strong>. Withheld information, managed access, destiny spoken of as communal property, a hostage framed as a guest. It is cruel in private and calls the cruelty safety.</p>
+    <p class="note">The register is intimate. Someone who loves you does it anyway.</p>
+  </div>
+</div>
+<div class="flag">
+  <b>Carried forward from §6.1:</b> differentiate Fenriel from Alai by making him <strong>frightened</strong> rather than merely cruel. You already have <em>"they're growing weaker."</em> His terror should be visible to Maeren, since reading people is her gift — and fear is exactly what makes an institution reach for control.
+</div>
+<div class="win"><b>The sentence underneath both notes:</b> the book's argument is that institutions destroy what they try to control. It only lands if the reader can see the institutions <em>working</em> — not just their worst men.</div>
 
 <hr class="div">
 
@@ -1392,6 +1491,8 @@
   wireChecks('passes','prog2','passes complete');
   wireChecks('punch1','prog3','addressed');
   wireChecks('punch2','prog4','cleaned');
+  wireChecks('inst1','prog5','placed');
+  wireChecks('inst2','prog6','placed');
 
   /* flag-word sweep */
   document.querySelectorAll('.traits.sweep').forEach(function(box){
