@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Bear Guardian — Emotion Redundancy Pass</title>
+<style>
+  :root{
+    --paper: #EFEDE7;
+    --paper-raised: #F8F7F3;
+    --ink: #26241F;
+    --ink-soft: #5B584E;
+    --rule: #D8D4C8;
+    --red: #A73B2C;
+    --red-soft: #C97E6C;
+    --moss: #4B6C5C;
+    --moss-soft: #8FA99A;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    --serif: Charter, "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+    --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--serif);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* site nav, styled to this page's palette rather than the app-wide one */
+  nav.book-nav{
+    background:var(--paper-raised);
+    border-bottom:2px solid var(--ink);
+  }
+  .book-nav-inner{
+    max-width:760px;
+    margin:0 auto;
+    padding:14px 24px;
+    display:flex;
+    align-items:center;
+    gap:20px;
+    flex-wrap:wrap;
+  }
+  .book-brand{
+    font-family:var(--mono);
+    font-size:12.5px;
+    letter-spacing:0.02em;
+    color:var(--ink);
+    text-decoration:none;
+    font-weight:600;
+    flex-shrink:0;
+  }
+  .book-links{
+    display:flex;
+    gap:4px;
+    flex-wrap:wrap;
+    font-family:var(--mono);
+    font-size:12.5px;
+  }
+  .book-links a{
+    color:var(--ink-soft);
+    text-decoration:none;
+    padding:5px 10px;
+    border-radius:3px;
+  }
+  .book-links a:hover{ background:var(--paper); color:var(--ink); }
+  .book-links a.active{ background:var(--ink); color:var(--paper-raised); }
+
+  .page{
+    max-width:760px;
+    margin:0 auto;
+    padding:0 24px 120px;
+  }
+
+  header.masthead{
+    padding:56px 0 28px;
+    border-bottom:2px solid var(--ink);
+  }
+  .kicker{
+    font-family:var(--mono);
+    font-size:12.5px;
+    letter-spacing:0.02em;
+    color:var(--ink-soft);
+    margin:0 0 10px;
+  }
+  h1{
+    font-family:var(--serif);
+    font-weight:600;
+    font-size:clamp(28px, 4.4vw, 40px);
+    line-height:1.12;
+    margin:0 0 14px;
+    letter-spacing:-0.01em;
+  }
+  header p.desc{
+    font-size:16px;
+    color:var(--ink-soft);
+    max-width:58ch;
+    margin:0;
+  }
+
+  /* progress + controls */
+  .toolbar{
+    position:sticky;
+    top:0;
+    z-index:5;
+    background:var(--paper);
+    padding:16px 0 14px;
+    border-bottom:1px solid var(--rule);
+    display:flex;
+    gap:16px;
+    align-items:center;
+    flex-wrap:wrap;
+  }
+  .toolbar input[type="search"]{
+    flex:1 1 220px;
+    font-family:var(--sans);
+    font-size:14px;
+    padding:9px 12px;
+    border:1px solid var(--rule);
+    border-radius:3px;
+    background:var(--paper-raised);
+    color:var(--ink);
+  }
+  .toolbar input[type="search"]:focus{
+    outline:none;
+    border-color:var(--ink-soft);
+  }
+  .progress-wrap{
+    font-family:var(--mono);
+    font-size:12.5px;
+    color:var(--ink-soft);
+    display:flex;
+    align-items:center;
+    gap:10px;
+    white-space:nowrap;
+  }
+  .progress-bar{
+    width:90px;
+    height:5px;
+    background:var(--rule);
+    border-radius:3px;
+    overflow:hidden;
+  }
+  .progress-fill{
+    height:100%;
+    background:var(--moss);
+    width:0%;
+    transition:width 0.25s ease;
+  }
+  .hide-fixed-toggle{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    font-family:var(--mono);
+    font-size:12.5px;
+    color:var(--ink-soft);
+    cursor:pointer;
+    user-select:none;
+  }
+
+  /* section nav */
+  nav.jump{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px 14px;
+    padding:16px 0 4px;
+    font-family:var(--mono);
+    font-size:12px;
+  }
+  nav.jump a{
+    color:var(--ink-soft);
+    text-decoration:none;
+    border-bottom:1px dotted var(--rule);
+    padding-bottom:1px;
+  }
+  nav.jump a:hover{ color:var(--red); border-color:var(--red-soft); }
+
+  section.block{
+    margin-top:52px;
+  }
+  section.block h2{
+    font-family:var(--serif);
+    font-size:22px;
+    font-weight:600;
+    margin:0 0 6px;
+    padding-bottom:10px;
+    border-bottom:1px solid var(--ink);
+  }
+  section.block .section-note{
+    font-family:var(--sans);
+    font-size:13.5px;
+    color:var(--ink-soft);
+    margin:10px 0 22px;
+    max-width:62ch;
+  }
+
+  /* item card */
+  .item{
+    display:flex;
+    gap:14px;
+    padding:16px 0 18px;
+    border-bottom:1px solid var(--rule);
+    position:relative;
+  }
+  .item.fixed{ opacity:0.42; }
+  .item.hidden-fixed{ display:none; }
+
+  .check{
+    flex:0 0 auto;
+    width:20px;
+    height:20px;
+    margin-top:3px;
+    border:1.5px solid var(--ink-soft);
+    border-radius:3px;
+    cursor:pointer;
+    position:relative;
+    background:var(--paper-raised);
+  }
+  .check.checked{
+    background:var(--moss);
+    border-color:var(--moss);
+  }
+  .check.checked::after{
+    content:"";
+    position:absolute;
+    left:5px; top:1px;
+    width:5px; height:10px;
+    border:solid var(--paper-raised);
+    border-width:0 2px 2px 0;
+    transform:rotate(40deg);
+  }
+
+  .item-body{ flex:1 1 auto; min-width:0; }
+
+  .quote-line{
+    font-size:15.5px;
+    margin:0 0 6px;
+    padding-left:12px;
+    border-left:3px solid transparent;
+  }
+  .quote-line .tag{
+    font-family:var(--mono);
+    font-size:10.5px;
+    letter-spacing:0.03em;
+    color:var(--ink-soft);
+    margin-right:8px;
+    vertical-align:1px;
+  }
+  .shown{ border-left-color: var(--moss-soft); }
+  .told{ border-left-color: var(--red-soft); }
+  .told .quote-text{ color:var(--red); }
+
+  .item-note{
+    font-family:var(--sans);
+    font-size:13px;
+    color:var(--ink-soft);
+    margin:8px 0 0;
+    font-style:italic;
+    max-width:62ch;
+  }
+
+  .item.custom .quote-line.told{ border-left-color: var(--red); }
+  .custom-badge{
+    font-family:var(--mono);
+    font-size:10px;
+    color:var(--moss);
+    border:1px solid var(--moss-soft);
+    border-radius:10px;
+    padding:1px 7px;
+    margin-left:8px;
+    vertical-align:1px;
+  }
+  .remove-btn{
+    font-family:var(--mono);
+    font-size:11px;
+    color:var(--ink-soft);
+    background:none;
+    border:none;
+    cursor:pointer;
+    padding:0;
+    margin-left:10px;
+    text-decoration:underline;
+  }
+  .remove-btn:hover{ color:var(--red); }
+
+  /* add-item form per section */
+  .add-form{
+    margin-top:18px;
+    padding:16px;
+    background:var(--paper-raised);
+    border:1px dashed var(--rule);
+    border-radius:4px;
+  }
+  .add-form.open{ border-style:solid; }
+  .add-toggle{
+    font-family:var(--mono);
+    font-size:13px;
+    color:var(--moss);
+    background:none;
+    border:none;
+    cursor:pointer;
+    padding:0;
+    margin-top:16px;
+  }
+  .add-toggle:hover{ text-decoration:underline; }
+  .add-form label{
+    display:block;
+    font-family:var(--mono);
+    font-size:11px;
+    color:var(--ink-soft);
+    margin:10px 0 4px;
+  }
+  .add-form label:first-child{ margin-top:0; }
+  .add-form input, .add-form textarea{
+    width:100%;
+    font-family:var(--sans);
+    font-size:14px;
+    padding:8px 10px;
+    border:1px solid var(--rule);
+    border-radius:3px;
+    background:#fff;
+    color:var(--ink);
+    resize:vertical;
+  }
+  .add-form textarea{ min-height:44px; }
+  .add-form .row-btns{
+    display:flex;
+    gap:10px;
+    margin-top:14px;
+  }
+  .btn{
+    font-family:var(--sans);
+    font-size:13.5px;
+    padding:8px 16px;
+    border-radius:3px;
+    border:1px solid var(--ink);
+    background:var(--ink);
+    color:var(--paper-raised);
+    cursor:pointer;
+  }
+  .btn.secondary{
+    background:transparent;
+    color:var(--ink-soft);
+    border-color:var(--rule);
+  }
+  .btn:hover{ opacity:0.85; }
+
+  .empty-state{
+    font-family:var(--sans);
+    font-size:14px;
+    color:var(--ink-soft);
+    font-style:italic;
+    padding:12px 0;
+  }
+
+  footer.saved-note{
+    margin-top:64px;
+    padding-top:20px;
+    border-top:1px solid var(--rule);
+    font-family:var(--mono);
+    font-size:11.5px;
+    color:var(--ink-soft);
+  }
+
+  @media (max-width:520px){
+    .page{ padding:0 16px 100px; }
+    header.masthead{ padding:36px 0 22px; }
+    .toolbar{ flex-direction:column; align-items:stretch; }
+    .progress-wrap{ justify-content:space-between; }
+    .book-nav-inner{ padding:12px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="book-nav">
+  <div class="book-nav-inner">
+    <a href="index.html" class="book-brand">🐻 the bear guardian</a>
+    <div class="book-links">
+      <a href="index.html">home</a>
+      <a href="schedule.html">revision plan</a>
+      <a href="checklist.html">checklist</a>
+      <a href="emotion-redundancy.html" class="active">emotion audit</a>
+    </div>
+  </div>
+</nav>
+
+<div class="page">
+
+  <header class="masthead">
+    <p class="kicker">revision notes · the bear guardian</p>
+    <h1>Emotion redundancy pass</h1>
+    <p class="desc">Every place a physical image already carries a feeling, and the next line names that feeling anyway. Check items off as you cut them. Add your own as you find more &mdash; they'll stay here.</p>
+  </header>
+
+  <div class="toolbar">
+    <input type="search" id="searchBox" placeholder="Filter by word or phrase…" autocomplete="off">
+    <label class="hide-fixed-toggle">
+      <input type="checkbox" id="hideFixed" style="margin:0;">
+      hide fixed
+    </label>
+    <div class="progress-wrap">
+      <span id="progressLabel">0 / 0 fixed</span>
+      <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+    </div>
+  </div>
+
+  <nav class="jump" id="jumpNav"></nav>
+
+  <div id="sections"></div>
+
+  <footer class="saved-note">
+    Saved automatically in this browser · nothing leaves your device
+  </footer>
+
+</div>
+
+<script>
+const STORAGE_KEY = 'bear-guardian-emotion-redundancy-v1';
+
+const SECTIONS = [
+  {
+    id: 'part1',
+    title: 'Part I — Velmora Court',
+    note: 'Prologue through the bear reveal.',
+    items: [
+      { shown:'"Wake up!" The man shouted', told:'panic rippling from his throat', note:'The shout and the shaking are already the panic.' },
+      { shown:'Ancient books, headache, twisted sheets', told:'the terror clung to her ribs, coiling tight', note:'Fine as image, but stacked on an already-clear waking-nightmare scene.' },
+      { shown:'"A woman in all white was dead."', told:'Overwhelming sadness and anger.', note:'A flat emotion-word fragment after a scene that already delivered the horror.' },
+      { shown:'hair "wild from sweat," ghostly pale skin, dark circles', told:'"wild from sweat and fear"', note:'Fear is stapled onto an image already doing fear\u2019s job.' },
+      { shown:'sister bursting in, teasing, alive', told:'"The last of the night\u2019s fear evacuated her chest"', note:'The banter already stages relief.' },
+      { shown:'Brynna huffing, crossing arms', told:'"tempered her anger at Maeren\u2019s coaxing"', note:'The huff and crossed arms are the anger.' },
+      { shown:'priest\u2019s brows furrowing at the insult', told:'"blossomed into a full storm of anxious energy"', note:'Overwritten restatement of a feeling the furrowed brow already sold.' },
+      { shown:'Riven whinnying, thrashing his head', told:'"with excitement"', note:'The thrashing is the excitement.' },
+      { shown:'"Helplessness paralyzed her."', told:'"mere spectators of her rage" (next sentence)', note:'Two abstract emotion-labels back to back with no image between them.' },
+      { shown:'Brynna striding, servants scattering', told:'"Anger transformed Brynna."', note:'The scattering servants already show it.' },
+      { shown:'"beneath her sister\u2019s militant composure"', told:'"lurked a feral fury"', note:'The composure/fury contrast is good, but overintensified after "militant" already implies barely-contained aggression.' },
+      { shown:'king looming over throne room', told:'"his anger was a palpable heat"', note:'Looming already conveys menace; second metaphor does the same job as the first.' },
+      { shown:'Brynna\u2019s total stillness', told:'"a thousand angry words would have been less terrifying"', note:'Good line, slightly undercut by needing to explain why the stillness is scary.' },
+      { shown:'king\u2019s arrogant apathy vanishing from his face', told:'"replaced by a distant sadness"', note:'The vanishing-then-blank beat already reads as suppressed feeling.' },
+      { shown:'advisors\u2019 eyes darting at each other', told:'"darted around... with nervousness"', note:'Literally names the thing the darting already is.' },
+      { shown:'"A weighty pang of guilt punched her in the gut."', told:'two images (pang / punched) for one word (guilt)', note:'Pick one.' },
+      { shown:'hunt dogs "thrum" at the horn\u2019s blast', told:'"with excitement"', note:'Thrumming is the excitement.' },
+      { shown:'hunters\u2019 faces under Brynna\u2019s spell', told:'"Maeren could feel their desperation"', note:'A strong image sentence gets stepped on by an abstract follow-up.' },
+      { shown:'man\u2019s face, pleading posture', told:'"There was desperation on his face, and Maeren\u2019s heart tightened with a familiar sting of pity"', note:'Two separate named emotions layered onto one visual beat.' },
+      { shown:'"a sharp discomfort rumbled in her gut"', told:'"horrified her... this horror" (next sentence)', note:'"Horror" used twice in one breath after the gut-image has landed.' },
+      { shown:'"His pale face gaunt with exhaustion"', told:'"and worry" tacked onto the same clause', note:'The gauntness is exhaustion; "worry" added without its own image.' },
+      { shown:'Brynna walking off, leaving Maeren in the mud', told:'"allowing Brynna\u2019s despair to roll over her like water"', note:'The walking-away already is the despair.' },
+    ]
+  },
+  {
+    id: 'part2',
+    title: 'Part II — Flight to Astralis / Eos threshold',
+    note: '',
+    items: [
+      { shown:'"wake up screaming, sweating, clutching the sheets"', told:'"Desperation was less consistent." (next line)', note:'The physical list already sold the nightmare; the abstract sentence reads like a thesis statement dropped into the scene.' },
+      { shown:'flower recognized, growing through leaves', told:'"relief and hope rising in her throat"', note:'A modest discovery gets two stacked abstract nouns.' },
+      { shown:'Eamon shaking her, wide eyes', told:'"his eyes wide with concern"', note:'Restates "wide eyes" one clause later.' },
+      { shown:'"Eamon," she breathed', told:'"relief sweeping over her"', note:'The breathed name already carries the relief.' },
+      { shown:'rasp in his voice breaking through', told:'"The rasp of worry broke through his voice"', note:'Names the emotion it\u2019s describing the sound of.' },
+      { shown:'"His concern melting into brotherly love."', told:'"The Order\u2019s been furious, embarrassed" (very next line)', note:'Two emotion-labels in successive beats with no image between them.' },
+      { shown:'guilt "dropped," trying to vanquish the feeling', told:'"guilt and worry trailed closely behind her"', note:'Renames guilt and adds "worry."' },
+      { shown:'"the bear\u2019s piercing blue eyes and its sad and tired expression"', told:'"sad" doing double duty with "tired"', note:'' },
+      { shown:'rising panic staged through physical paralysis', told:'"paralyzed by the rising panic in his throat"', note:'Names the exact mechanism the previous clause already dramatized.' },
+      { shown:'"It had to be over." (chapter close)', told:'"frantic pounding" (chapter open, restating the beat)', note:'Several chapter openings restate the previous closing beat instead of advancing.' },
+      { shown:'dark blue eyes twinkling', told:'"despite the perpetual despair that lay behind them"', note:'A nice contrast slightly overexplained by naming "despair" outright.' },
+      { shown:'tears in his eyes', told:'"Brynna\u2019s heart cracked, an unfiltered anger oozed out of it"', note:'Tears already established grief; a second, unearned emotion added in the same breath.' },
+      { shown:'accusatory, clipped dialogue', told:'"with every word, the anger in her chest swelled"', note:'The dialogue already carries the anger.' },
+      { shown:'stomach plummeting', told:'"In the vacancy, fear lingered." (one line later)', note:'Plummeting stomach already is fear.' },
+    ]
+  },
+  {
+    id: 'part3',
+    title: 'Part III — Training in Eos, the Elders, K\u0113l\u0113',
+    note: 'The heaviest concentration in the manuscript — likely because it\u2019s carrying the most interior weight, which is exactly where the instinct to over-explain kicks in hardest.',
+    items: [
+      { shown:'"Rían\u2019s hands were clenched on the edge of the wall"', told:'"his jaw was clenched tightly with panic"', note:'Two separate clenched-body-part images in one beat, the second also carrying an explicit label.' },
+      { shown:'fire sparking in his eyes', told:'"something like fear was there too"', note:'The hedge ("something like") does better work than a flat label would.' },
+      { shown:'"A sadness, like a shade, slid over his eyes."', told:'"sadness" named directly', note:'Let the reader infer it from "shade."' },
+      { shown:'face reddening', told:'"with embarrassment"', note:'Reddening is embarrassment.' },
+      { shown:'exhaustion tightening her chest', told:'"and soon panic had seeded itself into her heart"', note:'A second organ, a second emotion, stacked in the same sentence.' },
+      { shown:'"relief was shattered as she met the stare"', told:'naming "relief" then immediately un-naming it', note:'A slightly circular construction.' },
+      { shown:'Maeren\u2019s heart lightening', told:'"with excitement"', note:'Lightening already is the lift.' },
+      { shown:'Rían\u2019s head dropping to his chest', told:'"Maeren could feel his shame wafting off him"', note:'The dropped head already conveys shame.' },
+      { shown:'"A tiny thread of hope had sewn itself into his heart while he slept."', told:'stock hope-metaphor', note:'One of three near-identical plant/thread hope metaphors — see cross-cutting notes.' },
+      { shown:'nose crinkling', told:'"with disgust"', note:'The crinkle is the disgust.' },
+      { shown:'uneven, shallow delivery of a line', told:'"his worry betraying him"', note:'The uneven delivery is already the tell; "worry" undercuts the subtlety of "betraying."' },
+      { shown:'Godric scrunching eyebrows, looking at the hand', told:'"with disgust"', note:'Same move as above.' },
+      { shown:'shaking Godric, shouting (previous paragraph)', told:'"Anger surged through Aurelian at the look on Godric\u2019s pale, freckled face"', note:'Narrates the emotion a second time after already dramatizing it.' },
+      { shown:'torch dying in watery eyes', told:'"Fury scorched his chest."', note:'A quiet devastating image followed by a loud generic label that doesn\u2019t match its register.' },
+      { shown:'facial shift, single beat', told:'"a sad anger vanish from his facade, replaced by relief"', note:'Three emotion words in one sentence for a single beat.' },
+      { shown:'forced bow, scripted apology', told:'"she could taste the venom of anger on her tongue"', note:'A second metaphor for what the action already dramatized.' },
+      { shown:'"Maeren\u2019s face went hot with embarrassment."', told:'"Her chest swelled... to combat her shame." then "the fire in her cheeks shifted to anger-induced redness." (three sentences in a row)', note:'The clearest example in the book of the pattern compounding — three images, three labels, back to back.' },
+      { shown:'nostril twitching "as if he smelled something rotten"', told:'"exposing his frustration"', note:'The rotten-smell image is vivid; "frustration" undersells it.' },
+      { shown:'"the fury in his eyes matched the venom of his voice"', told:'"venom" reused as an anger-metaphor', note:'Used twice within a few pages — see cross-cutting notes.' },
+      { shown:'defiance in front of a man who could destroy her', told:'"a mix of fear and delight"', note:'Naming the paradox instead of dramatizing the specific sensation of it.' },
+    ]
+  },
+  {
+    id: 'part4',
+    title: 'Part IV — The Gala, the storm on the terrace, "Rían Feels," Confronting the Elders',
+    note: '',
+    items: [
+      { shown:'"Angry flames scorched her neck."', told:'"angry" labels a flame already doing the emotional work', note:'' },
+      { shown:'"Fear and doubt crept into her mind like expanding shadows."', told:'both nouns named alongside the image', note:'The shadow metaphor alone would carry this.' },
+      { shown:'"They were afraid of Maeren."', told:'"Or at least they were afraid of what she could become." (next sentence)', note:'Same word, same idea, two sentences in a row.' },
+      { shown:'Rían squeezing her hand almost to pain', told:'"the angry voice in her head quieted" (same sentence)', note:'The squeeze already communicates the intervention.' },
+      { shown:'extended storm/weather sequence on the terrace', told:'fear, panic, shame each named once per beat', note:'The magic system already makes weather = feeling literally — trust that conceit instead of narrating in parallel.' },
+      { shown:'fist against the door, crack of pain', told:'"brought him momentary relief"', note:'The self-punishment already communicates guilt; naming the result over-directs the reader.' },
+      { shown:'"The Elders would be furious with Maeren for what she had done."', told:'"They were going to be furious with him for letting her do it." (next sentence)', note:'Same emotion word twice in consecutive sentences about two different people.' },
+      { shown:'"Fool." (efficient one-word fragment)', told:'next chapter restates the same beat instead of advancing it', note:'Worth checking whether the italic fragments are doing their job if the following chapter re-explains what they conveyed.' },
+      { shown:'"A gray sun rose bathing Maeren\u2019s chambers in a sad light."', told:'"burning rod of dread" one clause later', note:'Two separate emotional deliveries (weather personification + interior sensation) for the same beat.' },
+      { shown:'bones quaking', told:'"with shame"', note:'The quake already is the shame.' },
+      { shown:'"Fury scorched his chest"', told:'recurring template', note:'"Scorched" + an emotion noun used at least four times across the manuscript.' },
+    ]
+  },
+  {
+    id: 'part5',
+    title: 'Part V — The Truth, Betrayal, Rescue, the Massacre, the ending',
+    note: '',
+    items: [
+      { shown:'"Dread filled her stomach with lead as she turned the page."', told:'"dread" named in the same breath as "lead"', note:'Let the weight speak for itself.' },
+      { shown:'"A nervous hush fell over the crowd"', told:'"nervous" narrates the kind of hush', note:'Context (a public execution) already does that work.' },
+      { shown:'"The once jeering crowd and angry priests stood as still as stones"', told:'"angry" applied to priests whose stillness reads better as shock', note:'The label undercuts a more interesting read.' },
+      { shown:'"The subtle crack in his voice betrayed his fear."', told:'"fear" named after "betrayed" already does the work', note:'Cut "fear" and trust "betrayed his—" plus the crack.' },
+      { shown:'the run through the streets, mid-escape', told:'"Exhilaration coupled with a heavy dread made its way into Aurelian\u2019s heart"', note:'A definition-style sentence rather than sensation; context already implies both.' },
+      { shown:'the violent action of throwing him to the ground', told:'"With one furious swing of her arms she debased the prince"', note:'"Furious" is redundant with the action, and "debased" is also the wrong verb — a double issue in one clause.' },
+      { shown:'"An expression of horror was etched on Dire\u2019s pale face."', told:'"horror" named directly after "etched"', note:'The etching, the pale face, and the arrow already deliver horror.' },
+      { shown:'shouting names, searching the bodies', told:'"moving with frantic panic through the massacre"', note:'The shouting and searching already dramatize panic; "frantic panic" doubles the intensity-word.' },
+      { shown:'fists clenched, raised toward the prince', told:'"a feral anger flashed in her eyes" (same sentence)', note:'The raised fists already carry the anger.' },
+      { shown:'crimson hand, stained crown, letting it fall silently', told:'"a strange relief"', note:'One of the better-earned instances — "strange" does real work — but still tells the reader what to feel about an image ambiguous enough to hold it alone.' },
+      { shown:'"Her heart burst into flames"', told:'"unable to endure the grief, humiliation, terror, and anger that consumed it"', note:'Four named emotions in one sentence, at the climactic beat of the relationship — pick one or two and let the image carry the rest.' },
+      { shown:'massacre imagery: slit throats, dead children, dead horse', told:'"Their innocent faces were permanently horror stricken."', note:'The one moment in the closing pages where the prose steps in to tell the reader how to feel about material that doesn\u2019t need help landing.' },
+    ]
+  },
+  {
+    id: 'crosscutting',
+    title: 'Cross-cutting patterns',
+    note: 'Worth fixing globally rather than line by line.',
+    items: [
+      { shown:'"[body part] + [verb] + with [emotion]"', told:'"eyes blazed with anger," "voice thick with frustration," "face hot with embarrassment," "bones quaking with shame" — dozens of instances', note:'Delete the "with [emotion]" on a handful of these across the manuscript — the physical image alone usually communicates the feeling more precisely.' },
+      { shown:'consecutive-sentence stacking', told:'shame \u2192 anger, fear \u2192 panic, sadness \u2192 grief, back to back', note:'The "hot with embarrassment / chest swelled with shame / fire shifted to anger" passage is the most extreme example — reads like the prose doesn\u2019t trust the first image to have landed.' },
+      { shown:'abstract-noun sentence fragments used as transitions', told:'"Overwhelming sadness and anger." / "Anxiety was simple." / "Desperation was less consistent."', note:'Reaching for the clipped rhythm of the one-word fragments (Coward. / Fool.) but landing as summary instead of gut-punch — the one-word fragments work; the phrase-length ones mostly don\u2019t.' },
+      { shown:'"hope" as a recurring plant/thread metaphor', told:'"a kernel of hope bloomed," "a tiny thread of hope had sewn itself," "a small bud of hope sprouted" — three near-identical images across three POV characters', note:'Assign different physical vocabulary per POV so the metaphor differentiates voice instead of flattening all four narrators into one register.' },
+      { shown:'"furious" / "fury" as the default anger word', told:'used at a noticeably higher rate than angry, rage, or wrath — often paired with "scorched," "flashed," or "surged"', note:'A search-and-vary pass would stop Maeren, Brynna, Aurelian, and Fenriel from sounding identical when angry.' },
+    ]
+  }
+];
+
+// ---------- storage helpers ----------
+async function loadState(){
+  try{
+    if(window.storage && typeof window.storage.get === "function"){
+      const res = await window.storage.get(STORAGE_KEY, false);
+      if(res && res.value) return JSON.parse(res.value);
+    }
+  }catch(e){ /* key not found yet */ }
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(raw) return JSON.parse(raw);
+  }catch(e){ /* ignore */ }
+  return { checked: {}, custom: {} };
+}
+async function saveState(state){
+  const payload = JSON.stringify(state);
+  let savedViaClaude = false;
+  try{
+    if(window.storage && typeof window.storage.set === "function"){
+      await window.storage.set(STORAGE_KEY, payload, false);
+      savedViaClaude = true;
+    }
+  }catch(e){ savedViaClaude = false; }
+  if(!savedViaClaude){
+    try{ localStorage.setItem(STORAGE_KEY, payload); }
+    catch(e){ console.error('storage save failed', e); }
+  }
+}
+
+let STATE = { checked: {}, custom: {} };
+
+function itemId(sectionId, idx){ return sectionId + '::' + idx; }
+
+function escapeHtml(s){
+  return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function renderAll(){
+  const root = document.getElementById('sections');
+  const nav = document.getElementById('jumpNav');
+  root.innerHTML = '';
+  nav.innerHTML = '';
+
+  let totalItems = 0, totalChecked = 0;
+
+  SECTIONS.forEach(section => {
+    const customItems = STATE.custom[section.id] || [];
+    const allItems = section.items.map((it,i)=>({...it, id:itemId(section.id,i), custom:false}))
+      .concat(customItems.map((it,i)=>({...it, id:'custom::'+section.id+'::'+i, custom:true, customIdx:i})));
+
+    const navLink = document.createElement('a');
+    navLink.href = '#'+section.id;
+    navLink.textContent = section.title.replace(/^Part [IVX]+ — /,'');
+    nav.appendChild(navLink);
+
+    const el = document.createElement('section');
+    el.className = 'block';
+    el.id = section.id;
+
+    let html = `<h2>${escapeHtml(section.title)}</h2>`;
+    if(section.note) html += `<p class="section-note">${escapeHtml(section.note)}</p>`;
+    el.innerHTML = html;
+
+    if(allItems.length === 0){
+      const empty = document.createElement('p');
+      empty.className = 'empty-state';
+      empty.textContent = 'No items yet.';
+      el.appendChild(empty);
+    }
+
+    allItems.forEach(it => {
+      totalItems++;
+      const checked = !!STATE.checked[it.id];
+      if(checked) totalChecked++;
+
+      const row = document.createElement('div');
+      row.className = 'item' + (checked ? ' fixed' : '') + (it.custom ? ' custom' : '');
+      row.dataset.id = it.id;
+      row.dataset.search = (it.shown + ' ' + it.told + ' ' + (it.note||'')).toLowerCase();
+
+      row.innerHTML = `
+        <div class="check ${checked?'checked':''}" data-toggle="${it.id}"></div>
+        <div class="item-body">
+          <p class="quote-line shown"><span class="tag">shown</span><span class="quote-text">${escapeHtml(it.shown)}</span></p>
+          <p class="quote-line told"><span class="tag">told</span><span class="quote-text">${escapeHtml(it.told)}</span>${it.custom?'<span class="custom-badge">added</span>':''}${it.custom?`<button class="remove-btn" data-remove="${section.id}::${it.customIdx}">remove</button>`:''}</p>
+          ${it.note ? `<p class="item-note">${escapeHtml(it.note)}</p>` : ''}
+        </div>
+      `;
+      el.appendChild(row);
+    });
+
+    // add-item form
+    const formWrap = document.createElement('div');
+    formWrap.innerHTML = `
+      <button class="add-toggle" data-add-toggle="${section.id}">+ add an example to this section</button>
+      <div class="add-form" id="form-${section.id}" style="display:none;">
+        <label>shown (the image)</label>
+        <textarea id="shown-${section.id}" placeholder="e.g. her hands trembled on the reins"></textarea>
+        <label>told (the redundant label)</label>
+        <textarea id="told-${section.id}" placeholder="e.g. fear had taken hold of her"></textarea>
+        <label>note (optional)</label>
+        <input id="note-${section.id}" type="text" placeholder="why it's redundant, or how to fix it">
+        <div class="row-btns">
+          <button class="btn" data-save="${section.id}">Add</button>
+          <button class="btn secondary" data-cancel="${section.id}">Cancel</button>
+        </div>
+      </div>
+    `;
+    el.appendChild(formWrap);
+
+    root.appendChild(el);
+  });
+
+  document.getElementById('progressLabel').textContent = `${totalChecked} / ${totalItems} fixed`;
+  document.getElementById('progressFill').style.width = totalItems ? (100*totalChecked/totalItems)+'%' : '0%';
+
+  attachHandlers();
+  applyFilter();
+}
+
+function attachHandlers(){
+  document.querySelectorAll('[data-toggle]').forEach(el=>{
+    el.onclick = async () => {
+      const id = el.dataset.toggle;
+      STATE.checked[id] = !STATE.checked[id];
+      await saveState(STATE);
+      renderAll();
+    };
+  });
+
+  document.querySelectorAll('[data-add-toggle]').forEach(btn=>{
+    btn.onclick = () => {
+      const id = btn.dataset.addToggle;
+      const form = document.getElementById('form-'+id);
+      const open = form.style.display !== 'none';
+      form.style.display = open ? 'none' : 'block';
+      form.classList.toggle('open', !open);
+    };
+  });
+
+  document.querySelectorAll('[data-cancel]').forEach(btn=>{
+    btn.onclick = () => {
+      const id = btn.dataset.cancel;
+      document.getElementById('form-'+id).style.display = 'none';
+    };
+  });
+
+  document.querySelectorAll('[data-save]').forEach(btn=>{
+    btn.onclick = async () => {
+      const id = btn.dataset.save;
+      const shown = document.getElementById('shown-'+id).value.trim();
+      const told = document.getElementById('told-'+id).value.trim();
+      const note = document.getElementById('note-'+id).value.trim();
+      if(!shown || !told) return;
+      if(!STATE.custom[id]) STATE.custom[id] = [];
+      STATE.custom[id].push({ shown, told, note });
+      await saveState(STATE);
+      renderAll();
+    };
+  });
+
+  document.querySelectorAll('[data-remove]').forEach(btn=>{
+    btn.onclick = async () => {
+      const [sectionId, idx] = btn.dataset.remove.split('::');
+      STATE.custom[sectionId].splice(parseInt(idx,10),1);
+      await saveState(STATE);
+      renderAll();
+    };
+  });
+}
+
+function applyFilter(){
+  const q = document.getElementById('searchBox').value.trim().toLowerCase();
+  const hideFixed = document.getElementById('hideFixed').checked;
+  document.querySelectorAll('.item').forEach(el=>{
+    const matchesSearch = !q || el.dataset.search.includes(q);
+    const isFixed = el.classList.contains('fixed');
+    const shouldHide = !matchesSearch || (hideFixed && isFixed);
+    el.classList.toggle('hidden-fixed', shouldHide);
+  });
+  // hide empty sections when filtering
+  document.querySelectorAll('section.block').forEach(sec=>{
+    const visibleItems = sec.querySelectorAll('.item:not(.hidden-fixed)').length;
+    const hasItemsAtAll = sec.querySelectorAll('.item').length;
+    if(hasItemsAtAll && q){
+      sec.style.display = visibleItems ? '' : 'none';
+    } else {
+      sec.style.display = '';
+    }
+  });
+}
+
+document.getElementById('searchBox').addEventListener('input', applyFilter);
+document.getElementById('hideFixed').addEventListener('change', applyFilter);
+
+(async () => {
+  STATE = await loadState();
+  renderAll();
+})();
+</script>
+</body>
+</html>

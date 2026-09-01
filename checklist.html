@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>The Bear Guardian — Pre-Beta Revision Plan</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+  :root{
+    --surface-page:#f6f5f1;
+    --surface-card:#ffffff;
+    --surface-muted:#f0efe9;
+    --text-primary:#1f1e1a;
+    --text-secondary:#6b6a63;
+    --text-muted:#98978f;
+    --border:#e2e0d6;
+    --border-strong:#cfccc0;
+    --accent:#3c3489;
+    --accent-bg:#eeedfe;
+    --critical:#791f1f;
+    --critical-bg:#fcebeb;
+    --high:#712b13;
+    --high-bg:#faece7;
+    --medium:#633806;
+    --medium-bg:#faeeda;
+    --done:#085041;
+    --done-bg:#e1f5ee;
+    --radius:10px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --surface-page:#1c1b18;
+      --surface-card:#242320;
+      --surface-muted:#2b2a26;
+      --text-primary:#f1efe8;
+      --text-secondary:#b4b2a9;
+      --text-muted:#888780;
+      --border:#3a3934;
+      --border-strong:#4a4943;
+      --accent:#cecbf6;
+      --accent-bg:#3c3489;
+      --critical:#f7c1c1;
+      --critical-bg:#4a1b0c;
+      --high:#f0997b;
+      --high-bg:#4a1b0c;
+      --medium:#fac775;
+      --medium-bg:#412402;
+      --done:#9fe1cb;
+      --done-bg:#04342c;
+    }
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--surface-page);
+    color:var(--text-primary);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+    line-height:1.5;
+    padding:2rem 1rem 5rem;
+  }
+  .wrap{max-width:760px;margin:0 auto;}
+  h1{font-size:22px;font-weight:600;margin:0 0 4px;}
+  .subtitle{color:var(--text-secondary);font-size:14px;margin:0 0 20px;}
+
+  .deadline{
+    display:inline-flex;align-items:center;gap:6px;
+    font-size:12px;font-weight:600;color:var(--accent);
+    background:var(--accent-bg);
+    padding:4px 10px;border-radius:99px;
+    margin-bottom:20px;
+  }
+
+  .overall{
+    background:var(--surface-card);
+    border:0.5px solid var(--border);
+    border-radius:var(--radius);
+    padding:16px 20px;
+    margin-bottom:20px;
+    display:flex;
+    align-items:center;
+    gap:16px;
+  }
+  .overall-ring{
+    width:56px;height:56px;border-radius:50%;
+    flex-shrink:0;
+    display:flex;align-items:center;justify-content:center;
+    font-size:14px;font-weight:600;
+    background:conic-gradient(var(--accent) calc(var(--pct,0)*1%), var(--surface-muted) 0);
+  }
+  .overall-ring-inner{
+    width:44px;height:44px;border-radius:50%;
+    background:var(--surface-card);
+    display:flex;align-items:center;justify-content:center;
+    font-size:13px;font-weight:600;
+  }
+  .overall-text{font-size:14px;color:var(--text-secondary);}
+  .overall-text strong{color:var(--text-primary);font-weight:600;}
+
+  .controls{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;}
+  button.tool{
+    font-size:13px;
+    padding:6px 12px;
+    border-radius:8px;
+    border:0.5px solid var(--border-strong);
+    background:var(--surface-card);
+    color:var(--text-secondary);
+    cursor:pointer;
+  }
+  button.tool:hover{background:var(--surface-muted);}
+
+  /* Fix-before-beta pinned card */
+  .fixbeta{
+    background:var(--surface-card);
+    border:1.5px solid var(--critical);
+    border-radius:12px;
+    margin-bottom:24px;
+    overflow:hidden;
+  }
+  .fixbeta-head{
+    padding:14px 18px;
+    background:var(--critical-bg);
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .fixbeta-head .pin{font-size:16px;}
+  .fixbeta-title{font-size:15px;font-weight:600;color:var(--critical);flex:1;}
+  .fixbeta-progress{font-size:12px;color:var(--critical);font-weight:600;}
+  .fixbeta-sub{
+    font-size:12px;color:var(--text-secondary);
+    padding:10px 18px 0;
+  }
+
+  details.phase{
+    background:var(--surface-card);
+    border:0.5px solid var(--border);
+    border-radius:12px;
+    margin-bottom:14px;
+    overflow:hidden;
+  }
+  details.phase[open] summary{border-bottom:0.5px solid var(--border);}
+  summary{
+    list-style:none;
+    cursor:pointer;
+    padding:16px 18px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+  summary::-webkit-details-marker{display:none;}
+  .chev{
+    font-size:11px;color:var(--text-muted);
+    transition:transform .15s ease;
+    flex-shrink:0;
+  }
+  details[open] .chev{transform:rotate(90deg);}
+  .phase-title{font-size:15px;font-weight:600;flex:1;min-width:0;}
+  .phase-sub{font-size:12px;color:var(--text-muted);font-weight:400;display:block;margin-top:2px;}
+  .phase-progress{
+    font-size:12px;color:var(--text-secondary);
+    display:flex;align-items:center;gap:8px;flex-shrink:0;
+  }
+  .bar{
+    width:64px;height:5px;border-radius:3px;
+    background:var(--surface-muted);overflow:hidden;
+  }
+  .bar-fill{height:100%;background:var(--accent);border-radius:3px;}
+  .fixbeta .bar-fill{background:var(--critical);}
+
+  .section-label{
+    font-size:12px;font-weight:600;color:var(--text-secondary);
+    text-transform:uppercase;letter-spacing:.03em;
+    padding:14px 18px 6px;
+  }
+  .item{
+    display:flex;
+    gap:10px;
+    padding:11px 18px;
+    border-top:0.5px solid var(--border);
+  }
+  .item:first-of-type{border-top:none;}
+  .item input[type=checkbox]{
+    margin-top:3px;
+    width:16px;height:16px;
+    flex-shrink:0;
+    accent-color:var(--accent);
+    cursor:pointer;
+  }
+  .fixbeta .item input[type=checkbox]{accent-color:var(--critical);}
+  .item-body{flex:1;min-width:0;}
+  .item-row{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:10px;
+  }
+  .item-text{font-size:14px;line-height:1.45;}
+  .item.done .item-text{color:var(--text-muted);text-decoration:line-through;}
+  .item-detail{
+    font-size:13px;color:var(--text-secondary);
+    margin-top:3px;
+    line-height:1.45;
+  }
+  .badge{
+    display:inline-block;
+    font-size:10px;font-weight:600;
+    padding:2px 7px;
+    border-radius:99px;
+    margin-left:8px;
+    vertical-align:middle;
+    white-space:nowrap;
+  }
+  .badge.critical{background:var(--critical-bg);color:var(--critical);}
+  .badge.high{background:var(--high-bg);color:var(--high);}
+  .badge.medium{background:var(--medium-bg);color:var(--medium);}
+  .badge.last{background:var(--surface-muted);color:var(--text-secondary);}
+  .badge.date{background:var(--surface-muted);color:var(--text-secondary);font-weight:600;}
+
+  .note-toggle{
+    flex-shrink:0;
+    font-size:11px;
+    color:var(--text-muted);
+    background:none;
+    border:none;
+    cursor:pointer;
+    padding:2px 0;
+    text-decoration:underline;
+    text-underline-offset:2px;
+  }
+  .note-toggle:hover{color:var(--text-secondary);}
+  .note-toggle.has-note{color:var(--accent);}
+  .fixbeta .note-toggle.has-note{color:var(--critical);}
+  .note-input{
+    display:none;
+    width:100%;
+    margin-top:8px;
+    font-family:inherit;
+    font-size:13px;
+    line-height:1.4;
+    color:var(--text-primary);
+    background:var(--surface-muted);
+    border:0.5px solid var(--border);
+    border-radius:8px;
+    padding:8px 10px;
+    resize:vertical;
+    min-height:52px;
+  }
+  .note-input:focus{outline:none;border-color:var(--border-strong);}
+  .note-input.open{display:block;}
+  .note-saved{
+    font-size:11px;color:var(--text-muted);
+    margin-top:3px;
+    opacity:0;
+    transition:opacity .2s ease;
+  }
+  .note-saved.show{opacity:1;}
+
+  .note{
+    font-size:13px;color:var(--text-secondary);
+    padding:12px 18px 16px;
+    border-top:0.5px solid var(--border);
+    background:var(--surface-muted);
+  }
+  .note strong{color:var(--text-primary);}
+
+  .legend{
+    display:flex;gap:14px;flex-wrap:wrap;
+    font-size:12px;color:var(--text-secondary);
+    margin-bottom:20px;
+  }
+  .legend span{display:flex;align-items:center;gap:6px;}
+  .dot{width:8px;height:8px;border-radius:50%;}
+
+  /* Guardrail reference cards (no checkboxes) */
+  details.guard{
+    background:var(--surface-card);
+    border:0.5px dashed var(--border-strong);
+    border-radius:12px;
+    margin-bottom:14px;
+    overflow:hidden;
+  }
+  details.guard[open] summary{border-bottom:0.5px solid var(--border);}
+  details.guard summary .phase-title{color:var(--text-secondary);}
+  .guard-list{padding:6px 18px 16px;}
+  .guard-list ul{margin:4px 0 14px;padding-left:18px;}
+  .guard-list li{font-size:13px;color:var(--text-secondary);margin-bottom:5px;line-height:1.4;}
+  .guard-list h4{font-size:12px;font-weight:600;color:var(--text-primary);margin:10px 0 4px;text-transform:uppercase;letter-spacing:.03em;}
+
+  .send-card{
+    background:var(--done-bg);
+    border:1.5px solid var(--done);
+    border-radius:12px;
+    padding:16px 18px;
+    margin-top:24px;
+    display:flex;
+    gap:10px;
+    align-items:flex-start;
+  }
+  .send-card input[type=checkbox]{width:18px;height:18px;margin-top:2px;accent-color:var(--done);}
+  .send-title{font-size:15px;font-weight:600;color:var(--done);}
+  .send-detail{font-size:13px;color:var(--text-secondary);margin-top:4px;line-height:1.5;}
+
+  .save-toast{
+    position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(20px);
+    background:var(--text-primary);color:var(--surface-page);
+    font-size:13px;padding:8px 16px;border-radius:8px;
+    opacity:0;transition:opacity .2s ease, transform .2s ease;
+    pointer-events:none;
+  }
+  .save-toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+</style>
+</head>
+<body>
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">🐻 The Bear Guardian</a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="schedule.html" class="nav-link">Revision plan</a>
+      <a href="checklist.html" class="nav-link active">Checklist</a>
+      <a href="emotion-redundancy.html" class="nav-link">Emotion audit</a>
+    </div>
+  </div>
+</nav>
+<div class="wrap">
+  <h1>The Bear Guardian — pre-beta revision plan</h1>
+  <p class="subtitle">Check items off as you go. Notes and progress save automatically.</p>
+  <div class="deadline">🐻 Send to beta readers: September 30, 2026</div>
+
+  <div class="overall">
+    <div class="overall-ring" id="overallRing" style="--pct:0">
+      <div class="overall-ring-inner" id="overallPct">0%</div>
+    </div>
+    <div class="overall-text" id="overallText">0 of 0 items complete</div>
+  </div>
+
+  <div class="legend">
+    <span><span class="dot" style="background:var(--critical)"></span>Critical</span>
+    <span><span class="dot" style="background:var(--high)"></span>High</span>
+    <span><span class="dot" style="background:var(--medium)"></span>Medium</span>
+    <span><span class="dot" style="background:var(--text-muted)"></span>Scheduled date</span>
+  </div>
+
+  <div class="controls">
+    <button class="tool" id="expandAll">Expand all</button>
+    <button class="tool" id="collapseAll">Collapse all</button>
+    <button class="tool" id="resetAll">Reset progress</button>
+  </div>
+
+  <!-- Pinned: Fix Before Beta -->
+  <div class="fixbeta">
+    <div class="fixbeta-head">
+      <span class="pin">📌</span>
+      <span class="fixbeta-title">Fix before beta — continuity &amp; logic</span>
+      <span class="fixbeta-progress" id="fixbetaProgress">0/10</span>
+    </div>
+    <div class="fixbeta-sub">Pulled from the Continuity and Logic Audit. These specific beats — including the Rían/Orlíen Veil arrival and the moonstone reasoning — get fixed during Phase 1 (climax pass) and Phase 3 (continuity pass) below.</div>
+    <div class="bar" style="margin:10px 18px 0; width:auto;"><span class="bar-fill" id="fixbetaBar" style="width:0%"></span></div>
+    <div id="fixbetaList"></div>
+  </div>
+
+  <div id="phaseList"></div>
+
+  <div id="guardList"></div>
+
+  <div class="send-card">
+    <input type="checkbox" id="chk-send-final">
+    <div>
+      <div class="send-title">Send — September 30</div>
+      <div class="send-detail" id="sendDetail">Send the version you prepared. Do not reread Chapter One first. Do not make "one tiny change." Do not run another AI developmental report that morning.</div>
+    </div>
+  </div>
+</div>
+
+<div class="save-toast" id="toast">Progress reset</div>
+
+<script>
+const FIXBETA = [
+  { id:"fb-journal", issue:"Rían's journal says \"three days ago, the order changed,\" but the surrounding Astralis story has advanced for weeks.", fix:"Replace with a timeline-consistent marker, or date the journal entries.", tag:"high" },
+  { id:"fb-huntdays", issue:"The hunt is called its third day, but Maeren later refers to \"four grueling days.\"", fix:"Verify the intended count and standardize.", tag:"medium" },
+  { id:"fb-elders", issue:"Elder Agon becomes \"Agin\"; the later seven-Elder roster adds Athos and drops Agon.", fix:"Establish one canonical roster and family relationship.", tag:"high" },
+  { id:"fb-ursa", issue:"Ursa is present entering the Bear's final stand, but isn't accounted for when the sisters leave together on Riven.", fix:"Show her fleeing, being killed, being taken, or deliberately left.", tag:"medium" },
+  { id:"fb-rianhand", issue:"Rían punches a door and believes his hand is likely broken; the injury has no later functional effect.", fix:"Follow it through, or soften \"likely broken\" to bruising/pain.", tag:"medium" },
+  { id:"fb-veil-arrival", issue:"Rían and Orlíen appear at the exact Veil Maeren chooses, with no clear interception beat.", fix:"Add one line connecting Orlíen's sight, or Rían's knowledge, to that location.", tag:"high" },
+  { id:"fb-moonstone", issue:"Rían's moonstone-removal reasoning at the climax is compressed — why he thinks the amulet is harming/trapping her isn't stated.", fix:"State the mechanism he infers and why removing it could save her. As written it can read as an argument for leaving it ON.", tag:"critical" },
+  { id:"fb-prologue", issue:"The prologue's burned woman remains unidentified and isn't meaningfully echoed later.", fix:"Confirm this is a deliberate Book Two plant; otherwise add a Book One echo.", tag:"medium" },
+  { id:"fb-orderterm", issue:"\"Order of Divinity\" appears once against \"Divinity of Order.\"", fix:"Standardize to one term.", tag:"medium" },
+  { id:"fb-godric", issue:"\"Godric Moore\" becomes \"Godric Moor.\"", fix:"Choose one surname.", tag:"medium" }
+];
+
+const PHASES = [
+  {
+    id: "phase1",
+    title: "Phase 1 — Lock the story",
+    sub: "Aug 26 – Sep 2 · Developmental cleanup only — do not polish sentences yet.",
+    sections: [
+      {
+        label: "Build the master revision list — Aug 26",
+        items: [
+          { id:"p1-setup", text:"Set up the working files", detail:"Duplicate the manuscript as PRE-BETA MASTER; start a separate Book Two / parking-lot doc for ideas not required before beta; mark which chapters are affected by remaining developmental issues and leave the rest alone.", when:"Aug 26" },
+          { id:"p1-artifacts", text:"Remove drafting artifacts and finish unfinished passages", detail:"Embedded Q&A/dev tables, every <<>> / TODO / placeholder / drafting instruction, corrupted lines (Throne Room p.19), missing beats (Rían's surveillance ch. p.81–82, Maeren's approach to the Bear p.84, market/village transition p.104), stray brackets and editorial comments.", when:"Aug 26" },
+          { id:"p1-locked", text:"Confirm these decisions remain settled (unless the manuscript itself reveals a contradiction)", detail:"Maeren stays quiet/investigative and doesn't need added combat competence · Maeren/Brynna don't need Book One reconciliation · Rían doesn't need full redemption · the ending stays unresolved · the Bear transformation doesn't need to be triumphant · Order and Elders stay ideological mirrors · magic/listening/control relationship stays implicit · Riven/hydrangea ending stays · no pull toward romantasy convention.", when:"Aug 26" }
+        ]
+      },
+      {
+        label: "Maeren causality pass — Aug 27–28",
+        items: [
+          { id:"p1-maeren", text:"Read Maeren's chapters consecutively; verify want → question → knowledge → choice → consequence for each", detail:"Check: Bear investigation stays curiosity-driven · archive/prophecy research has a visible evidence chain · capture reads as strategic compliance once Brynna is threatened · Astralis compliance evolves rather than staying uniformly passive · she keeps observing Rían and Cordova · major revelations connect to questions she's already carrying · Gwyrionez's info revises her theories · she connects the betrayal evidence herself · the journal functions as evidence, not exposition · her final decision clearly originates in her. End-of-pass test: complete \"Because Maeren ___, ___ happens\" for every chapter — if you can't, look closer (don't auto-revise; some chapters exist for discovery or emotional processing).", when:"Aug 27–28" }
+        ]
+      },
+      {
+        label: "Astralis pass — Aug 29–30",
+        items: [
+          { id:"p1-astralis", text:"Track the investigation, captivity/control, and Rían engines simultaneously through the Astralis section", detail:"Does each revelation answer or complicate a question Maeren already has, and does she revise theories? Does her compliance have a clear reason, and does her willingness to test boundaries increase? Does trust in Rían rise for a specific, incremental reason each time, and does the later surveillance reveal specifically contaminate earlier intimacy?", when:"Aug 29–30" },
+          { id:"p1-training", text:"Audit training scenes for redundancy", detail:"For each: what's different after this scene (new knowledge / changed relationship / new danger / new capability / new failure / changed understanding of control)? Flag and compress only scenes doing genuinely the same job — don't cut a quiet scene just because it lacks external action.", when:"Aug 29–30" }
+        ]
+      },
+      {
+        label: "Sister & emotional continuity pass — Aug 31",
+        items: [
+          { id:"p1-sisters", text:"Track wound → response → suppression → resurfacing → changed behavior across Maeren/Brynna, Eamon, Nyara, their mother, and Riven", detail:"Eamon keeps affecting both sisters · Brynna's accusation stays consequential · Maeren's understanding of her mother changes once she learns the truth · Nyara's death stays emotionally present · Brynna carries guilt after the separation · Maeren carries the rupture into Astralis · Riven/hydrangea payoff stays intact. Do not manufacture reconciliation — the question is whether the wound stays alive, not whether it heals.", when:"Aug 31" }
+        ]
+      },
+      {
+        label: "Rían relationship pass — Sep 1",
+        items: [
+          { id:"p1-rian", text:"Track threat → captor → uncertainty → curiosity → recognition → safety → attraction → trust → warning → betrayal through every Maeren/Rían scene", detail:"Confirm each stage-shift has a specific cause: why she stops seeing him solely as a threat, why she becomes curious, why she feels safe, what he reveals vs. withholds, where his institutional loyalty starts weakening, Cordova's warning, the journal/surveillance setup, and that his guilt afterward doesn't accidentally read as full accountability. Do not redeem him further — accountability is Book Two's job.", when:"Sep 1" }
+        ]
+      },
+      {
+        label: "Climax pass — Sep 2",
+        items: [
+          { id:"p1-climax-choice", text:"Confirm Maeren's choice, the unchosen consequence, and Rían's choice stay distinct at the Veil", detail:"Maeren deliberately stops accepting containment and forces her power open — that's her authored choice. The power overwhelming her and destabilizing the Veil is a consequence she can't predict, not something she chooses. Rían's moonstone removal is his own separate, authored decision (see the Fix Before Beta item above for the missing reasoning beat). \"Forcing\" should read as meaningfully different from the earlier \"releasing\" during the rain scene.", when:"Sep 2" },
+          { id:"p1-climax-portal", text:"Clarify the portal confrontation / final transformation prose", detail:"Hardest sequence to visualize — imprecise verbs and stacked metaphors (fire/ice/stone/blood) currently arrive faster than the cause-and-effect. Highest-value clarity fix in the book, since it's also the climax.", when:"Sep 2" },
+          { id:"p1-climax-laststand", text:"Tighten spatial clarity in the Bear's last stand", detail:"Many simultaneous combatants blur positioning; be selective with figurative language here specifically.", when:"Sep 2" }
+        ]
+      }
+    ],
+    note: "Developmental lock after Sep 2. No new structural revision after this point unless you discover a genuine contradiction."
+  },
+  {
+    id: "phase2",
+    title: "Phase 2 — Prose pass",
+    sub: "Sep 3 – 12 · The story is locked. Stop thinking about plot.",
+    sections: [
+      {
+        label: "Sentence-level clarity — do first",
+        items: [
+          { id:"p2-clarity", text:"Fix recurring sentence-level clarity issues throughout", detail:"Dangling/misattached modifiers, ambiguous pronouns, anatomically unclear language (\"shuttered\"→\"shuddered,\" \"gagged,\" the eyelids/eyeballs line), abstract verbs standing in for simple images (\"space to breach,\" \"reoriented her chin,\" \"shadow compiled\"), and agreement errors (\"like a swords\").", when:"Sep 3–5" }
+        ]
+      },
+      {
+        label: "Somatic language — Sep 3–5",
+        items: [
+          { id:"p2-somatic", text:"Audit heart / chest / stomach / gut / breath / throat / blood / heat / cold / tightening / burning / trembling / tears", detail:"For each: is this the strongest expression of the emotion, did the previous sentence already land it, and does it feel specific to this character? Keep strong bodily writing — remove or vary only the repetitions that have become default shorthand. Rough POV goals: Maeren = perception/environment/subtle sensation, Brynna = movement/muscle/spatial readiness, Aurelian = shame/self-judgment/recoil, Rían = restraint/observation/suppressed reaction breaking through. Tendencies, not rules.", when:"Sep 3–5" }
+        ]
+      },
+      {
+        label: "Interiority & rhetorical questions — Sep 6–7",
+        items: [
+          { id:"p2-questions", text:"Audit stacked internal questions (\"she wondered,\" \"what if,\" \"why,\" repeated ?)", detail:"For every cluster of internal questions, check whether each one advances the thought — if three questions communicate one uncertainty, keep the strongest. Goal isn't fewer questions, it's eliminating ones that just restate the one before. Protect Maeren's questioning mind.", when:"Sep 6–7" }
+        ]
+      },
+      {
+        label: "Emotional redundancy — Sep 8–9",
+        items: [
+          { id:"p2-redundancy", text:"Cut redundant channels wherever emotion shown → bodily reaction → metaphor → emotion named → rhetorical restatement all stack together", detail:"Ask whether the beat already landed before adding the next channel. Especially inspect: Eamon, Nyara, the sister rupture, the capture, the rain, Rían intimacy, the betrayal, the transformation, Riven. These scenes should keep their intensity — the goal is hierarchy, not minimalism.", when:"Sep 8–9" }
+        ]
+      },
+      {
+        label: "Gesture audit — Sep 10",
+        items: [
+          { id:"p2-gestures", text:"Audit recurring gestures: smirk, brow furrow, head tilt, crossed arms, clenched jaw/fist, sigh, shrug, eyes widen/narrow, swallowing, shoulder movement, nodding", detail:"Keep character-specific gestures. Change only the repetitions noticeable enough to flatten characters together.", when:"Sep 10" }
+        ]
+      },
+      {
+        label: "POV differentiation — Sep 11",
+        items: [
+          { id:"p2-pov", text:"Read 5–10 pages from each POV consecutively; check if you could identify the narrator with names removed", detail:"Focus especially on Maeren vs. Rían, the closest pair per the editorial report. Strengthen what's already there rather than manufacturing four radically different styles.", when:"Sep 11" }
+        ]
+      },
+      {
+        label: "Lyricism protection — Sep 12",
+        items: [
+          { id:"p2-lyricism", text:"Reread the hydrangea garden, forest, dreams, Astralis landscape, rain, Nyara's transformation, Maeren's transformation, and the Riven ending — restore anything cut merely for being descriptive", detail:"An entire pass whose job is partly not to cut things. Confirm atmosphere, rhythm, symbolic imagery, and strangeness that belongs to this book survived the earlier passes: sentient nature, animal specificity, hydrangea symbolism, rain-as-freedom, magic as ecological/perceptual, staccato terror rhythm, small physical gestures carrying grief, beauty/violence juxtaposition, dream/prophecy fragments.", when:"Sep 12" }
+        ]
+      }
+    ],
+    note: "Prose lock after Sep 12."
+  },
+  {
+    id: "phase3",
+    title: "Phase 3 — Continuity & manuscript hygiene",
+    sub: "Sep 13 – 19 · No developmental editing.",
+    sections: [
+      {
+        label: "Names & terminology — Sep 13–14",
+        items: [
+          { id:"p3-names", text:"Build a canonical spelling sheet and fix every name/term variant globally", detail:"Maeren, Brynna, Aurelian, Rían, Orlíen, Cydar, Nyara, Vaela, Gwyrionez, Minvaera/Maevira, Astrean, Sha'thi, Nymari, Velmora, Astralis, Eos, Talauvmor, Syrithien, Veil terminology — plus Godric Moore and \"Order of Divinity\" from the Fix Before Beta list above.", when:"Sep 13–14" }
+        ]
+      },
+      {
+        label: "Object continuity — Sep 15",
+        items: [
+          { id:"p3-objects", text:"Track where each object begins, who has it, and where it ends", detail:"Moonstone, Rían's journal, the prophecy/book, weapons, clothing where relevant, Riven, horses/lairs, the hydrangea charm, maps, injuries (including Rían's hand from the Fix Before Beta list).", when:"Sep 15" }
+        ]
+      },
+      {
+        label: "Knowledge continuity — Sep 16",
+        items: [
+          { id:"p3-knowledge", text:"For every major revelation, confirm who knows it, when they learned it, and how", detail:"Nyara = Bear, Maeren's power, the Bear Guardian lineage, the prophecy, Rían's surveillance, the Elders' motives, Order activity, Veil mechanics, family history. Watch for accidental clairvoyance — a character knowing something before their own scene reveals it.", when:"Sep 16" }
+        ]
+      },
+      {
+        label: "Timeline & geography — Sep 17",
+        items: [
+          { id:"p3-timeline", text:"Check days/nights, travel duration, healing time, moon/weather references, and parallel timelines against each other", detail:"Velmora → Syrithien travel, portal travel, Eos geography, Brynna's timeline vs. Maeren's vs. Aurelian's, the final parallel sequences — including the journal date and hunt day-count issues from the Fix Before Beta list. Doesn't need to be beautiful, needs to work.", when:"Sep 17" }
+        ]
+      },
+      {
+        label: "Magic continuity — Sep 18",
+        items: [
+          { id:"p3-magic", text:"Build a private ability/mechanism/cost/limits/first-demonstrated reference sheet and verify the manuscript against it", detail:"Extraction, healing, environmental manipulation, the shadow creature, the Veils, Bear transformation, the moonstone, magic's cost, Maeren's sensory abilities. This is for your own consistency — don't over-explain new rules to readers.", when:"Sep 18" }
+        ]
+      },
+      {
+        label: "Final manuscript hygiene sweep — Sep 19",
+        items: [
+          { id:"p3-hygiene", text:"Final search for any remaining artifacts or formatting breaks", detail:"<<, >>, TODO, NOTES, Q&A tables, chapter-development notes, placeholder text, duplicated paragraphs, broken formatting, corrupted characters, inconsistent chapter headings, accidental comments, missing scene breaks. This is the one hard prerequisite before outside readers see the manuscript.", when:"Sep 19" }
+        ]
+      }
+    ]
+  },
+  {
+    id: "phase4",
+    title: "Phase 4 — The reader pass",
+    sub: "Sep 20 – 25 · Stop editing while you read.",
+    sections: [
+      {
+        label: "Read like a reader — Sep 20–24",
+        items: [
+          { id:"p4-read", text:"Export to a format that feels different from your working doc and read ~20% per day, marking only", detail:"Different font/page size, ebook/PDF/tablet/print if possible. Mark: C = confused, B = bored, R = repetition, E = emotional beat didn't land, CONT = continuity issue, 🔥 = this works, don't touch it. No sentence polishing or rewriting while reading — you're collecting evidence.", when:"Sep 20–24" }
+        ]
+      },
+      {
+        label: "Triage your marks — Sep 25",
+        items: [
+          { id:"p4-triage", text:"Fix genuine confusion, continuity errors, obvious repetition, and broken transitions only", detail:"Do NOT fix \"maybe readers won't like this,\" \"maybe Maeren should be more...,\" \"maybe I should add...,\" \"what if the second act...\" — those go on the beta-question list below, not into the manuscript.", when:"Sep 25" }
+        ]
+      }
+    ]
+  },
+  {
+    id: "phase5",
+    title: "Phase 5 — Beta package",
+    sub: "Sep 26 – 29",
+    sections: [
+      {
+        label: "Final formatting — Sep 26",
+        items: [
+          { id:"p5-format", text:"Clean formatting pass", detail:"Title page, consistent chapter headings and scene breaks, readable font/spacing, page numbers if PDF, remove all comments/track changes, verify italics and accented characters, one final search for drafting artifacts.", when:"Sep 26" }
+        ]
+      },
+      {
+        label: "Beta questions — Sep 27",
+        items: [
+          { id:"p5-questions", text:"Draft ~12–15 beta questions across these categories, without revealing your intended answers", detail:"Maeren (what did you understand her to want, how did that change, any unclear choices) · Astralis (pacing, whether it still felt like one novel with Velmora, information overload) · Sisters (understanding of the conflict, feelings about the unresolved ending) · Rían (when did trust begin, how did the surveillance reveal reframe earlier scenes) · Climax (what was Maeren choosing, what was Rían choosing, what did the transformation mean) · Ending (what questions are you most eager to see answered, what pulls you into Book Two).", when:"Sep 27" }
+        ]
+      },
+      {
+        label: "Beta instructions — Sep 28",
+        items: [
+          { id:"p5-instructions", text:"Write reader instructions: what to mark, and what NOT to do", detail:"Ask them to flag confusion, boredom, emotional reactions, predictions, favorite characters, trust/distrust shifts. Tell them they don't need to line-edit unless something repeatedly distracts them. Most important: don't tell them what you're worried about before they read — you want independent evidence.", when:"Sep 28" }
+        ]
+      },
+      {
+        label: "Freeze — Sep 29",
+        items: [
+          { id:"p5-freeze", text:"Lock the beta file", detail:"Create the final beta file, back up the working manuscript separately, back up the beta version, label it clearly (\"THE BEAR GUARDIAN — BETA 1 — SEPT 2026\"), prepare the recipient list and instructions/questions, open only to verify the file works, then close it. No more editing after this.", when:"Sep 29" }
+        ]
+      }
+    ]
+  }
+];
+
+const STORAGE_KEY = "bear-guardian-revision-state";
+let checked = {};
+let notes = {};
+let noteSaveTimers = {};
+
+function escapeHtml(str){
+  return String(str)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;");
+}
+
+function tagLabel(tag){
+  if(tag==="critical") return "Critical";
+  if(tag==="high") return "High";
+  if(tag==="medium") return "Medium";
+  return "Do last";
+}
+
+function allPassItems(){
+  const out = [];
+  PHASES.forEach(phase => phase.sections.forEach(sec => sec.items.forEach(it => out.push(it))));
+  return out;
+}
+function allItems(){
+  return [...FIXBETA, ...allPassItems()];
+}
+
+function buildRow(it, isFixbeta){
+  const hasNote = !!(notes[it.id] && notes[it.id].trim());
+  const row = document.createElement("div");
+  row.className = "item" + (checked[it.id] ? " done" : "");
+  const mainText = isFixbeta ? it.issue : it.text;
+  const detailText = isFixbeta ? it.fix : it.detail;
+  let badgeHtml = "";
+  if(it.tag){
+    badgeHtml = `<span class="badge ${it.tag}">${tagLabel(it.tag)}</span>`;
+  }else if(it.when){
+    badgeHtml = `<span class="badge date">${it.when}</span>`;
+  }
+  row.innerHTML = `
+    <input type="checkbox" id="chk-${it.id}" ${checked[it.id] ? "checked" : ""}>
+    <div class="item-body">
+      <div class="item-row">
+        <label for="chk-${it.id}" class="item-text">${mainText}${badgeHtml}</label>
+        <button type="button" class="note-toggle${hasNote ? " has-note" : ""}" data-id="${it.id}">${hasNote ? "Edit note" : "+ Note"}</button>
+      </div>
+      ${detailText ? `<div class="item-detail">${isFixbeta ? "Fix: " : ""}${detailText}</div>` : ""}
+      <textarea class="note-input${hasNote ? " open" : ""}" data-id="${it.id}" placeholder="Add a note…">${escapeHtml(notes[it.id] || "")}</textarea>
+      <div class="note-saved" data-id="${it.id}">Saved</div>
+    </div>
+  `;
+  const cb = row.querySelector("input");
+  cb.addEventListener("change", () => {
+    checked[it.id] = cb.checked;
+    row.classList.toggle("done", cb.checked);
+    save();
+    renderProgressOnly();
+  });
+
+  const noteToggle = row.querySelector(".note-toggle");
+  const noteInput = row.querySelector(".note-input");
+  noteToggle.addEventListener("click", () => {
+    const isOpen = noteInput.classList.toggle("open");
+    if(isOpen) noteInput.focus();
+  });
+  noteInput.addEventListener("input", () => {
+    const id = it.id;
+    notes[id] = noteInput.value;
+    const hasText = !!noteInput.value.trim();
+    noteToggle.classList.toggle("has-note", hasText);
+    noteToggle.textContent = hasText ? "Edit note" : "+ Note";
+    clearTimeout(noteSaveTimers[id]);
+    noteSaveTimers[id] = setTimeout(async () => {
+      await save();
+      const savedTag = row.querySelector(`.note-saved[data-id="${id}"]`);
+      savedTag.classList.add("show");
+      setTimeout(() => savedTag.classList.remove("show"), 1200);
+    }, 500);
+  });
+
+  return row;
+}
+
+const GUARDRAILS = [
+  {
+    id: "guard-testbeta",
+    title: "Ask beta readers — don't preemptively fix",
+    items: [
+      "Does Astralis feel too long?",
+      "Do the two realms feel disconnected while the characters are separated?",
+      "Does Maeren feel agentic?",
+      "Does the unresolved Maeren/Brynna relationship feel intentional?",
+      "Does Rían earn the betrayal, or does it feel unearned?",
+      "Does Rían stay morally complicated rather than accidentally reading as redeemed?",
+      "Is Aurelian sympathetic enough to follow?",
+      "Is the lore comprehensible?",
+      "Does the climax read as intentional complexity rather than confusion?",
+      "Does the ending create Book Two desire?",
+      "Which mysteries are predictable?",
+      "Which emotional moments land hardest?"
+    ]
+  },
+  {
+    id: "guard-noreopen",
+    title: "Do not reopen before beta",
+    items: [
+      "Core concept",
+      "Maeren's fundamental personality",
+      "The four-POV architecture",
+      "The Bear Guardian premise",
+      "The two-realm concept",
+      "Order/Elders thematic mirroring",
+      "The Maeren/Brynna philosophical conflict",
+      "Rían's morally compromised role",
+      "The unresolved Book One ending",
+      "Magic-as-listening/release vs. control/force theme",
+      "The Riven ending",
+      "Fundamental series architecture"
+    ]
+  }
+];
+
+function renderGuardrails(){
+  const wrap = document.getElementById("guardList");
+  wrap.innerHTML = "";
+  GUARDRAILS.forEach((g, idx) => {
+    const details = document.createElement("details");
+    details.className = "guard";
+    const summary = document.createElement("summary");
+    summary.innerHTML = `<span class="chev">&#9656;</span><span class="phase-title">${g.title}<span class="phase-sub">Reference only — not a task list</span></span>`;
+    details.appendChild(summary);
+    const body = document.createElement("div");
+    body.className = "guard-list";
+    body.innerHTML = `<ul>${g.items.map(t => `<li>${t}</li>`).join("")}</ul>`;
+    details.appendChild(body);
+    wrap.appendChild(details);
+  });
+}
+
+function render(){
+  const fixbetaList = document.getElementById("fixbetaList");
+  fixbetaList.innerHTML = "";
+  FIXBETA.forEach(it => fixbetaList.appendChild(buildRow(it, true)));
+
+  const phaseList = document.getElementById("phaseList");
+  phaseList.innerHTML = "";
+  PHASES.forEach((phase, idx) => {
+    const details = document.createElement("details");
+    details.className = "phase";
+    if(idx === 0) details.open = true;
+
+    const summary = document.createElement("summary");
+    summary.innerHTML = `
+      <span class="chev">&#9656;</span>
+      <span class="phase-title">${phase.title}<span class="phase-sub">${phase.sub}</span></span>
+      <span class="phase-progress">
+        <span class="bar"><span class="bar-fill"></span></span>
+        <span class="phase-count"></span>
+      </span>
+    `;
+    details.appendChild(summary);
+
+    phase.sections.forEach(sec => {
+      const label = document.createElement("div");
+      label.className = "section-label";
+      label.textContent = sec.label;
+      details.appendChild(label);
+      sec.items.forEach(it => details.appendChild(buildRow(it, false)));
+    });
+
+    if(phase.note){
+      const note = document.createElement("div");
+      note.className = "note";
+      note.innerHTML = `<strong>Lock:</strong> ${phase.note}`;
+      details.appendChild(note);
+    }
+
+    phaseList.appendChild(details);
+  });
+
+  renderGuardrails();
+
+  const sendCb = document.getElementById("chk-send-final");
+  sendCb.checked = !!checked["send-final"];
+  sendCb.onchange = () => {
+    checked["send-final"] = sendCb.checked;
+    save();
+    renderProgressOnly();
+  };
+
+  renderProgressOnly();
+}
+
+function renderProgressOnly(){
+  const items = [...allItems(), {id:"send-final"}];
+  const done = items.filter(it => checked[it.id]).length;
+  const pct = items.length ? Math.round((done/items.length)*100) : 0;
+  document.getElementById("overallRing").style.setProperty("--pct", pct);
+  document.getElementById("overallPct").textContent = pct + "%";
+  document.getElementById("overallText").innerHTML = `<strong>${done} of ${items.length}</strong> items complete`;
+
+  const fbDone = FIXBETA.filter(it => checked[it.id]).length;
+  const fbPct = FIXBETA.length ? Math.round((fbDone/FIXBETA.length)*100) : 0;
+  document.getElementById("fixbetaProgress").textContent = `${fbDone}/${FIXBETA.length}`;
+  document.getElementById("fixbetaBar").style.width = fbPct + "%";
+
+  document.querySelectorAll("details.phase").forEach((el, idx) => {
+    const phase = PHASES[idx];
+    const items = phase.sections.flatMap(s => s.items);
+    const doneCount = items.filter(it => checked[it.id]).length;
+    const pct = items.length ? Math.round((doneCount/items.length)*100) : 0;
+    el.querySelector(".bar-fill").style.width = pct + "%";
+    el.querySelector(".phase-count").textContent = `${doneCount}/${items.length}`;
+  });
+}
+
+async function save(){
+  const payload = JSON.stringify({ checked, notes });
+  let savedViaClaude = false;
+  try{
+    if(window.storage && typeof window.storage.set === "function"){
+      await window.storage.set(STORAGE_KEY, payload, false);
+      savedViaClaude = true;
+    }
+  }catch(e){
+    savedViaClaude = false;
+  }
+  if(!savedViaClaude){
+    try{
+      localStorage.setItem(STORAGE_KEY, payload);
+    }catch(e){
+      // no persistence available at all; state stays in-memory for this session
+    }
+  }
+}
+
+async function load(){
+  let raw = null;
+  try{
+    if(window.storage && typeof window.storage.get === "function"){
+      const res = await window.storage.get(STORAGE_KEY, false);
+      if(res && res.value) raw = res.value;
+    }
+  }catch(e){
+    raw = null;
+  }
+  if(raw === null){
+    try{
+      raw = localStorage.getItem(STORAGE_KEY);
+    }catch(e){
+      raw = null;
+    }
+  }
+  if(raw){
+    try{
+      const parsed = JSON.parse(raw);
+      if(parsed && (parsed.checked || parsed.notes)){
+        checked = parsed.checked || {};
+        notes = parsed.notes || {};
+      }else{
+        checked = parsed || {};
+        notes = {};
+      }
+    }catch(e){
+      checked = {};
+      notes = {};
+    }
+  }
+  render();
+}
+
+function showToast(msg){
+  const t = document.getElementById("toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  setTimeout(() => t.classList.remove("show"), 1600);
+}
+
+document.getElementById("expandAll").addEventListener("click", () => {
+  document.querySelectorAll("details.phase, details.guard").forEach(d => d.open = true);
+});
+document.getElementById("collapseAll").addEventListener("click", () => {
+  document.querySelectorAll("details.phase, details.guard").forEach(d => d.open = false);
+});
+document.getElementById("resetAll").addEventListener("click", async () => {
+  if(!confirm("Reset all checked items and notes? This can't be undone.")) return;
+  checked = {};
+  notes = {};
+  await save();
+  render();
+  showToast("Progress reset");
+});
+
+load();
+</script>
+</body>
+</html>
