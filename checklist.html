@@ -130,6 +130,32 @@
     padding:10px 18px 0;
   }
 
+  /* Developmental recommendations (optional, not bugs) pinned card */
+  .devrec{
+    background:var(--surface-card);
+    border:1.5px solid var(--accent);
+    border-radius:12px;
+    margin-bottom:24px;
+    overflow:hidden;
+  }
+  .devrec-head{
+    padding:14px 18px;
+    background:var(--accent-bg);
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .devrec-head .pin{font-size:16px;}
+  .devrec-title{font-size:15px;font-weight:600;color:var(--accent);flex:1;}
+  .devrec-progress{font-size:12px;color:var(--accent);font-weight:600;}
+  .devrec-sub{
+    font-size:12px;color:var(--text-secondary);
+    padding:10px 18px 0;
+  }
+  .devrec .bar-fill{background:var(--accent);}
+  .devrec .item input[type=checkbox]{accent-color:var(--accent);}
+  .devrec .note-toggle.has-note{color:var(--accent);}
+
   details.phase{
     background:var(--surface-card);
     border:0.5px solid var(--border);
@@ -358,6 +384,18 @@
     <div id="fixbetaList"></div>
   </div>
 
+  <!-- Pinned: Developmental Recommendations (optional) -->
+  <div class="devrec">
+    <div class="devrec-head">
+      <span class="pin">📝</span>
+      <span class="devrec-title">Developmental recommendations — optional</span>
+      <span class="devrec-progress" id="devrecProgress">0/8</span>
+    </div>
+    <div class="devrec-sub">Ranked-by-impact suggestions from the causality &amp; engine-tracking report. These are creative calls, not bugs — worth a deliberate yes/no rather than losing track of them.</div>
+    <div class="bar" style="margin:10px 18px 0; width:auto;"><span class="bar-fill" id="devrecBar" style="width:0%"></span></div>
+    <div id="devrecList"></div>
+  </div>
+
   <div id="phaseList"></div>
 
   <div id="guardList"></div>
@@ -385,6 +423,17 @@ const FIXBETA = [
   { id:"fb-prologue", issue:"The prologue's burned woman remains unidentified and isn't meaningfully echoed later.", fix:"Confirm this is a deliberate Book Two plant; otherwise add a Book One echo.", tag:"medium" },
   { id:"fb-orderterm", issue:"\"Order of Divinity\" appears once against \"Divinity of Order.\"", fix:"Standardize to one term.", tag:"medium" },
   { id:"fb-godric", issue:"\"Godric Moore\" becomes \"Godric Moor.\"", fix:"Choose one surname.", tag:"medium" }
+];
+
+const DEVREC = [
+  { id:"dev-prophecy", issue:"The handwritten prophecy book Maeren finds in the Velmoran archive is never explained — who wrote or hid it there, or why it happens to match what the Elders and Nymari already know.", fix:"Add one line, anywhere after the Gwyrionez/Betrayal reveals, confirming Nyara planted or hid it. Right now it reads as authorial convenience rather than Maeren's inference.", when:"Pass 1" },
+  { id:"dev-knowstoomuch", issue:"Rían's two-years-of-surveillance reveal in Betrayal lands as new information rather than confirming a suspicion — Maeren is never shown wondering, earlier, why a Shai'thi assassin recognized her habits and routines so specifically.", fix:"Plant one small, retrospectively-readable \"how did he know that\" beat for Maeren during the capture sequence — Captors or Captive would be ideal.", when:"Pass 1 / 5" },
+  { id:"dev-orderchanged", issue:"The Rish/journal betrayal reveal is delivered TO Maeren by Orlien rather than assembled BY her from clues she's gathered — she's the audience for the reveal, not its detective.", fix:"Let Maeren notice and recall Rían's evasiveness about \"the order changed three nights ago\" (already planted in Cordova's chapter) a beat before Orlien confirms it.", when:"Pass 1" },
+  { id:"dev-gala", issue:"The Gala's earrings-and-dancing escalation reads as a trust/attraction jump, but nothing new is revealed or risked by Rían in that scene to justify it — compare to The Ride, where the escalation is earned by disclosure.", fix:"Give Rían one small, costly honesty beat inside the Gala scene itself — something that risks his position if overheard — so the intimacy is earned the same way it is elsewhere.", when:"Pass 2" },
+  { id:"dev-hanaweed", issue:"Whether the Kēlē/hanaweed act of care (gathering hanaweed for her, no audience, no incentive) survives the \"everything was a lie\" sweep in Portal Closes is currently ambiguous — and the ambiguity is accidental, not intentional.", fix:"Decide explicitly: either let one line acknowledge that some of what he did wasn't strategic (complicating the betrayal, setting up his Book Two redemption arc), or make sure the \"everything was a lie\" sweep doesn't accidentally include a beat you want the reader to remember as real.", when:"Pass 2" },
+  { id:"dev-shelltwig", issue:"The repeated shell/twig failure beats inside Training do the same job as the water-tornado beat — establishing that her power resists fine control — without adding a new capability, danger, or relationship beat.", fix:"Compress the shell/twig repetitions into 2–3 sentences of summary and spend the reclaimed space on the Orlien vision warning, which is the scene's actual payload.", when:"Pass 3" },
+  { id:"dev-brynnahurt", issue:"Maeren's side of the dell rupture — her own feelings about Brynna choosing not to save her — gets comparatively little page time once she's in Astralis. She thinks about Brynna as a hostage/motivation far more than she processes the specific hurt of being left.", fix:"Add one interior beat, ideally in a quieter Astralis chapter (Prophecy or The Ride would fit tonally), where Maeren explicitly sits with the specific personal hurt, not just the strategic fact.", when:"Pass 4" },
+  { id:"dev-amulet", issue:"Giving Rían the single most important save of the climax (identifying and removing the amulet, at personal cost) functionally rehabilitates his competence and centrality at the exact moment the book should be underlining his culpability.", fix:"Consider routing the amulet insight through Orlien (already established as more analytically capable about the amulet's warmth), with Rían supplying only the nerve to act on it. Keeps accountability squarely deferred to Book Two.", when:"Pass 5" }
 ];
 
 const PHASES = [
@@ -608,7 +657,7 @@ function allPassItems(){
   return out;
 }
 function allItems(){
-  return [...FIXBETA, ...allPassItems()];
+  return [...FIXBETA, ...DEVREC, ...allPassItems()];
 }
 
 function buildRow(it, isFixbeta){
@@ -728,6 +777,10 @@ function render(){
   fixbetaList.innerHTML = "";
   FIXBETA.forEach(it => fixbetaList.appendChild(buildRow(it, true)));
 
+  const devrecList = document.getElementById("devrecList");
+  devrecList.innerHTML = "";
+  DEVREC.forEach(it => devrecList.appendChild(buildRow(it, true)));
+
   const phaseList = document.getElementById("phaseList");
   phaseList.innerHTML = "";
   PHASES.forEach((phase, idx) => {
@@ -789,6 +842,11 @@ function renderProgressOnly(){
   const fbPct = FIXBETA.length ? Math.round((fbDone/FIXBETA.length)*100) : 0;
   document.getElementById("fixbetaProgress").textContent = `${fbDone}/${FIXBETA.length}`;
   document.getElementById("fixbetaBar").style.width = fbPct + "%";
+
+  const drDone = DEVREC.filter(it => checked[it.id]).length;
+  const drPct = DEVREC.length ? Math.round((drDone/DEVREC.length)*100) : 0;
+  document.getElementById("devrecProgress").textContent = `${drDone}/${DEVREC.length}`;
+  document.getElementById("devrecBar").style.width = drPct + "%";
 
   document.querySelectorAll("details.phase").forEach((el, idx) => {
     const phase = PHASES[idx];
@@ -881,3 +939,4 @@ load();
 </script>
 </body>
 </html>
+
