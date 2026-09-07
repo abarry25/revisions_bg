@@ -384,14 +384,14 @@
     <div id="fixbetaList"></div>
   </div>
 
-  <!-- Pinned: Developmental Recommendations (optional) -->
+  <!-- Pinned: Decisions to implement -->
   <div class="devrec">
     <div class="devrec-head">
       <span class="pin">📝</span>
-      <span class="devrec-title">Developmental recommendations — optional</span>
-      <span class="devrec-progress" id="devrecProgress">0/8</span>
+      <span class="devrec-title">Decisions to implement</span>
+      <span class="devrec-progress" id="devrecProgress">0/6</span>
     </div>
-    <div class="devrec-sub">Ranked-by-impact suggestions from the causality &amp; engine-tracking report. These are creative calls, not bugs — worth a deliberate yes/no rather than losing track of them.</div>
+    <div class="devrec-sub">Specific creative direction settled in the revision notes — these need writing into the manuscript, not further deliberation. Bugs stay in Fix Before Beta above; this is craft/character work.</div>
     <div class="bar" style="margin:10px 18px 0; width:auto;"><span class="bar-fill" id="devrecBar" style="width:0%"></span></div>
     <div id="devrecList"></div>
   </div>
@@ -419,21 +419,20 @@ const FIXBETA = [
   { id:"fb-ursa", issue:"Ursa is present entering the Bear's final stand, but isn't accounted for when the sisters leave together on Riven.", fix:"Show her fleeing, being killed, being taken, or deliberately left.", tag:"medium" },
   { id:"fb-rianhand", issue:"Rían punches a door and believes his hand is likely broken; the injury has no later functional effect.", fix:"Follow it through, or soften \"likely broken\" to bruising/pain.", tag:"medium" },
   { id:"fb-veil-arrival", issue:"Rían and Orlíen appear at the exact Veil Maeren chooses, with no clear interception beat.", fix:"Add one line connecting Orlíen's sight, or Rían's knowledge, to that location.", tag:"high" },
-  { id:"fb-moonstone", issue:"Rían's moonstone-removal reasoning at the climax is compressed — why he thinks the amulet is harming/trapping her isn't stated.", fix:"State the mechanism he infers and why removing it could save her. As written it can read as an argument for leaving it ON.", tag:"critical" },
+  { id:"fb-moonstone", issue:"Rían's moonstone-removal reasoning at the climax is compressed — why he thinks the amulet is harming/trapping her isn't stated.", fix:"Decided approach: Orlien recognizes the magical pattern (Maeren's power deteriorating, something ancient constraining it, the shadow consuming her, the stone/amulet involved) without a full exposition dump. Rían connects that to the physical object using clues already planted (the amulet's heat during Rain Storm, his suspicion in 'Rían Feels' that it protects her from herself) and acts through nerve and sacrifice rather than complete understanding — he shouldn't become the one who finally understands her best. Write this as a beat, not an explanation.", tag:"critical" },
+  { id:"fb-laststand-headcount", issue:"Headcount contradiction in the Bear's last stand: four guards plus ten soldiers equals fourteen, but the manuscript later refers to fifteen remaining soldiers.", fix:"Settle on one total and adjust the scene's later references to match.", tag:"high" },
   { id:"fb-prologue", issue:"The prologue's burned woman remains unidentified and isn't meaningfully echoed later.", fix:"Confirm this is a deliberate Book Two plant; otherwise add a Book One echo.", tag:"medium" },
   { id:"fb-orderterm", issue:"\"Order of Divinity\" appears once against \"Divinity of Order.\"", fix:"Standardize to one term.", tag:"medium" },
   { id:"fb-godric", issue:"\"Godric Moore\" becomes \"Godric Moor.\"", fix:"Choose one surname.", tag:"medium" }
 ];
 
 const DEVREC = [
-  { id:"dev-prophecy", issue:"The handwritten prophecy book Maeren finds in the Velmoran archive is never explained — who wrote or hid it there, or why it happens to match what the Elders and Nymari already know.", fix:"Add one line, anywhere after the Gwyrionez/Betrayal reveals, confirming Nyara planted or hid it. Right now it reads as authorial convenience rather than Maeren's inference.", when:"Pass 1" },
-  { id:"dev-knowstoomuch", issue:"Rían's two-years-of-surveillance reveal in Betrayal lands as new information rather than confirming a suspicion — Maeren is never shown wondering, earlier, why a Shai'thi assassin recognized her habits and routines so specifically.", fix:"Plant one small, retrospectively-readable \"how did he know that\" beat for Maeren during the capture sequence — Captors or Captive would be ideal.", when:"Pass 1 / 5" },
+  { id:"dev-journal-brynna", issue:"The journal reveal needs a specific line establishing that Rían identified Brynna — not just Maeren's physical capturability — as the actual lever: he knew she'd sacrifice herself for her sister, and documented it as something usable.", fix:"Add an operationally-worded entry (something like \"the easiest way to Maeren is through Brynna\" — exact wording TBD). Maeren should stop on this entry because she's looking for information about Brynna, not because she's investigating Rían — she isn't suspicious of him going in.", when:"Pass 1" },
   { id:"dev-orderchanged", issue:"The Rish/journal betrayal reveal is delivered TO Maeren by Orlien rather than assembled BY her from clues she's gathered — she's the audience for the reveal, not its detective.", fix:"Let Maeren notice and recall Rían's evasiveness about \"the order changed three nights ago\" (already planted in Cordova's chapter) a beat before Orlien confirms it.", when:"Pass 1" },
-  { id:"dev-gala", issue:"The Gala's earrings-and-dancing escalation reads as a trust/attraction jump, but nothing new is revealed or risked by Rían in that scene to justify it — compare to The Ride, where the escalation is earned by disclosure.", fix:"Give Rían one small, costly honesty beat inside the Gala scene itself — something that risks his position if overheard — so the intimacy is earned the same way it is elsewhere.", when:"Pass 2" },
-  { id:"dev-hanaweed", issue:"Whether the Kēlē/hanaweed act of care (gathering hanaweed for her, no audience, no incentive) survives the \"everything was a lie\" sweep in Portal Closes is currently ambiguous — and the ambiguity is accidental, not intentional.", fix:"Decide explicitly: either let one line acknowledge that some of what he did wasn't strategic (complicating the betrayal, setting up his Book Two redemption arc), or make sure the \"everything was a lie\" sweep doesn't accidentally include a beat you want the reader to remember as real.", when:"Pass 2" },
+  { id:"dev-gala", issue:"Decided direction: the Gala needs a more explicit turning point for Rían, but not one that proves or defines his love.", fix:"Tighten the scene so Rían has a visible \"oh fuck\" moment — his internal alarm at realizing his feelings are endangering his mission and his obedience, made visible without narrating or categorizing what he feels. The kiss stays the major rupture; this is what makes it land.", when:"Pass 2" },
   { id:"dev-shelltwig", issue:"The repeated shell/twig failure beats inside Training do the same job as the water-tornado beat — establishing that her power resists fine control — without adding a new capability, danger, or relationship beat.", fix:"Compress the shell/twig repetitions into 2–3 sentences of summary and spend the reclaimed space on the Orlien vision warning, which is the scene's actual payload.", when:"Pass 3" },
-  { id:"dev-brynnahurt", issue:"Maeren's side of the dell rupture — her own feelings about Brynna choosing not to save her — gets comparatively little page time once she's in Astralis. She thinks about Brynna as a hostage/motivation far more than she processes the specific hurt of being left.", fix:"Add one interior beat, ideally in a quieter Astralis chapter (Prophecy or The Ride would fit tonally), where Maeren explicitly sits with the specific personal hurt, not just the strategic fact.", when:"Pass 4" },
-  { id:"dev-amulet", issue:"Giving Rían the single most important save of the climax (identifying and removing the amulet, at personal cost) functionally rehabilitates his competence and centrality at the exact moment the book should be underlining his culpability.", fix:"Consider routing the amulet insight through Orlien (already established as more analytically capable about the amulet's warmth), with Rían supplying only the nerve to act on it. Keeps accountability squarely deferred to Book Two.", when:"Pass 5" }
+  { id:"dev-brynnahurt", issue:"Maeren's own feelings about Brynna choosing not to save her get little page time once she's in Astralis — she processes it as leverage far more than as hurt. Decided: this is one strand of a larger \"she will never be chosen\" wound (mother's absence, Brynna's freeze, Rían's betrayal), not a standalone fix.", fix:"Thread several brief moments through Astralis rather than one explanatory scene, following hurt → suppression → compartmentalization → triggering → collapse: a raw flash of anger/grief right after capture, redirected toward survival · focusing on the practical leverage problem when the Elders invoke Brynna, not the wound underneath · a dangerous, quickly-shut-down thought during a quiet Rían moment that he came for her in a way Brynna didn't · full collapse of the compartments once Rían's betrayal breaks them apart. Maeren doesn't need to consciously see the whole pattern before the climax — the reader should feel it gathering while she keeps refusing to look at it directly.", when:"Pass 4" },
+  { id:"dev-laststand-blocking", issue:"The Bear's last stand needs clearer spatial blocking (separate from the headcount bug above): where each Blade group is positioned, that the dogs pivot into the soldiers beside them rather than sprinting past Brynna toward soldiers behind her, and how the Brynna/Godric duel resolves when the bear arrives.", fix:"Make explicit: the four initial Blade soldiers are attacked by the dogs, not written out of the scene. Give the Brynna/Godric duel one resolving beat — Godric breaks off at the bear's roar, or Brynna disarms him to reach Maeren. Hold figurative language until the plain geography (position, direction, movement) is established.", when:"Pass 1" }
 ];
 
 const PHASES = [
@@ -478,9 +477,9 @@ const PHASES = [
       {
         label: "Climax pass — Sep 2",
         items: [
-          { id:"p1-climax-choice", text:"Confirm Maeren's choice, the unchosen consequence, and Rían's choice stay distinct at the Veil", detail:"Maeren deliberately stops accepting containment and forces her power open — that's her authored choice. The power overwhelming her and destabilizing the Veil is a consequence she can't predict, not something she chooses. Rían's moonstone removal is his own separate, authored decision (see the Fix Before Beta item above for the missing reasoning beat). \"Forcing\" should read as meaningfully different from the earlier \"releasing\" during the rain scene.", when:"Sep 2" },
+          { id:"p1-climax-choice", text:"Confirm Maeren's choice, the unchosen consequence, and Rían's choice stay distinct at the Veil", detail:"Maeren deliberately stops accepting containment and forces her power open/outward — that's her authored choice. Watch the verb here: she chooses to unleash, summon, ignite, or force the magic free, NOT to be consumed, rot, disappear, or lose herself — 'consume' makes it sound like she's choosing her own destruction, which isn't the intent. The power turning out to be already-rotting and beginning to consume her is the unchosen consequence. Rían's moonstone removal is his own separate, authored decision (see the Fix Before Beta item above for the decided mechanism). \"Forcing\" should read as meaningfully different from the earlier \"releasing\" during the rain scene.", when:"Sep 2" },
           { id:"p1-climax-portal", text:"Clarify the portal confrontation / final transformation prose", detail:"Hardest sequence to visualize — imprecise verbs and stacked metaphors (fire/ice/stone/blood) currently arrive faster than the cause-and-effect. Highest-value clarity fix in the book, since it's also the climax.", when:"Sep 2" },
-          { id:"p1-climax-laststand", text:"Tighten spatial clarity in the Bear's last stand", detail:"Many simultaneous combatants blur positioning; be selective with figurative language here specifically.", when:"Sep 2" }
+          { id:"p1-climax-laststand", text:"Tighten spatial clarity in the Bear's last stand", detail:"Many simultaneous combatants blur positioning; be selective with figurative language here specifically. Full blocking notes (dog pivots, Brynna/Godric resolving beat) are in the Decisions to Implement card above; the headcount contradiction is in Fix Before Beta.", when:"Sep 2" }
         ]
       }
     ],
@@ -752,6 +751,68 @@ const GUARDRAILS = [
       "The Riven ending",
       "Fundamental series architecture"
     ]
+  },
+  {
+    id: "guard-settled",
+    title: "🔒 Settled — do not revisit",
+    items: [
+      "Rían's earlier acts of care (hanaweed, The Ride, Rain Storm, the near-kiss) stay permanently ambiguous — never clarify which were strategy and which became real. Maeren's \"everything was a lie\" is psychologically true even though it isn't objectively complete, and that gap is the point.",
+      "No earlier \"how did you know that\" suspicion beat for Maeren about Rían. Her lack of suspicion is intentional characterization, not a plot hole — he's the one person she stops surveilling, and losing that vigilance is exactly what the betrayal should cost her.",
+      "The prophecy book's origin stays unrevealed in Book One. Only imply Nyara's connection to it (the watcher's relief when Maeren finds it is enough) — full origin, including a possible Shai'thi honeypot lineage older than Nyara, is Book Two/Three material.",
+      "The amulet's removal does not cure Maeren or resolve the magical imbalance. It only keeps her from being consumed before the transformation completes — the rot remains, and continues into Book Two.",
+      "Do not manufacture a Maeren/Brynna reconciliation scene (carried over from the emotional-continuity pass) — this wound is one strand of a larger \"she will never be chosen\" pattern (mother, Brynna, Rían) and stays unresolved by design."
+    ]
+  },
+  {
+    id: "guard-canon",
+    title: "🌍 World canon — Book Two/Three parking lot",
+    groups: [
+      {
+        heading: "The rot & magical imbalance",
+        items: [
+          "The shadow is not an evil alternate transformation or a separate force attacking Maeren — it's magic rotting from within.",
+          "The Shai'thi are creating unnatural additional Veils because they can no longer access their power; these artificial Veils distort the flow of magic between realms, and the imbalance shows up as blight, rot, and magic deteriorating from within.",
+          "Maeren is especially vulnerable as the core of the Bear Guardian system — like frostbite, the core may survive but the damage has already spread through the tendrils (the Veils, the realms, the magic moving between them)."
+        ]
+      },
+      {
+        heading: "The amulet",
+        items: [
+          "Developed by the Arios and passed to the firstborn daughter each generation to prevent the Bear Guardian from transforming. The original reason is lost to time; the family kept the belief that becoming the Bear Guardian was dangerous.",
+          "It's generational protection that became harmful: suppressing the transformation the bloodline was meant to fulfill. Hana's death and Nyara's near-immediate transformation when the amulet passed to Maeren establish that it hinders/prevents the transformation.",
+          "The amulet was never protecting Maeren from the shadow — its suppression of the transformation is part of what let the magic rot in the first place."
+        ]
+      },
+      {
+        heading: "Book One climax sequence (canon)",
+        items: [
+          "Maeren unleashes the power → the already-rotting magic begins consuming her → Rían removes the amulet → the Bear transformation occurs → Maeren survives, but the rot remains.",
+          "The ending light may represent release, rebalancing, rebirth, or the transformation completing — not healing."
+        ]
+      },
+      {
+        heading: "Book Two opening",
+        items: [
+          "Opens with Maeren visibly deteriorated — when Rían finds her near Seradon, roughly half her face is shadow. This is the physical continuation of Book One's unresolved rot.",
+          "As long as magic stays out of balance, she keeps turning to shadow. When she intervenes to help Brynna despite visible deterioration, the effort nearly kills her.",
+          "This leads to Aurelian's sacrifice: Brynna fears Maeren repeating their mother's and Nyara's self-destructive pattern, and Aurelian interrupts that generational pattern by sacrificing himself instead."
+        ]
+      },
+      {
+        heading: "Book Three direction",
+        items: [
+          "Book One's Veil closure was a desperate survival act, not a solution — it may worsen the separation between realms.",
+          "Neither creating more Veils nor simply closing them restores balance. The prophecy's fuller meaning involves ripping open the seams between the Veils so the realms can reemerge and the original wound can heal."
+        ]
+      },
+      {
+        heading: "Vaela, the Fions & the Battle of Belmora (Book Two)",
+        items: [
+          "Vaela stays in osprey form throughout the battle; her screeches signal Brynna's formations. She flies into Maeren's storm on arrival and emerges through it in front of Brynna, who already knows Vaela is a Fion — the transformation doesn't happen inside the storm itself.",
+          "Open question: scale of the reveal when Vaela transforms afterward — just Brynna and command staff, nearby soldiers, or the whole army. Ties to Seradon's larger arc from suspicion toward tolerance of magic; can be decided when this book is drafted."
+        ]
+      }
+    ]
   }
 ];
 
@@ -766,7 +827,13 @@ function renderGuardrails(){
     details.appendChild(summary);
     const body = document.createElement("div");
     body.className = "guard-list";
-    body.innerHTML = `<ul>${g.items.map(t => `<li>${t}</li>`).join("")}</ul>`;
+    if(g.groups){
+      body.innerHTML = g.groups.map(grp =>
+        `<h4>${grp.heading}</h4><ul>${grp.items.map(t => `<li>${t}</li>`).join("")}</ul>`
+      ).join("");
+    }else{
+      body.innerHTML = `<ul>${g.items.map(t => `<li>${t}</li>`).join("")}</ul>`;
+    }
     details.appendChild(body);
     wrap.appendChild(details);
   });
@@ -939,4 +1006,3 @@ load();
 </script>
 </body>
 </html>
-
