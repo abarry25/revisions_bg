@@ -2,8 +2,25 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Revision Plan — The Bear Guardian</title>
+<title>Revision Passes — The Bear Guardian</title>
 <link rel="stylesheet" href="styles.css">
+<style>
+  dl.grades{margin:8px 0 0;}
+  dl.grades dt{
+    display:inline-block;font-size:10.5px;font-weight:700;color:#fff;
+    padding:2px 8px;border-radius:99px;margin-top:8px;
+  }
+  dl.grades dt.small{background:#4a7a9c;}
+  dl.grades dt.medium{background:#a15c2f;}
+  dl.grades dt.large{background:#791f1f;}
+  dl.grades dd{margin:4px 0 0;font-size:13.5px;color:var(--text-secondary);}
+  .lean{font-size:13.5px;color:var(--text-secondary);margin:6px 0;}
+  .lean .lbl{font-weight:700;color:var(--text-primary);}
+  .recommended-tag{
+    font-size:10.5px;font-weight:700;color:var(--done);background:var(--done-bg);
+    padding:1px 8px;border-radius:99px;margin-left:6px;
+  }
+</style>
 </head>
 <body>
 
@@ -20,265 +37,373 @@
 </nav>
 
 <div class="wrap">
-  <h1>Pre-beta revision plan</h1>
-  <p class="subtitle">Read this for the reasoning behind the sequence. For day-to-day tracking, use the <a href="checklist.html">interactive checklist</a> instead.</p>
-  <div class="deadline">🐻 Send to beta readers: September 30, 2026</div>
+  <h1>Revision passes</h1>
+  <p class="subtitle">Eight passes, in order. For day-to-day tracking with checkboxes, Small/Medium/Large selectors, and notes, use the <a href="checklist.html">interactive checklist</a> instead.</p>
+  <p style="font-size:12.5px;color:var(--text-muted);">PRE BETA MASTER · 71 chapters · 109,336 words · page numbers refer to the PDF of PRE BETA MASTER – 0826 (3) · chapter numbers count the Prologue as 0.</p>
 
-  <p>The developmental architecture works — Maeren's arc is causal, the sister conflict is earned, Rían's betrayal changes the central relationship, and the climax grows from the novel's established conflict between suppression, listening, control, and force. What stands between this draft and beta readers isn't a rewrite. It's finishing the page, then working outward from story logic to prose to hygiene, in that order — because polishing a sentence in a scene with a missing causal beat wastes the polish.</p>
+  <p><strong>How to use this.</strong> Do the passes in order. Each has an entry condition, a fixed scope, and an exit condition. Do not let a later pass bleed into an earlier one — the sequence exists because Pass 3 changes what the sentences in Pass 7 need to do, and Pass 0 changes what Pass 3 is for. Every item is graded Small / Medium / Large; pick one level per item and move on.</p>
 
-  <p><strong>Rule for this entire period:</strong> this is no longer an open developmental rewrite. Every revision solves an identified problem. New ideas go into a Book Two / parking-lot document unless they expose a genuine continuity or comprehension issue.</p>
-
-  <hr class="divider">
-
-  <h2>📌 Fix before beta — continuity &amp; logic</h2>
-  <p>Ten specific bugs pulled from the Continuity and Logic Audit. These get resolved during the Phase 1 climax pass and the Phase 3 continuity pass below — they're listed here up front because they're easy to lose track of.</p>
-
+  <h2>The schedule at a glance</h2>
   <table class="plain">
-    <tr><th>Issue</th><th>Fix</th></tr>
-    <tr><td>Rían's journal says "three days ago, the order changed," but the surrounding Astralis story has advanced for weeks.</td><td>Replace with a timeline-consistent marker, or date the journal entries.</td></tr>
-    <tr><td>The hunt is called its third day, but Maeren later refers to "four grueling days."</td><td>Verify the intended count and standardize.</td></tr>
-    <tr><td>Elder Agon becomes "Agin"; the later seven-Elder roster adds Athos and drops Agon.</td><td>Establish one canonical roster and family relationship.</td></tr>
-    <tr><td>Ursa is present entering the Bear's final stand, but isn't accounted for when the sisters leave together on Riven.</td><td>Show her fleeing, being killed, being taken, or deliberately left.</td></tr>
-    <tr><td>Rían punches a door and believes his hand is likely broken; the injury has no later functional effect.</td><td>Follow it through, or soften "likely broken" to bruising/pain.</td></tr>
-    <tr><td>Rían and Orlíen appear at the exact Veil Maeren chooses, with no clear interception beat.</td><td>Add one line connecting Orlíen's sight, or Rían's knowledge, to that location.</td></tr>
-    <tr><td><strong>Rían's moonstone-removal reasoning at the climax is compressed</strong> — why he thinks the amulet is harming/trapping her isn't stated.</td><td>Decided approach: Orlien recognizes the magical pattern (power deteriorating, something ancient constraining it, the shadow consuming her, the stone involved) without a full exposition dump. Rían connects that to the physical object using clues already planted (the amulet's heat during Rain Storm, his suspicion in "Rían Feels" that it protects her from herself) and acts through nerve and sacrifice rather than complete understanding.</td></tr>
-    <tr><td>The prologue's burned woman remains unidentified and isn't meaningfully echoed later.</td><td>Confirm this is a deliberate Book Two plant; otherwise add a Book One echo.</td></tr>
-    <tr><td>"Order of Divinity" appears once against "Divinity of Order."</td><td>Standardize to one term.</td></tr>
-    <tr><td>"Godric Moore" becomes "Godric Moor."</td><td>Choose one surname.</td></tr>
-  </table>
-  <p style="font-size:13px;"><strong>Also added to Fix Before Beta:</strong> headcount contradiction in the Bear's last stand — four guards plus ten soldiers equals fourteen, but the manuscript later refers to fifteen remaining soldiers. Settle on one total and adjust later references.</p>
-
-  <hr class="divider">
-
-  <h2>📝 Decisions to implement</h2>
-  <p>Specific creative direction settled in the latest revision notes — these need writing into the manuscript, not further deliberation. Full detail and notes live in the <a href="checklist.html">checklist</a>.</p>
-
-  <table class="plain">
-    <tr><th>Issue</th><th>Decided direction</th><th>Pass</th></tr>
-    <tr><td>The journal needs to establish that Rían identified Brynna — not just Maeren's capturability — as the actual lever: he knew she'd sacrifice herself for her sister and documented it as usable.</td><td>Add an operationally-worded entry (something like "the easiest way to Maeren is through Brynna"). Maeren stops on it because she's looking for information about Brynna, not investigating Rían — she isn't suspicious of him going in.</td><td>Pass 1</td></tr>
-    <tr><td>The betrayal reveal is delivered to Maeren by Orlien rather than assembled by her from clues she's gathered.</td><td>Let Maeren recall Rían's "the order changed three nights ago" line (already planted in Cordova's chapter) a beat before Orlien confirms it.</td><td>Pass 1</td></tr>
-    <tr><td>The Gala needs a more explicit turning point for Rían — but not one that proves or defines his love.</td><td>Tighten the scene so Rían has a visible "oh fuck" moment: his internal alarm at realizing his feelings endanger his mission and obedience, visible without narrating or categorizing the feeling itself.</td><td>Pass 2</td></tr>
-    <tr><td>The shell/twig failure repetitions inside Training do the same job as the water-tornado beat without adding anything new.</td><td>Compress into 2–3 sentences; spend the reclaimed space on the Orlien vision warning.</td><td>Pass 3</td></tr>
-    <tr><td>Maeren's own feelings about Brynna's choice not to save her get little page time in Astralis — she processes it as leverage more than hurt. This is one strand of a larger "she will never be chosen" wound (mother, Brynna, Rían), not a standalone fix.</td><td>Thread several brief moments through Astralis following hurt → suppression → compartmentalization → triggering → collapse, rather than one explanatory scene. She doesn't need to consciously see the whole pattern before the climax — the reader should feel it gathering while she keeps refusing to look at it.</td><td>Pass 4</td></tr>
-    <tr><td>The Bear's last stand needs clearer spatial blocking, separate from the headcount bug above.</td><td>Show where each Blade group is positioned; the dogs pivot into the soldiers beside them rather than sprinting past Brynna; give the Brynna/Godric duel a resolving beat when the bear arrives; hold figurative language until the plain geography is established.</td><td>Pass 1</td></tr>
+    <tr><th>Pass</th><th>What</th><th>Time</th><th>Gate to start</th></tr>
+    <tr><td>0</td><td>Decide three things. No drafting.</td><td>One sitting</td><td>—</td></tr>
+    <tr><td>1</td><td>Mechanical repair. No craft decisions.</td><td>Half day</td><td>—</td></tr>
+    <tr><td>2</td><td>Names and orthography.</td><td>1–2 hours</td><td>Pass 0 decisions</td></tr>
+    <tr><td>3</td><td>The climax and its plants.</td><td>The big one</td><td>Pass 0</td></tr>
+    <tr><td>4</td><td>Four surgical agency beats.</td><td>1–2 days</td><td>Pass 3</td></tr>
+    <tr><td>5</td><td>Rían, Fenriel, and the exposition load.</td><td>3–5 days</td><td>Pass 3</td></tr>
+    <tr><td>6</td><td>Ending staging and order.</td><td>1–2 days</td><td>Passes 3–5</td></tr>
+    <tr><td>7</td><td>Line pass: filters, bodies, voice.</td><td>The long one</td><td>All drafting done</td></tr>
+    <tr><td>8</td><td>Final proof. Re-run Pass 1 checks.</td><td>Half day</td><td>Everything</td></tr>
   </table>
 
+  <h2>Three questions to carry through every pass</h2>
+  <ol>
+    <li>Does this scene put pressure on Maeren's invisibility, or let her keep it? Book One's emotional question is <em>can Maeren remain invisible and keep the people she loves safe</em> — and the answer is no. Every scene should be testable against that.</li>
+    <li>Is magic pointing, or deciding? Magic can say LOOK. Maeren decides I will look.</li>
+    <li>Can the reader tell when her silence, observation, mercy, restraint, or surrender is a decision? Not "is she active enough" — that question is now answered.</li>
+  </ol>
+
   <hr class="divider">
 
-  <h2>🔒 Settled — do not revisit</h2>
-  <p>Decisions that close off questions raised in earlier passes. Don't re-open these.</p>
+  <h2>🛑 Do Not Touch</h2>
+  <p>Before anything else, a protect list. These are working and are at risk of being sanded off during a general pass.</p>
+
+  <h3>Structure and scene</h3>
   <ul class="static-check">
-    <li>Rían's earlier acts of care (hanaweed, The Ride, Rain Storm, the near-kiss) stay permanently ambiguous — never clarify which were strategy and which became real. Maeren's "everything was a lie" is psychologically true even though it isn't objectively complete, and that gap is the point.</li>
-    <li>No earlier "how did you know that" suspicion beat for Maeren about Rían. Her lack of suspicion is intentional characterization, not a plot hole — he's the one person she stops surveilling, and losing that vigilance is exactly what the betrayal should cost her.</li>
-    <li>The prophecy book's origin stays unrevealed in Book One. Only imply Nyara's connection to it — full origin, including a possible Shai'thi honeypot lineage older than Nyara, is Book Two/Three material.</li>
-    <li>The amulet's removal does not cure Maeren or resolve the magical imbalance. It only keeps her from being consumed before the transformation completes — the rot remains into Book Two.</li>
-    <li>Do not manufacture a Maeren/Brynna reconciliation scene — this wound is one strand of a larger "she will never be chosen" pattern and stays unresolved by design.</li>
+    <li>The Cook (ch. 4, p. 24) — your best new chapter. Do not cut it for pace.</li>
+    <li>The arrow (ch. 13, p. 80) · the vine trap (ch. 22, p. 123) · stepping over Cordova's sword (ch. 39, p. 203) · the silence before the Elders (ch. 43, p. 226) · lying to Gwyrionez (ch. 61, p. 376).</li>
+    <li>Maeren never masters her power. No competence beat before the end.</li>
+    <li>Rían un-redeemed. "You don't." stands.</li>
+  </ul>
+
+  <h3>Lines</h3>
+  <ul class="static-check">
+    <li>"But she had to understand." (ch. 8)</li>
+    <li>"She didn't command the storm. She simply stopped holding it back." (ch. 55, p. 336)</li>
+    <li>"demanded it obey her" and the black fire (ch. 68, p. 424)</li>
+    <li>"MA - the way to Maeren, is through Brynna." (ch. 63, p. 394)</li>
+    <li>"No Rian, you've already hurt her." (ch. 66, p. 414)</li>
+  </ul>
+
+  <h3>Prose habits</h3>
+  <ul class="static-check">
+    <li>The prologue's short-sentence cascade. Do not let anyone combine "The bear moved. It did not roar or growl."</li>
+    <li>Smell as the lead sense.</li>
+    <li>The single-word echo device — Purged. Protection. Contain. Free. 56 instances. Flag these for any copyeditor so they aren't marked as fragments.</li>
+    <li>Dream sequences in present tense.</li>
+    <li>Plain dialogue tags. Said and asked dominate. Leave them.</li>
   </ul>
 
   <hr class="divider">
 
-  <h2>🌍 World canon — Book Two/Three parking lot</h2>
-  <p>Not pre-beta tasks — reference only, so Book One doesn't accidentally contradict where the series is going.</p>
+  <h2>Pass 0 · Decide</h2>
+  <p><em>One sitting · No drafting.</em> Write the answers down where you can see them. Everything downstream depends on these three — two of them change what sentences have to do; the third gates a find-and-replace.</p>
 
-  <h3>The rot &amp; magical imbalance</h3>
+  <h3>0.1 · Is the transformation culmination or regression?</h3>
+  <p><strong>Recommendation: regression.</strong> The manuscript already argues this. At ch. 68 (p. 424) Maeren takes hold of a power that is visibly sick — "It weakly pulled back as if sick" — overrides its resistance, and commands it: "lit the black fire within her and demanded it obey her." She is doing exactly what the Order does to the druids and the Elders do to the rain. And she is breaking the only rule she was given, Kēlē at ch. 49 (p. 285): "When you feel that resistance, listen to it… If you fight it, it will drain you and the consequences will potentially be irreversible."</p>
+  <p>The wall she builds at the Veil is her chapter 1 belief at full strength. "It's not worth the risk" (ch. 1) → "They would not protect her. She would not let them in" (ch. 68).</p>
+  <p><strong>If you confirm regression, three things become obligatory</strong> — they are Passes 3 and 6:</p>
+  <ul class="static-check">
+    <li>Maeren must name what the storm taught her, or she cannot be seen to abandon it.</li>
+    <li>The wall at the Veil should rhyme on the page with ch. 1.</li>
+    <li>She must be present, at length, for her own fall.</li>
+  </ul>
+
+  <h3>0.2 · Who decodes the amulet?</h3>
+  <p>Three options. Pick one before Pass 3.</p>
+  <table class="plain">
+    <tr><th></th><th>Who</th><th>Status</th></tr>
+    <tr><td>A</td><td>Rían decodes and removes it (as written)</td><td>Works, but the mechanism of her transformation is not hers. He gets the deduction twice — ch. 57 (p. 346) and ch. 69 (p. 427); Maeren never.</td></tr>
+    <tr><td>B</td><td>Maeren decodes it and removes it herself, as release</td><td>Right gesture for culmination. Wrong for regression. Retired if you pick regression.</td></tr>
+    <tr><td>C</td><td>Maeren decodes it wrongly or partially; Rían still removes it</td><td><strong>Recommended.</strong> Costs three paragraphs. Turns his act from supplying what she lacked into confirming what she suspected. She worked it out and it didn't save her.</td></tr>
+  </table>
+  <p>The clue is already planted and marked at ch. 48 (p. 271): "'My mother gave it to me,' Maeren said quietly… 'As protection.' Protection. The word landed heavily." The manuscript stops there. Option C picks it back up.</p>
+
+  <h3>0.3 · Name and orthography rulings</h3>
+  <p>Decide now; Pass 2 executes.</p>
+  <p><strong>Maevira or Minvaera?</strong> Maevira is used in the creation myth and the prophecy and is presumably canonical. Minvaera appears 6×, Minevaera 1×, Mineveara 1× — including in a chapter title (Minvaera Burns, ch. 67, p. 415) and in Cydar's self-introduction (p. 417): "I am a druid from Minevaera's Grove." Meanwhile ch. 42 is titled Maevira's Grove.</p>
+  <p><strong>Astraen or Astrean?</strong> The prophecy says "A Bear, of the blood of Astraen and Maevira" (pp. 57, 71, 231, 408). The prose says Astrean 26× including every oath ("So is the will of Astrean," p. 239). A reader will assume two gods.</p>
+  <p><strong>Accents: in or out?</strong> Rían loses its accent 80× of 504 (16%). Orlíen loses it 95× of 134 — the unaccented form is now dominant. Diré loses it 4× of 21. Commit or drop. Half-commitment is the only wrong answer.</p>
+
+  <hr class="divider">
+
+  <h2>Pass 1 · Mechanical Repair</h2>
+  <p><em>Half a day · No craft decisions.</em> Do this first — the broken sentences are actively misleading you about your own text. A global deletion of "slightly" was run without a read-back. It left 59 orphaned spaces and six sentences that no longer parse.</p>
+
+  <h3>1.1 · The six broken sentences — fix these individually</h3>
+  <p><strong>p. 323 is the priority.</strong> It is the emotional hinge of the chapter and it currently says the opposite of what you mean.</p>
+  <table class="plain">
+    <tr><th>p.</th><th>Chapter</th><th>As it now reads</th><th>Problem</th></tr>
+    <tr><td>224</td><td>42 Maevira's Grove</td><td>"Brynna a wave of contentment washed over Brynna when she saw her sister's horse"</td><td>Duplicated subject; no verb for the first Brynna</td></tr>
+    <tr><td>253</td><td>46 Aurelian Sees</td><td>"As Aurelian shielded his eyes from the blinding brightness."</td><td>Subordinate clause; no main clause</td></tr>
+    <tr><td>252</td><td>46 Aurelian Sees</td><td>"His stomach clenched he considered engaging with the world"</td><td>Missing conjunction</td></tr>
+    <tr><td>360</td><td>59 Unexpected Ally</td><td>"Maeren , imagining the tiny Shai'thi rudely dismissing Cordova."</td><td>Verb deleted</td></tr>
+    <tr><td>346</td><td>57 Rían Feels</td><td>"He had told Maeren she shouldn't be contained. In the moment, the words had"</td><td>Sentence abandoned mid-thought</td></tr>
+    <tr><td>323</td><td>54 Tightening Grip</td><td>"She would not let herself be coerced so easily again. She would tolerate this feeling again."</td><td>Lost its "not." As printed, Maeren resolves to keep tolerating it — at the beat where defiance is born.</td></tr>
+  </table>
+
+  <h3>1.2 · Orphaned spaces — global sweep</h3>
+  <p>Search for space-before-punctuation ( . , ? ). 59 instances. Most want "slightly" restored or the sentence tightened. Confirmed examples: p. 213 — "his nostrils flared ." · p. 295 — "mostly just giggle ." (also: giggle is a typo for jiggle) · ch. 52 — "the yellow hairs on Glaide's neck darkened ." · ch. 55 — "made Maeren cringe ." · ch. 43 — "Maeren's heart sank ." · ch. 64 — "hoisting Vaela up ." Some are italic-spacing artifacts from the PDF (e.g. italicised titles like <em>The Coastal War</em>) — check before editing.</p>
+
+  <h3>1.3 · Stray marks</h3>
+  <table class="plain">
+    <tr><th>p.</th><th>Item</th></tr>
+    <tr><td>215</td><td>{person of interest] — unresolved author note, mismatched brackets</td></tr>
+    <tr><td>333</td><td>stray ] mid-paragraph in The Gala</td></tr>
+    <tr><td>311</td><td>"That is true," Maeren whispered.x"</td></tr>
+    <tr><td>38</td><td>"his head stayed bowed.."</td></tr>
+    <tr><td>69</td><td>"she said more softly.."</td></tr>
+  </table>
+
+  <h3>1.4 · Quotation marks</h3>
+  <ul class="static-check">
+    <li>13 unclosed quotations — 1,523 opening curly quotes against 1,510 closing. Find them.</li>
+    <li>34 straight quotes mixed with curly; 67 straight apostrophes against 2,062 curly. Normalise.</li>
+    <li>Missing space after dialogue: "Please, your highness,"Aurelian stepped closer (ch. 46).</li>
+  </ul>
+
+  <h3>1.5 · Homophones — global</h3>
+  <table class="plain">
+    <tr><th>Wrong</th><th>Count</th><th>Right</th></tr>
+    <tr><td>shuttered / shutter</td><td>12</td><td>shuddered — "its entire arm shuttered," "Rían shuttered," "A deep rumble shuttered the earth," "Soft uneven breaths shuttered out of Vaela"</td></tr>
+    <tr><td>viscous</td><td>3</td><td>vicious — "smiled viscously," "a viscous winter wind," "void of that viscous mockery"</td></tr>
+    <tr><td>malled</td><td>2</td><td>mauled</td></tr>
+    <tr><td>giggle</td><td>1</td><td>jiggle</td></tr>
+  </table>
+  <p>Keep one: "Aurelian shuttered his mind's eye" — closing it like a shutter. That one is deliberate and good.</p>
+
+  <h3>1.6 · Revert the two simpers</h3>
+  <p>Simper means to smile coyly and self-consciously. It is not a synonym for smirk, and both uses land on Rían and give him a flirtatiousness you don't intend. p. 121 — "He looked over to Maeren with a pitying simper" · p. 326 — "'Bear Guardian,' he said, simpering." The third replacement, grin, is fine. Leave it.</p>
+
+  <h3>1.7 · Single-instance typos</h3>
+  <p style="font-size:13px;color:var(--text-secondary);">Weclome · daed · esacape · behld (×2) · descecrated · herecy · Fourty (×2) · masacre · hanful · submissed · runningthe · elegantletters · stumblng · investigaged · recongnized · flagulation (→ self-flagellation) · instructured · peated · Byrnna (×2) · Veala · Valea (×3) · Cider / Cyder (→ Cydar) · Ryan (→ Rían) · Orlirn · Gywnironez</p>
+
+  <h3>1.8 · One anatomy error</h3>
+  <p>p. 59, ch. 9 — "Aurelian's sternum collapsed inward, shielded by his ribcage." A sternum is part of the ribcage; it cannot be shielded by it. When the anatomy gets specific it has to be right.</p>
+
+  <p><strong>Exit:</strong> search for . , ? [ ] { } returns nothing unintended.</p>
+
+  <hr class="divider">
+
+  <h2>Pass 2 · Names &amp; Orthography</h2>
+  <p><em>1–2 hours.</em> Executes Pass 0.3. Pure find-and-replace once the rulings are made.</p>
+  <table class="plain">
+    <tr><th>Name</th><th>Canonical</th><th>Fix</th><th>Error rate</th></tr>
+    <tr><td>Aurelian</td><td>379 correct</td><td>Aurlien (23) · Aurelien (9) · Aurliean (8)</td><td>9.5%</td></tr>
+    <tr><td>Rían</td><td>424</td><td>Rian (80) · Ryan (1)</td><td>16%</td></tr>
+    <tr><td>Maevira</td><td>35</td><td>Minvaera (6) · Minevaera (1) · Mineveara (1)</td><td>19%</td></tr>
+    <tr><td>Astraen / Astrean</td><td>— decide —</td><td>9 vs 26</td><td>74%</td></tr>
+    <tr><td>Orlíen</td><td>39</td><td>Orlien (95) · Orlirn (1)</td><td>71%</td></tr>
+    <tr><td>Diré</td><td>17</td><td>Dire (4)</td><td>19%</td></tr>
+    <tr><td>Gwyrionez</td><td>30</td><td>Gwyironez (2) · Gwyrinez (1) · Gywnironez (1)</td><td>12%</td></tr>
+    <tr><td>Syrithien</td><td>40</td><td>Syrthien (2)</td><td>5%</td></tr>
+  </table>
+  <p>Two chapter titles need changing once Maevira is settled: ch. 42 Maevira's Grove and ch. 67 Minvaera Burns currently disagree. And check the prophecy wherever it appears (pp. 57, 71, 231, 408) so the recited version matches the prose spelling.</p>
+  <p><strong>Exit:</strong> every proper noun has exactly one spelling.</p>
+
+  <hr class="divider">
+
+  <h2>Pass 3 · The Climax and Its Plants</h2>
+  <p><em>The big one · gate: Pass 0.</em> Draft the Veil sequence under the Pass 0 decision, then work backward to place what it needs. Doing this first means every earlier fix has a known destination.</p>
+
+  <h3>3.1 · Maeren must name the storm's lesson</h3>
+  <p class="lean"><span class="lbl">Problem.</span> She does the thing at ch. 55 and enjoys it. She never concludes anything from it. You cannot dramatise the abandonment of an unarticulated lesson — and under the regression reading, the Veil is that abandonment.</p>
+  <p class="lean"><span class="lbl">Lean on:</span> ch. 55, p. 336 — "She didn't command the storm. She simply stopped holding it back." That is the lesson. It is currently narration, not her thought. <span class="lbl">Where it goes:</span> anywhere between ch. 56 (p. 338) and ch. 63 (p. 390).</p>
+  <dl class="grades">
+    <dt class="small">Small</dt><dd>One sentence in ch. 56 (Rain Storm), while she is standing in the rain. She names the principle to herself, in her own words, plainly.</dd>
+    <dt class="medium">Medium</dt><dd>She says it out loud to Cordova on the staircase (ch. 56, p. 342). Cordova is interrogating her about exactly this — "You just severed their wards? You make it sound easy?" — and Maeren's answer is currently mechanical. Let her articulate the principle, not the method.</dd>
+    <dt class="large">Large</dt><dd>She uses the principle successfully once more, small, in ch. 59–61, so it reads as a working method before she throws it away.</dd>
+  </dl>
+
+  <h3>3.2 · The amulet plant (executes Pass 0.2)</h3>
+  <p class="lean"><span class="lbl">Problem.</span> Rían deduces the amulet's true function twice — ch. 57 (p. 346): "If the moonstone was designed to protect Maeren from others, it would be ineffective if it only worked by burning the assailants who touched it" — and ch. 69 (p. 427): "It had been protecting Maeren, but not from the world, as Maeren had believed." Maeren never once.</p>
+  <p class="lean"><span class="lbl">Lean on:</span> ch. 48, p. 271 — "'My mother gave it to me,' Maeren said quietly… 'As protection.' Protection. The word landed heavily." She already has the data: fifteen years of heat, drag and cold; it went "deathly still" when Nyara died (ch. 24); it seared at the shadow creature (ch. 38); it burns Rían when he touches it (ch. 56); it hangs heavy at every Veil.</p>
+  <dl class="grades">
+    <dt class="small">Small</dt><dd>Extend the ch. 48 beat by one paragraph. She turns the word over and lands on a wrong answer — a beacon, a leash, her mother's apology. Wrong is better than right.</dd>
+    <dt class="medium">Medium</dt><dd>The wrong answer recurs once, under pressure, in ch. 58 or 61 — and is still wrong.</dd>
+    <dt class="large">Large</dt><dd>She gets it half-right before the Veil and decides to keep wearing it anyway. Then Rían tears off the thing she chose to keep.</dd>
+  </dl>
+
+  <h3>3.3 · Make the regression legible</h3>
+  <p class="lean"><span class="lbl">Problem.</span> Everything is on the page — the black fire, the sick magic, obey — except a signal that this is the lesson she is discarding.</p>
+  <p class="lean"><span class="lbl">Lean on:</span> ch. 68, p. 424 — "Pulling violently on it as it resisted, she ripped free the lodged magic within. It weakly pulled back as if sick… Her rage flared and she tightened her grip." And Kēlē's rule at ch. 49, p. 285.</p>
+  <dl class="grades">
+    <dt class="small">Small</dt><dd>One line of recognition between the wall going up and the grip closing. It does not have to be correct — she knows what Kēlē said and does it anyway is enough.</dd>
+    <dt class="medium">Medium</dt><dd>Echo ch. 1 deliberately. "It's not worth the risk" → the wall. Make the two rhyme in image or cadence so the reader feels the loop close rather than a new power arriving.</dd>
+    <dt class="large">Large</dt><dd>Both, plus a beat where the magic's sickness registers as Nyara's sickness or the blight's — she is gripping the thing she was meant to heal.</dd>
+  </dl>
+
+  <hr class="divider">
+
+  <h2>Pass 4 · Four Surgical Agency Beats</h2>
+  <p><em>1–2 days · gate: Pass 3.</em> Small, local, high return. Do not expand scope.</p>
+
+  <h3>4.1 · Cut one clause — ch. 11, p. 73</h3>
+  <p class="lean">Your fix at the treeline is airtight: "A second cry pierced the cold air… Maeren's hands tightened over the reins. She kicked Riven's side, commanding him to plunge into the forest." But four pages earlier the chapter still opens on compulsion: "Her head clear of escape strategies, the primal pull yanked again." "And yet, she continued through the castle. Led by an invisible thread that was laced with curiosity and dread."</p>
+  <dl class="grades">
+    <dt class="small">Small</dt><dd>Cut "Led by an invisible thread that was laced with curiosity and dread." This is the only fully unearned attribution left in the first half of the book. Keep "primal pull" — a sensation is not a decision.</dd>
+    <dt class="medium">Medium</dt><dd>Replace the cut clause with the reason she actually has: the bear is wounded, alone, and starving, and she is the only person who knows it.</dd>
+  </dl>
+
+  <h3>4.2 · Give defiance its own grammar — ch. 58, pp. 350 &amp; 355</h3>
+  <p class="lean">Three instances of the same construction, doing opposite work. Because you cleaned this pattern everywhere else, this pair is now the most conspicuous thing of its kind in the manuscript.</p>
+  <table class="plain">
+    <tr><th>p.</th><th>Beat</th><th>Line</th><th>Verdict</th></tr>
+    <tr><td>323</td><td>ch. 54, capitulating to Fenriel</td><td>"Words formulated in her mouth and she spoke them as if puppeted by another being."</td><td>Correct. Keep exactly.</td></tr>
+    <tr><td>350</td><td>ch. 58, defying him</td><td>"As if possessed, Maeren sat at her vanity without consciously thinking."</td><td>Defiance in the grammar of surrender</td></tr>
+    <tr><td>355</td><td>ch. 58, after the punishment</td><td>"Once more, her body was taken over by subconscious movement as it walked her out of the room."</td><td>Costs the chapter its last beat of agency</td></tr>
+  </table>
+  <dl class="grades">
+    <dt class="small">Small</dt><dd>Rewrite p. 350 only. Something rises through her, not instead of her. Leave 323 and 355.</dd>
+    <dt class="medium">Medium</dt><dd>Rewrite 350 and cut 355 entirely.</dd>
+    <dt class="large">Large</dt><dd>Let 350 rhyme with 323 deliberately — she notices her body is doing what it did when she surrendered, and that this time it is doing the opposite.</dd>
+  </dl>
+
+  <h3>4.3 · The vine — recognition without exoneration — ch. 28, p. 151</h3>
+  <p class="lean">The only note from the last read that did not get taken. <span class="lbl">Lean on:</span> ch. 28, p. 151 — "'You are a coward,' Brynna said… 'Just like mother.'" and Maeren's reply: "Nothing Brynna said was untrue… She had chosen their safety at that moment, and it cost them both." That line reads as agreement with Brynna's framing, not recognition of her own choice. And it has gotten louder. At ch. 63, p. 394, you now prove the charge false about Hana — "Her mother and Nyara, both women who she had called weak." The unanswered version of it about Maeren is now the only one left standing.</p>
+  <dl class="grades">
+    <dt class="small">Small</dt><dd>Change the framing of the existing line so it is hers, not a concession. She does not defend it. She knows she chose — Eamon or Brynna — and refuses to let herself off.</dd>
+    <dt class="medium">Medium</dt><dd>Carry it. One recurrence in Astralis where she names the choice without softening it.</dd>
+    <dt class="large">Large</dt><dd>Land it against the mother-reversal at ch. 63. Hana was not a coward; Maeren does not get the same acquittal, and knows it.</dd>
+  </dl>
+
+  <h3>4.4 · The soft patch — chs. 50–54, pp. 292–323</h3>
+  <p class="lean"><span class="lbl">Problem.</span> You switched Detective Maeren on at ch. 43 ("They needed Maeren here, alive, and she was going to find out why") and she goes quiet for five chapters under Orlíen's prohibition. It reads as dread rather than defeat, which is defensible — but it is the last place in the middle where the reader waits.</p>
+  <dl class="grades">
+    <dt class="small">Small</dt><dd>One covert act. She does something small she was told not to, alone, and it works.</dd>
+    <dt class="medium">Medium</dt><dd>She keeps a written record. She has kept a dream log since ch. 1 (p. 6) — reusing that practice in Eos makes the invisible investigation visible without changing a single plot beat. It is also thematically exact: the survival tool becomes the investigative tool.</dd>
+    <dt class="large">Large</dt><dd>She tests Orlíen's vision. She is the one character in the book who questions inherited stories; a seer telling her what she will become is the biggest inherited story she has ever been handed, and she accepts it at face value.</dd>
+  </dl>
+
+  <hr class="divider">
+
+  <h2>Pass 5 · Rían, Fenriel, Exposition</h2>
+  <p><em>3–5 days · gate: Pass 3.</em> Supporting-cast repairs that need new scene work.</p>
+
+  <h3>5.1 · The reader never watches Rían choose</h3>
+  <p class="lean"><span class="lbl">Problem.</span> He holds 4.0% of POV (4,383 words) across five short chapters. The reader is told he surveilled her for two years and reported on her constraint. The reader never watches him decide, and never watches him lie for her either. His confession at ch. 68 lands, but it carries weight the preceding 100,000 words didn't build.</p>
+  <p class="lean"><span class="lbl">Lean on:</span> the journal voice, ch. 49, p. 282 — "M.A - vulnerable, unarmed, unguarded during nightly rides beyond walls… Weak point: empathy, no killer instinct, gentle with nature; could be used later." This is the only genuinely different voice in the manuscript.</p>
+  <dl class="grades">
+    <dt class="small">Small</dt><dd>In his existing ch. 57 (p. 345) he thinks about "soften[ing] the story for them." Show him write it. One paragraph of the false report.</dd>
+    <dt class="medium">Medium</dt><dd>One short surveillance-era chapter set in Velmora, before the capture. He watches her, files an entry, and goes home. You already have the register.</dd>
+    <dt class="large">Large</dt><dd>Split ch. 44 (pp. 235–239) so the reader watches him accept the Elders' terms — "should you fail to secure her loyalties, she will be eliminated" — and then immediately go be kind to her. The gap between those two beats is his entire character.</dd>
+  </dl>
+
+  <h3>5.2 · Fenriel is still a second Alai</h3>
+  <p class="lean"><span class="lbl">Problem.</span> Both institutions share a beat sheet: false-warm greeting, doctrinal justification for purging, sudden rage, public spectacle. Rían's POV tells us "They were afraid of Maeren" and that he "could feel his weakness" (ch. 44, p. 235) — but Maeren, whose gift is reading people, only ever sees cruelty.</p>
+  <p class="lean"><span class="lbl">Lean on:</span> she already registers the tells. Ch. 43, p. 230 — "It was a clumsy delivery." And p. 229 — "Cordova scoffed loudly. No one turned to her except Maeren." She notices and drops both.</p>
+  <dl class="grades">
+    <dt class="small">Small</dt><dd>One physical tell in ch. 43 or 58 that she reads correctly — the effort it costs him to rise from the chair, a glance at the others for support.</dd>
+    <dt class="medium">Medium</dt><dd>She uses it. She is running an investigation; a frightened man is exploitable.</dd>
+    <dt class="large">Large</dt><dd>Let Cordova's scoff pay. Maeren notices dissent among the Elders' own people and follows it — which is also how you get Cordova's defection earlier and more earned.</dd>
+  </dl>
+
+  <h3>5.3 · Two monologues carrying too much</h3>
+  <p class="lean"><span class="lbl">Problem.</span> Ch. 49 (Kēlē, 3,960 words — the longest chapter in the book) and ch. 63 (Betrayal) both carry long uninterrupted speeches because at 16.4% dialogue there is nowhere else for the material to live.</p>
+  <dl class="grades">
+    <dt class="small">Small</dt><dd>Break both with physical business and interruption. Kēlē making tea; Orlíen closing the journal; Maeren getting a detail wrong and being corrected.</dd>
+    <dt class="medium">Medium</dt><dd>Convert one into an argument. Information delivered by someone who does not want to give it reads at a different speed.</dd>
+    <dt class="large">Large</dt><dd>Move the journal into Maeren's hands without an intermediary — she goes to Rían's chambers, finds it herself. Ch. 63 becomes discovery rather than disclosure.</dd>
+  </dl>
+
+  <hr class="divider">
+
+  <h2>Pass 6 · Ending Staging</h2>
+  <p><em>1–2 days · gate: Passes 3–5.</em> Do after Passes 3–5 so you know what the ending has to hold.</p>
+  <p class="lean"><span class="lbl">Problem.</span> The final seven chapters: Rescue (B) · Free (A) · What's Best (R) · Minvaera Burns (A) · Portal Closes (M, 1,072 words) · Watching her Disappear (R) · Burn (B). Maeren appears in one of the last seven chapters, for 1,072 words — fewer than Aurelian gets for a walk through a market (ch. 46, 2,486 words). The run of other POVs immediately before her climax is 5,799 words. The book's last line is Brynna's. Under the regression reading this is the difference between <em>she made a tragic choice</em> and <em>she failed and vanished</em> — and that difference lives entirely in interiority the reader isn't given.</p>
+  <dl class="grades">
+    <dt class="small">Small</dt><dd>Reorder. Portal Closes and Watching her Disappear land last, after Burn. The war declaration is a strong ending; the disappearance of the title character is stronger.</dd>
+    <dt class="medium">Medium</dt><dd>Extend Portal Closes (p. 421). The transformation has been built for four hundred pages and gets a thousand words.</dd>
+    <dt class="large">Large</dt><dd>Interleave. Put Rían's observation inside her POV so the reader has her fragmentary, non-comprehending experience of the amulet coming off. She does not have to understand. She has to be present.</dd>
+  </dl>
+
+  <hr class="divider">
+
+  <h2>Pass 7 · Line Pass</h2>
+  <p><em>The long one · gate: all drafting done.</em> Only after all drafting is finished.</p>
+
+  <h3>7.1 · The filter sweep — the highest-value line work in the book</h3>
+  <p class="lean"><span class="lbl">Problem.</span> Perception filters run at 50 per 10,000 words: could see/feel/hear/sense (173), seemed (89), saw (64), started to (64), watched (59), began to (34), plus as if / as though (122) and like a (56). Each one inserts the act of perceiving between the reader and the thing perceived. "She could see the flecks of shell" is one remove further than "Flecks of shell caught the light." You already do it right in her best scenes: the two-body deduction (ch. 7), reading Alai's body (ch. 8), the map discrepancy (ch. 59). None of those use "could see." Expect to cut 1–2% of total wordcount.</p>
+  <dl class="grades">
+    <dt class="small">Small</dt><dd>Sweep could see / could feel (173) and delete the construction wherever the object is concrete. "She could see the arrow had struck between the neck and right arm" → "The arrow had struck between the neck and right arm."</dd>
+    <dt class="medium">Medium</dt><dd>Add seemed (89). Roughly half are genuine POV uncertainty; the other half hedge things that simply are.</dd>
+    <dt class="large">Large</dt><dd>Take the ten most filtered paragraphs in Maeren's POV and rewrite them with zero perception verbs. Diagnostic even where you revert.</dd>
+  </dl>
+
+  <h3>7.2 · Body parts acting alone</h3>
+  <p class="lean"><span class="lbl">Problem.</span> 118 instances of her/his [body part] + past-tense verb as an independent actor, eyes alone accounting for 43. Around 105 per 10,000 words in every POV. In a novel whose central craft problem has been whether Maeren's actions read as chosen, a narration in which her stomach, eyes, heart and lungs keep acting without her works against you at sentence level.</p>
+  <dl class="grades">
+    <dt class="small">Small</dt><dd>Cap the eyes constructions. Forty-three instances of eyes darting, flicking, narrowing and widening is enough for three books.</dd>
+    <dt class="medium">Medium</dt><dd>Do this only in the decision beats — the fifteen turns in the agency ledger. Make Maeren the subject of the sentence where she decides; let the body react in the sentence after, not during.</dd>
+    <dt class="large">Large</dt><dd>Make it a system. Dense when she is overwhelmed, absent when she is resolved. That turns a tic into grammar.</dd>
+  </dl>
+
+  <h3>7.3 · Gesture vocabulary</h3>
+  <p class="lean"><span class="lbl">Problem.</span> 557 beats, one per ~196 words — fine in volume, top-heavy in distribution: stare (80), head-shaking (48), sigh (47), tilt (35), nod (31), flinch (30), shrug (26).</p>
+  <dl class="grades">
+    <dt class="small">Small</dt><dd>Cut the weakest third of the stare and head-shake beats. Most dialogue survives with no beat at all.</dd>
+    <dt class="medium">Medium</dt><dd>Give each POV three or four signature habits and stop sharing them. Brynna cracks her neck, grips a hilt. Aurelian's hands go to soil. Maeren wrings her hands — you already have this, and Eamon notices it (ch. 4). Rían rubs the bridge of his nose.</dd>
+    <dt class="large">Large</dt><dd>In scenes of conflicting want, replace beats with action that advances the conflict.</dd>
+  </dl>
+
+  <h3>7.4 · Four points of view, one voice</h3>
+  <p class="lean"><span class="lbl">Problem.</span> Measured across all four POVs: mean sentence length 11.2–12.4 · fragments 12–17% · as if 9.5–13.7/10k · adverbs 125–137/10k · body-part subjects 102–115/10k. Statistically indistinguishable. The one thing already working, and you did not engineer it: Brynna asks the fewest questions in the book (28 per 10k), Rían the most (52). She acts because she is certain; he has stopped being able to answer anything.</p>
+  <dl class="grades">
+    <dt class="small">Small</dt><dd>Strip the filter constructions from Brynna entirely. She does not perceive; she registers and acts. This single subtraction separates her chapters from everyone else's immediately, and it is the cheapest differentiation available.</dd>
+    <dt class="medium">Medium</dt><dd>Differentiate by syntax. Brynna in short declaratives and imperatives, minimal subordination, no hedging. Aurelian in longer self-interrupting sentences that circle back. Maeren in accumulating observation with the conclusion at the end. Rían in questions and negations.</dd>
+    <dt class="large">Large</dt><dd>Assign each POV a metaphor domain. Aurelian's should be botanical — it is his expertise and he barely uses it. Maeren's should be textile: thread, weave, seam. You already reach for it — "the fraying seam where the mystery of the bear… converged" (ch. 8).</dd>
+  </dl>
+
+  <h3>7.5 · Two smaller line notes</h3>
+  <p><strong>Sentence variety.</strong> Only 2.4% of sentences run 29+ words. You write almost entirely in the 6–18 band and have very few sentences that build, subordinate and release. There is no slow gear. <strong>Small:</strong> in the three or four most reflective passages, let one sentence run long.</p>
+  <p><strong>Em dashes.</strong> Five in 109,000 words. You have effectively no interruptive punctuation — which is the natural tool for the self-interrupting interiority Aurelian's chapters keep reaching for. Decide whether that absence is a choice.</p>
+
+  <hr class="divider">
+
+  <h2>Pass 8 · Final Proof</h2>
+  <p><em>Half a day · gate: everything.</em> New drafting introduces new artifacts. Re-run the Pass 1 checks:</p>
+  <ul class="static-check">
+    <li>Search . , ? — orphaned spaces.</li>
+    <li>Search [ ] { } — author notes.</li>
+    <li>Count " against " — they should match.</li>
+    <li>Search straight " and ' — should be zero.</li>
+    <li>Re-run the name list from Pass 2 against any new material.</li>
+    <li>Spellcheck the homophone list: shuttered · viscous · malled · simper.</li>
+    <li>Read the 56 single-word echo beats (Purged. Protection. Contain.) and confirm none have crept into a POV other than Maeren's.</li>
+  </ul>
+
+  <hr class="divider">
+
+  <h2>Carried over from previous notes</h2>
+  <p>Not addressed by the new pass structure above — still valid, kept for reference.</p>
+
+  <h3>🌍 World canon — Book Two/Three parking lot</h3>
+  <h4 class="subhead">The rot &amp; magical imbalance</h4>
   <ul class="static-check">
     <li>The shadow is not an evil alternate transformation or a separate force attacking Maeren — it's magic rotting from within.</li>
     <li>The Shai'thi are creating unnatural additional Veils because they can no longer access their power; these artificial Veils distort the flow of magic between realms, and the imbalance shows up as blight, rot, and magic deteriorating from within.</li>
-    <li>Maeren is especially vulnerable as the core of the Bear Guardian system — like frostbite, the core may survive but the damage has already spread through the tendrils (the Veils, the realms, the magic moving between them).</li>
+    <li>Maeren is especially vulnerable as the core of the Bear Guardian system — like frostbite, the core may survive but the damage has already spread through the tendrils.</li>
   </ul>
-
-  <h3>The amulet</h3>
+  <h4 class="subhead">The amulet (background)</h4>
   <ul class="static-check">
-    <li>Developed by the Arios and passed to the firstborn daughter each generation to prevent the Bear Guardian from transforming. The original reason is lost to time; the family kept the belief that becoming the Bear Guardian was dangerous.</li>
-    <li>It's generational protection that became harmful: suppressing the transformation the bloodline was meant to fulfill. Hana's death and Nyara's near-immediate transformation when the amulet passed to Maeren establish that it hinders/prevents the transformation.</li>
-    <li>The amulet was never protecting Maeren from the shadow — its suppression of the transformation is part of what let the magic rot in the first place.</li>
+    <li>Developed by the Arios and passed to the firstborn daughter each generation to prevent the Bear Guardian from transforming. The original reason is lost to time.</li>
+    <li>The amulet was never protecting Maeren from the shadow — its suppression of the transformation is part of what let the magic rot in the first place. (See Pass 0.2 for the Book One decision on how this plays out.)</li>
   </ul>
-
-  <h3>Book One climax sequence (canon)</h3>
+  <h4 class="subhead">Book Two opening</h4>
   <ul class="static-check">
-    <li>Maeren unleashes the power → the already-rotting magic begins consuming her → Rían removes the amulet → the Bear transformation occurs → Maeren survives, but the rot remains.</li>
-    <li>The ending light may represent release, rebalancing, rebirth, or the transformation completing — not healing.</li>
+    <li>Opens with Maeren visibly deteriorated — when Rían finds her near Seradon, roughly half her face is shadow.</li>
+    <li>This leads to Aurelian's sacrifice, interrupting the generational pattern of women consumed by duty.</li>
   </ul>
-
-  <h3>Book Two opening</h3>
+  <h4 class="subhead">Book Three direction</h4>
   <ul class="static-check">
-    <li>Opens with Maeren visibly deteriorated — when Rían finds her near Seradon, roughly half her face is shadow. This is the physical continuation of Book One's unresolved rot.</li>
-    <li>As long as magic stays out of balance, she keeps turning to shadow. When she intervenes to help Brynna despite visible deterioration, the effort nearly kills her.</li>
-    <li>This leads to Aurelian's sacrifice: Brynna fears Maeren repeating their mother's and Nyara's self-destructive pattern, and Aurelian interrupts that generational pattern by sacrificing himself instead.</li>
+    <li>Book One's Veil closure was a desperate survival act, not a solution. The prophecy's fuller meaning involves ripping open the seams between the Veils so the realms can reemerge and the original wound can heal.</li>
   </ul>
-
-  <h3>Book Three direction</h3>
+  <h4 class="subhead">Vaela, the Fions &amp; the Battle of Belmora (Book Two)</h4>
   <ul class="static-check">
-    <li>Book One's Veil closure was a desperate survival act, not a solution — it may worsen the separation between realms.</li>
-    <li>Neither creating more Veils nor simply closing them restores balance. The prophecy's fuller meaning involves ripping open the seams between the Veils so the realms can reemerge and the original wound can heal.</li>
+    <li>Vaela stays in osprey form throughout the battle; her screeches signal Brynna's formations. She flies into Maeren's storm on arrival and emerges through it in front of Brynna, who already knows Vaela is a Fion.</li>
+    <li>Open question: scale of the reveal when Vaela transforms afterward — decide when this book is drafted.</li>
   </ul>
-
-  <h3>Vaela, the Fions &amp; the Battle of Belmora (Book Two)</h3>
-  <ul class="static-check">
-    <li>Vaela stays in osprey form throughout the battle; her screeches signal Brynna's formations. She flies into Maeren's storm on arrival and emerges through it in front of Brynna, who already knows Vaela is a Fion — the transformation doesn't happen inside the storm itself.</li>
-    <li>Open question: scale of the reveal when Vaela transforms afterward — just Brynna and command staff, nearby soldiers, or the whole army. Ties to Seradon's larger arc from suspicion toward tolerance of magic; can be decided when this book is drafted.</li>
-  </ul>
-
-  <hr class="divider">
-
-  <h2>Phase 1 — Lock the story</h2>
-  <p><em>Aug 26 – Sep 2 · Developmental cleanup only — do not polish sentences yet.</em></p>
-
-  <div class="section-label">Build the master revision list — Aug 26</div>
-  <ul class="static-check">
-    <li>Set up the working files<span class="detail">Duplicate the manuscript as PRE-BETA MASTER; start a separate Book Two / parking-lot doc; mark which chapters are affected by remaining developmental issues and leave the rest alone.</span></li>
-    <li>Remove drafting artifacts and finish unfinished passages<span class="detail">Embedded Q&amp;A/dev tables, every &lt;&lt;&gt;&gt; / TODO / placeholder, corrupted lines (Throne Room p.19), missing beats (Rían's surveillance ch. p.81–82, Maeren's approach to the Bear p.84, market/village transition p.104), stray brackets and editorial comments.</span></li>
-    <li>Confirm these decisions remain settled unless the manuscript itself reveals a contradiction<span class="detail">Maeren stays quiet/investigative, no added combat competence · Maeren/Brynna don't need Book One reconciliation · Rían doesn't need full redemption · the ending stays unresolved · the Bear transformation doesn't need to be triumphant · Order and Elders stay ideological mirrors · magic/listening/control relationship stays implicit · Riven/hydrangea ending stays · no pull toward romantasy convention.</span></li>
-  </ul>
-
-  <div class="section-label">Maeren causality pass — Aug 27–28</div>
-  <ul class="static-check">
-    <li>Read Maeren's chapters consecutively; verify want → question → knowledge → choice → consequence for each<span class="detail">Bear investigation stays curiosity-driven · archive/prophecy research has a visible evidence chain · capture reads as strategic compliance once Brynna is threatened · Astralis compliance evolves · she keeps observing Rían and Cordova · revelations connect to questions she's already carrying · Gwyrionez's info revises her theories · she connects the betrayal evidence herself · the journal functions as evidence, not exposition · her final decision clearly originates in her. End-of-pass test: complete "Because Maeren ___, ___ happens" for every chapter.</span></li>
-  </ul>
-
-  <div class="section-label">Astralis pass — Aug 29–30</div>
-  <ul class="static-check">
-    <li>Track the investigation, captivity/control, and Rían engines simultaneously<span class="detail">Does each revelation answer or complicate a question Maeren already has? Does her compliance have a clear reason? Does trust in Rían rise for a specific, incremental reason each time, and does the later surveillance reveal specifically contaminate earlier intimacy?</span></li>
-    <li>Audit training scenes for redundancy<span class="detail">For each: what's different after this scene? Compress only scenes doing genuinely the same job — don't cut a quiet scene just because it lacks external action.</span></li>
-  </ul>
-
-  <div class="section-label">Sister &amp; emotional continuity pass — Aug 31</div>
-  <ul class="static-check">
-    <li>Track wound → response → suppression → resurfacing → changed behavior across Maeren/Brynna, Eamon, Nyara, their mother, and Riven<span class="detail">Eamon keeps affecting both sisters · Brynna's accusation stays consequential · Maeren's understanding of her mother changes · Nyara's death stays present · Brynna carries guilt after the separation · Riven/hydrangea payoff stays intact. Do not manufacture reconciliation.</span></li>
-  </ul>
-
-  <div class="section-label">Rían relationship pass — Sep 1</div>
-  <ul class="static-check">
-    <li>Track threat → captor → uncertainty → curiosity → recognition → safety → attraction → trust → warning → betrayal<span class="detail">Confirm each stage-shift has a specific cause. Do not redeem him further — accountability is Book Two's job.</span></li>
-  </ul>
-
-  <div class="section-label">Climax pass — Sep 2</div>
-  <ul class="static-check">
-    <li>Confirm Maeren's choice, the unchosen consequence, and Rían's choice stay distinct at the Veil<span class="detail">Maeren deliberately forces her power open/outward — that's her authored choice. Watch the verb: she chooses to unleash, summon, ignite, or force the magic free, NOT to be consumed, rot, disappear, or lose herself. The power turning out to be already-rotting and beginning to consume her is the unchosen consequence. Rían's moonstone removal is his own separate decision (see Fix Before Beta above).</span></li>
-    <li>Clarify the portal confrontation / final transformation prose<span class="detail">Hardest sequence to visualize — imprecise verbs and stacked metaphors (fire/ice/stone/blood) arrive faster than cause-and-effect. Highest-value clarity fix in the book.</span></li>
-    <li>Tighten spatial clarity in the Bear's last stand<span class="detail">Many simultaneous combatants blur positioning; be selective with figurative language here specifically. Full blocking notes are in the Decisions to Implement section above; the headcount contradiction is in Fix Before Beta.</span></li>
-  </ul>
-  <p><strong>Lock:</strong> developmental lock after Sep 2. No new structural revision unless you discover a genuine contradiction.</p>
-
-  <hr class="divider">
-
-  <h2>Phase 2 — Prose pass</h2>
-  <p><em>Sep 3 – 12 · The story is locked. Stop thinking about plot.</em></p>
-
-  <div class="section-label">Sentence-level clarity — do first</div>
-  <ul class="static-check">
-    <li>Fix recurring sentence-level clarity issues throughout<span class="detail">Dangling/misattached modifiers, ambiguous pronouns, anatomically unclear language ("shuttered"→"shuddered," "gagged"), abstract verbs standing in for simple images ("space to breach," "shadow compiled"), agreement errors.</span></li>
-  </ul>
-
-  <div class="section-label">Somatic language — Sep 3–5</div>
-  <ul class="static-check">
-    <li>Audit heart / chest / stomach / gut / breath / throat / blood / heat / cold / tightening / burning / trembling / tears<span class="detail">Keep strong bodily writing — remove or vary only the repetitions that have become default shorthand. Rough POV goals: Maeren = perception/environment, Brynna = movement/readiness, Aurelian = shame/recoil, Rían = restraint/suppressed reaction breaking through.</span></li>
-  </ul>
-
-  <div class="section-label">Interiority &amp; rhetorical questions — Sep 6–7</div>
-  <ul class="static-check">
-    <li>Audit stacked internal questions ("she wondered," "what if," "why")<span class="detail">If three questions communicate one uncertainty, keep the strongest. Goal isn't fewer questions — it's eliminating ones that restate the one before.</span></li>
-  </ul>
-
-  <div class="section-label">Emotional redundancy — Sep 8–9</div>
-  <ul class="static-check">
-    <li>Cut redundant channels wherever emotion shown → bodily reaction → metaphor → emotion named → rhetorical restatement all stack together<span class="detail">Especially: Eamon, Nyara, the sister rupture, the capture, the rain, Rían intimacy, the betrayal, the transformation, Riven. Goal is hierarchy, not minimalism.</span></li>
-  </ul>
-
-  <div class="section-label">Gesture audit — Sep 10</div>
-  <ul class="static-check">
-    <li>Audit recurring gestures: smirk, brow furrow, head tilt, crossed arms, clenched jaw/fist, sigh, shrug, eyes widen/narrow, swallowing, nodding<span class="detail">Keep character-specific gestures; change only the repetitions flattening characters together.</span></li>
-  </ul>
-
-  <div class="section-label">POV differentiation — Sep 11</div>
-  <ul class="static-check">
-    <li>Read 5–10 pages from each POV consecutively; check if you could identify the narrator with names removed<span class="detail">Focus especially on Maeren vs. Rían, the closest pair per the editorial report.</span></li>
-  </ul>
-
-  <div class="section-label">Lyricism protection — Sep 12</div>
-  <ul class="static-check">
-    <li>Reread the hydrangea garden, forest, dreams, Astralis landscape, rain, both transformations, and the Riven ending — restore anything cut merely for being descriptive<span class="detail">An entire pass whose job is partly not to cut things.</span></li>
-  </ul>
-  <p><strong>Lock:</strong> prose lock after Sep 12.</p>
-
-  <hr class="divider">
-
-  <h2>Phase 3 — Continuity &amp; manuscript hygiene</h2>
-  <p><em>Sep 13 – 19 · No developmental editing.</em></p>
-
-  <div class="section-label">Names &amp; terminology — Sep 13–14</div>
-  <ul class="static-check">
-    <li>Build a canonical spelling sheet and fix every name/term variant globally<span class="detail">Maeren, Brynna, Aurelian, Rían, Orlíen, Cydar, Nyara, Vaela, Gwyrionez, Minvaera/Maevira, Astrean, Sha'thi, Nymari, Velmora, Astralis, Eos, Talauvmor, Syrithien, Veil terminology — plus Godric Moore and "Order of Divinity" from the Fix Before Beta list.</span></li>
-  </ul>
-
-  <div class="section-label">Object continuity — Sep 15</div>
-  <ul class="static-check">
-    <li>Track where each object begins, who has it, and where it ends<span class="detail">Moonstone, Rían's journal, the prophecy/book, weapons, Riven, horses/lairs, the hydrangea charm, maps, injuries.</span></li>
-  </ul>
-
-  <div class="section-label">Knowledge continuity — Sep 16</div>
-  <ul class="static-check">
-    <li>For every major revelation, confirm who knows it, when they learned it, and how<span class="detail">Nyara = Bear, Maeren's power, the lineage, the prophecy, Rían's surveillance, the Elders' motives, Order activity, Veil mechanics, family history.</span></li>
-  </ul>
-
-  <div class="section-label">Timeline &amp; geography — Sep 17</div>
-  <ul class="static-check">
-    <li>Check days/nights, travel duration, healing time, and parallel timelines against each other<span class="detail">Including the journal date and hunt day-count issues from the Fix Before Beta list. Doesn't need to be beautiful, needs to work.</span></li>
-  </ul>
-
-  <div class="section-label">Magic continuity — Sep 18</div>
-  <ul class="static-check">
-    <li>Build a private ability/mechanism/cost/limits reference sheet and verify the manuscript against it<span class="detail">Extraction, healing, environmental manipulation, the shadow creature, the Veils, Bear transformation, the moonstone, magic's cost, Maeren's sensory abilities.</span></li>
-  </ul>
-
-  <div class="section-label">Final manuscript hygiene sweep — Sep 19</div>
-  <ul class="static-check">
-    <li>Final search for any remaining artifacts or formatting breaks<span class="detail">&lt;&lt;, &gt;&gt;, TODO, Q&amp;A tables, placeholder text, duplicated paragraphs, corrupted characters, inconsistent chapter headings, missing scene breaks. The one hard prerequisite before outside readers see the manuscript.</span></li>
-  </ul>
-
-  <hr class="divider">
-
-  <h2>Phase 4 — The reader pass</h2>
-  <p><em>Sep 20 – 25 · Stop editing while you read.</em></p>
-
-  <div class="section-label">Read like a reader — Sep 20–24</div>
-  <ul class="static-check">
-    <li>Export to a format that feels different from your working doc; read ~20% per day, marking only<span class="detail">C = confused, B = bored, R = repetition, E = emotional beat didn't land, CONT = continuity issue, 🔥 = this works, don't touch it. No editing while reading.</span></li>
-  </ul>
-
-  <div class="section-label">Triage your marks — Sep 25</div>
-  <ul class="static-check">
-    <li>Fix genuine confusion, continuity errors, obvious repetition, and broken transitions only<span class="detail">Do NOT fix "maybe readers won't like this" or "what if the second act..." — those go on the beta-question list, not into the manuscript.</span></li>
-  </ul>
-
-  <hr class="divider">
-
-  <h2>Phase 5 — Beta package</h2>
-  <p><em>Sep 26 – 29</em></p>
-
-  <div class="section-label">Final formatting — Sep 26</div>
-  <ul class="static-check">
-    <li>Clean formatting pass<span class="detail">Title page, consistent chapter headings and scene breaks, readable font/spacing, page numbers, remove comments/track changes, verify italics and accented characters.</span></li>
-  </ul>
-
-  <div class="section-label">Beta questions — Sep 27</div>
-  <ul class="static-check">
-    <li>Draft ~12–15 beta questions without revealing your intended answers<span class="detail">Maeren (want, change, unclear choices) · Astralis (pacing, cohesion with Velmora, information load) · Sisters (understanding of the conflict, feelings about the unresolved ending) · Rían (when did trust begin, how the surveillance reveal reframes earlier scenes) · Climax (what was each character choosing) · Ending (what pulls you into Book Two).</span></li>
-  </ul>
-
-  <div class="section-label">Beta instructions — Sep 28</div>
-  <ul class="static-check">
-    <li>Write reader instructions: what to mark, and what NOT to do<span class="detail">They don't need to line-edit unless something repeatedly distracts them. Don't tell them what you're worried about before they read.</span></li>
-  </ul>
-
-  <div class="section-label">Freeze — Sep 29</div>
-  <ul class="static-check">
-    <li>Lock the beta file<span class="detail">Create the final beta file, back up the working manuscript separately, back up the beta version, label it clearly, prepare the recipient list and instructions. No more editing after this.</span></li>
-  </ul>
-
-  <hr class="divider">
-
-  <h2>Guardrails</h2>
 
   <h3>Ask beta readers — don't preemptively fix</h3>
   <ul class="static-check">
@@ -287,37 +412,14 @@
     <li>Does Maeren feel agentic?</li>
     <li>Does the unresolved Maeren/Brynna relationship feel intentional?</li>
     <li>Does Rían earn the betrayal, or does it feel unearned?</li>
-    <li>Does Rían stay morally complicated rather than accidentally reading as redeemed?</li>
     <li>Is Aurelian sympathetic enough to follow?</li>
     <li>Is the lore comprehensible?</li>
-    <li>Does the climax read as intentional complexity rather than confusion?</li>
     <li>Does the ending create Book Two desire?</li>
     <li>Which mysteries are predictable?</li>
     <li>Which emotional moments land hardest?</li>
   </ul>
 
-  <h3>Do not reopen before beta</h3>
-  <ul class="static-check">
-    <li>Core concept</li>
-    <li>Maeren's fundamental personality</li>
-    <li>The four-POV architecture</li>
-    <li>The Bear Guardian premise</li>
-    <li>The two-realm concept</li>
-    <li>Order/Elders thematic mirroring</li>
-    <li>The Maeren/Brynna philosophical conflict</li>
-    <li>Rían's morally compromised role</li>
-    <li>The unresolved Book One ending</li>
-    <li>Magic-as-listening/release vs. control/force theme</li>
-    <li>The Riven ending</li>
-    <li>Fundamental series architecture</li>
-  </ul>
-
-  <hr class="divider">
-
-  <h2>🐻 Send — September 30</h2>
-  <p>Send the version you prepared. Do not reread Chapter One first. Do not make "one tiny change." Do not run another AI developmental report that morning.</p>
-
-  <div class="footer-note">For day-to-day tracking with checkboxes and notes, use the <a href="checklist.html">interactive checklist</a>.</div>
+  <div class="footer-note">For day-to-day tracking with checkboxes, Small/Medium/Large selectors, and notes on every item, use the <a href="checklist.html">interactive checklist</a>.</div>
 </div>
 
 </body>
