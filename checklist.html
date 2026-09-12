@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>The Bear Guardian — Pre-Beta Revision Plan</title>
+<title>The Bear Guardian — Revision Passes</title>
 <link rel="stylesheet" href="styles.css">
 <style>
   :root{
@@ -16,12 +16,12 @@
     --border-strong:#cfccc0;
     --accent:#3c3489;
     --accent-bg:#eeedfe;
-    --critical:#791f1f;
-    --critical-bg:#fcebeb;
-    --high:#712b13;
-    --high-bg:#faece7;
-    --medium:#633806;
-    --medium-bg:#faeeda;
+    --small:#4a7a9c;
+    --small-bg:#e8f1f6;
+    --medium:#a15c2f;
+    --medium-bg:#f8ede2;
+    --large:#791f1f;
+    --large-bg:#fcebeb;
     --done:#085041;
     --done-bg:#e1f5ee;
     --radius:10px;
@@ -38,12 +38,12 @@
       --border-strong:#4a4943;
       --accent:#cecbf6;
       --accent-bg:#3c3489;
-      --critical:#f7c1c1;
-      --critical-bg:#4a1b0c;
-      --high:#f0997b;
-      --high-bg:#4a1b0c;
-      --medium:#fac775;
-      --medium-bg:#412402;
+      --small:#9dc4dd;
+      --small-bg:#1c3140;
+      --medium:#f0997b;
+      --medium-bg:#3c2311;
+      --large:#f7c1c1;
+      --large-bg:#4a1b0c;
       --done:#9fe1cb;
       --done-bg:#04342c;
     }
@@ -55,19 +55,12 @@
     color:var(--text-primary);
     font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
     line-height:1.5;
-    padding:2rem 1rem 5rem;
+    padding:0 1rem 5rem;
   }
-  .wrap{max-width:760px;margin:0 auto;}
+  .wrap{max-width:800px;margin:0 auto;padding-top:2rem;}
   h1{font-size:22px;font-weight:600;margin:0 0 4px;}
   .subtitle{color:var(--text-secondary);font-size:14px;margin:0 0 20px;}
-
-  .deadline{
-    display:inline-flex;align-items:center;gap:6px;
-    font-size:12px;font-weight:600;color:var(--accent);
-    background:var(--accent-bg);
-    padding:4px 10px;border-radius:99px;
-    margin-bottom:20px;
-  }
+  .meta-line{font-size:12.5px;color:var(--text-muted);margin:0 0 20px;}
 
   .overall{
     background:var(--surface-card);
@@ -97,206 +90,36 @@
 
   .controls{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;}
   button.tool{
-    font-size:13px;
-    padding:6px 12px;
-    border-radius:8px;
+    font-size:13px;padding:6px 12px;border-radius:8px;
     border:0.5px solid var(--border-strong);
-    background:var(--surface-card);
-    color:var(--text-secondary);
-    cursor:pointer;
+    background:var(--surface-card);color:var(--text-secondary);cursor:pointer;
   }
   button.tool:hover{background:var(--surface-muted);}
 
-  /* Fix-before-beta pinned card */
-  .fixbeta{
-    background:var(--surface-card);
-    border:1.5px solid var(--critical);
-    border-radius:12px;
-    margin-bottom:24px;
-    overflow:hidden;
+  /* Overview table */
+  .overview-table{width:100%;border-collapse:collapse;margin-bottom:22px;font-size:12.5px;}
+  .overview-table th{
+    text-align:left;padding:6px 8px;font-size:10.5px;text-transform:uppercase;
+    letter-spacing:.03em;color:var(--text-muted);border-bottom:1px solid var(--border-strong);
   }
-  .fixbeta-head{
-    padding:14px 18px;
-    background:var(--critical-bg);
-    display:flex;
-    align-items:center;
-    gap:10px;
-  }
-  .fixbeta-head .pin{font-size:16px;}
-  .fixbeta-title{font-size:15px;font-weight:600;color:var(--critical);flex:1;}
-  .fixbeta-progress{font-size:12px;color:var(--critical);font-weight:600;}
-  .fixbeta-sub{
-    font-size:12px;color:var(--text-secondary);
-    padding:10px 18px 0;
-  }
+  .overview-table td{padding:6px 8px;border-bottom:0.5px solid var(--border);}
+  .overview-table td:first-child{font-weight:700;color:var(--accent);}
+  .overview-table tr:last-child td{border-bottom:none;}
 
-  /* Developmental recommendations (optional, not bugs) pinned card */
-  .devrec{
-    background:var(--surface-card);
+  /* Three Questions touchstone */
+  .touchstone{
+    background:var(--accent-bg);
     border:1.5px solid var(--accent);
     border-radius:12px;
-    margin-bottom:24px;
-    overflow:hidden;
-  }
-  .devrec-head{
-    padding:14px 18px;
-    background:var(--accent-bg);
-    display:flex;
-    align-items:center;
-    gap:10px;
-  }
-  .devrec-head .pin{font-size:16px;}
-  .devrec-title{font-size:15px;font-weight:600;color:var(--accent);flex:1;}
-  .devrec-progress{font-size:12px;color:var(--accent);font-weight:600;}
-  .devrec-sub{
-    font-size:12px;color:var(--text-secondary);
-    padding:10px 18px 0;
-  }
-  .devrec .bar-fill{background:var(--accent);}
-  .devrec .item input[type=checkbox]{accent-color:var(--accent);}
-  .devrec .note-toggle.has-note{color:var(--accent);}
-
-  details.phase{
-    background:var(--surface-card);
-    border:0.5px solid var(--border);
-    border-radius:12px;
-    margin-bottom:14px;
-    overflow:hidden;
-  }
-  details.phase[open] summary{border-bottom:0.5px solid var(--border);}
-  summary{
-    list-style:none;
-    cursor:pointer;
-    padding:16px 18px;
-    display:flex;
-    align-items:center;
-    gap:12px;
-  }
-  summary::-webkit-details-marker{display:none;}
-  .chev{
-    font-size:11px;color:var(--text-muted);
-    transition:transform .15s ease;
-    flex-shrink:0;
-  }
-  details[open] .chev{transform:rotate(90deg);}
-  .phase-title{font-size:15px;font-weight:600;flex:1;min-width:0;}
-  .phase-sub{font-size:12px;color:var(--text-muted);font-weight:400;display:block;margin-top:2px;}
-  .phase-progress{
-    font-size:12px;color:var(--text-secondary);
-    display:flex;align-items:center;gap:8px;flex-shrink:0;
-  }
-  .bar{
-    width:64px;height:5px;border-radius:3px;
-    background:var(--surface-muted);overflow:hidden;
-  }
-  .bar-fill{height:100%;background:var(--accent);border-radius:3px;}
-  .fixbeta .bar-fill{background:var(--critical);}
-
-  .section-label{
-    font-size:12px;font-weight:600;color:var(--text-secondary);
-    text-transform:uppercase;letter-spacing:.03em;
-    padding:14px 18px 6px;
-  }
-  .item{
-    display:flex;
-    gap:10px;
-    padding:11px 18px;
-    border-top:0.5px solid var(--border);
-  }
-  .item:first-of-type{border-top:none;}
-  .item input[type=checkbox]{
-    margin-top:3px;
-    width:16px;height:16px;
-    flex-shrink:0;
-    accent-color:var(--accent);
-    cursor:pointer;
-  }
-  .fixbeta .item input[type=checkbox]{accent-color:var(--critical);}
-  .item-body{flex:1;min-width:0;}
-  .item-row{
-    display:flex;
-    align-items:flex-start;
-    justify-content:space-between;
-    gap:10px;
-  }
-  .item-text{font-size:14px;line-height:1.45;}
-  .item.done .item-text{color:var(--text-muted);text-decoration:line-through;}
-  .item-detail{
-    font-size:13px;color:var(--text-secondary);
-    margin-top:3px;
-    line-height:1.45;
-  }
-  .badge{
-    display:inline-block;
-    font-size:10px;font-weight:600;
-    padding:2px 7px;
-    border-radius:99px;
-    margin-left:8px;
-    vertical-align:middle;
-    white-space:nowrap;
-  }
-  .badge.critical{background:var(--critical-bg);color:var(--critical);}
-  .badge.high{background:var(--high-bg);color:var(--high);}
-  .badge.medium{background:var(--medium-bg);color:var(--medium);}
-  .badge.last{background:var(--surface-muted);color:var(--text-secondary);}
-  .badge.date{background:var(--surface-muted);color:var(--text-secondary);font-weight:600;}
-
-  .note-toggle{
-    flex-shrink:0;
-    font-size:11px;
-    color:var(--text-muted);
-    background:none;
-    border:none;
-    cursor:pointer;
-    padding:2px 0;
-    text-decoration:underline;
-    text-underline-offset:2px;
-  }
-  .note-toggle:hover{color:var(--text-secondary);}
-  .note-toggle.has-note{color:var(--accent);}
-  .fixbeta .note-toggle.has-note{color:var(--critical);}
-  .note-input{
-    display:none;
-    width:100%;
-    margin-top:8px;
-    font-family:inherit;
-    font-size:13px;
-    line-height:1.4;
-    color:var(--text-primary);
-    background:var(--surface-muted);
-    border:0.5px solid var(--border);
-    border-radius:8px;
-    padding:8px 10px;
-    resize:vertical;
-    min-height:52px;
-  }
-  .note-input:focus{outline:none;border-color:var(--border-strong);}
-  .note-input.open{display:block;}
-  .note-saved{
-    font-size:11px;color:var(--text-muted);
-    margin-top:3px;
-    opacity:0;
-    transition:opacity .2s ease;
-  }
-  .note-saved.show{opacity:1;}
-
-  .note{
-    font-size:13px;color:var(--text-secondary);
-    padding:12px 18px 16px;
-    border-top:0.5px solid var(--border);
-    background:var(--surface-muted);
-  }
-  .note strong{color:var(--text-primary);}
-
-  .legend{
-    display:flex;gap:14px;flex-wrap:wrap;
-    font-size:12px;color:var(--text-secondary);
+    padding:16px 20px;
     margin-bottom:20px;
   }
-  .legend span{display:flex;align-items:center;gap:6px;}
-  .dot{width:8px;height:8px;border-radius:50%;}
+  .touchstone h3{margin:0 0 10px;font-size:14px;color:var(--accent);}
+  .touchstone ol{margin:0;padding-left:20px;}
+  .touchstone li{font-size:13.5px;margin-bottom:8px;line-height:1.45;color:var(--text-primary);}
+  .touchstone li:last-child{margin-bottom:0;}
 
-  /* Guardrail reference cards (no checkboxes) */
+  /* Reference cards (Do Not Touch, carried-over material) */
   details.guard{
     background:var(--surface-card);
     border:0.5px dashed var(--border-strong);
@@ -305,32 +128,124 @@
     overflow:hidden;
   }
   details.guard[open] summary{border-bottom:0.5px solid var(--border);}
-  details.guard summary .phase-title{color:var(--text-secondary);}
   .guard-list{padding:6px 18px 16px;}
   .guard-list ul{margin:4px 0 14px;padding-left:18px;}
-  .guard-list li{font-size:13px;color:var(--text-secondary);margin-bottom:5px;line-height:1.4;}
-  .guard-list h4{font-size:12px;font-weight:600;color:var(--text-primary);margin:10px 0 4px;text-transform:uppercase;letter-spacing:.03em;}
+  .guard-list li{font-size:13px;color:var(--text-secondary);margin-bottom:6px;line-height:1.45;}
+  .guard-list h4{font-size:12px;font-weight:600;color:var(--text-primary);margin:12px 0 4px;text-transform:uppercase;letter-spacing:.03em;}
 
-  .send-card{
-    background:var(--done-bg);
-    border:1.5px solid var(--done);
+  /* Pass cards (accordion) */
+  details.pass{
+    background:var(--surface-card);
+    border:0.5px solid var(--border);
     border-radius:12px;
-    padding:16px 18px;
-    margin-top:24px;
-    display:flex;
-    gap:10px;
-    align-items:flex-start;
+    margin-bottom:14px;
+    overflow:hidden;
   }
-  .send-card input[type=checkbox]{width:18px;height:18px;margin-top:2px;accent-color:var(--done);}
-  .send-title{font-size:15px;font-weight:600;color:var(--done);}
-  .send-detail{font-size:13px;color:var(--text-secondary);margin-top:4px;line-height:1.5;}
+  details.pass[open] summary{border-bottom:0.5px solid var(--border);}
+  summary{
+    list-style:none;cursor:pointer;padding:16px 18px;
+    display:flex;align-items:center;gap:12px;
+  }
+  summary::-webkit-details-marker{display:none;}
+  .chev{font-size:11px;color:var(--text-muted);transition:transform .15s ease;flex-shrink:0;}
+  details[open] .chev{transform:rotate(90deg);}
+  .pass-title{font-size:15px;font-weight:600;flex:1;min-width:0;}
+  .pass-sub{font-size:12px;color:var(--text-muted);font-weight:400;display:block;margin-top:2px;}
+  .pass-progress{font-size:12px;color:var(--text-secondary);display:flex;align-items:center;gap:8px;flex-shrink:0;}
+  .bar{width:64px;height:5px;border-radius:3px;background:var(--surface-muted);overflow:hidden;}
+  .bar-fill{height:100%;background:var(--accent);border-radius:3px;}
+  .pass-intro{font-size:13px;color:var(--text-secondary);padding:0 18px 12px;font-style:italic;}
+
+  .section-label{
+    font-size:12px;font-weight:700;color:var(--text-secondary);
+    padding:14px 18px 6px;
+  }
+
+  /* Simple checkbox item (Pass 1, 2, 8, and 7.5) */
+  .item{display:flex;gap:10px;padding:11px 18px;border-top:0.5px solid var(--border);}
+  .item:first-of-type{border-top:none;}
+  .item input[type=checkbox]{margin-top:3px;width:16px;height:16px;flex-shrink:0;accent-color:var(--accent);cursor:pointer;}
+  .item-body{flex:1;min-width:0;}
+  .item-row{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;}
+  .item-text{font-size:14px;line-height:1.45;font-weight:600;}
+  .item.done .item-text{color:var(--text-muted);text-decoration:line-through;}
+  .item-detail{font-size:13px;color:var(--text-secondary);margin-top:5px;line-height:1.5;}
+  .item-detail strong{color:var(--text-primary);}
+
+  /* Mini reference tables embedded in items */
+  table.mini{width:100%;border-collapse:collapse;margin-top:8px;font-size:12px;}
+  table.mini th{
+    text-align:left;padding:5px 7px;font-size:10px;text-transform:uppercase;letter-spacing:.02em;
+    color:var(--text-muted);border-bottom:1px solid var(--border-strong);background:var(--surface-muted);
+  }
+  table.mini td{padding:6px 7px;border-bottom:0.5px solid var(--border);vertical-align:top;color:var(--text-primary);}
+  table.mini tr:last-child td{border-bottom:none;}
+
+  /* Numbered subsection wrapper (used by decisions and graded items) */
+  .subitem{padding:14px 18px;border-top:0.5px solid var(--border);}
+  .subitem:first-of-type{border-top:none;}
+  .subitem-head{display:flex;align-items:baseline;gap:8px;margin-bottom:6px;}
+  .subitem-num{font-size:11px;font-weight:700;color:var(--accent);font-family:ui-monospace,Menlo,monospace;flex-shrink:0;}
+  .subitem-title{font-size:14px;font-weight:700;color:var(--text-primary);}
+  .subitem-body{font-size:13px;color:var(--text-secondary);line-height:1.55;margin-bottom:4px;}
+  .subitem-body strong{color:var(--text-primary);}
+  .subitem-body .lbl{font-weight:700;color:var(--text-primary);}
+
+  /* Option rows: decisions (Pass 0) and S/M/L (graded passes) */
+  .option-row{
+    display:flex;gap:10px;align-items:flex-start;
+    padding:9px 10px;margin-top:6px;border-radius:8px;
+    border:0.5px solid var(--border);cursor:pointer;
+    background:var(--surface-muted);
+  }
+  .option-row:hover{border-color:var(--border-strong);}
+  .option-row.selected{background:var(--accent-bg);border-color:var(--accent);}
+  .option-pill{
+    flex-shrink:0;font-size:10.5px;font-weight:700;padding:3px 9px;border-radius:99px;
+    color:#fff;min-width:26px;text-align:center;height:fit-content;
+  }
+  .option-pill.small{background:var(--small);}
+  .option-pill.medium{background:var(--medium);}
+  .option-pill.large{background:var(--large);}
+  .option-pill.choice{background:var(--accent);}
+  .option-text{font-size:13px;color:var(--text-secondary);line-height:1.45;}
+  .option-row.selected .option-text{color:var(--text-primary);}
+  .option-recommended{
+    font-size:9.5px;font-weight:700;color:var(--done);background:var(--done-bg);
+    padding:1px 7px;border-radius:99px;margin-left:6px;vertical-align:1px;
+  }
+
+  .note-toggle{
+    flex-shrink:0;font-size:11px;color:var(--text-muted);background:none;border:none;
+    cursor:pointer;padding:2px 0;text-decoration:underline;text-underline-offset:2px;
+  }
+  .note-toggle:hover{color:var(--text-secondary);}
+  .note-toggle.has-note{color:var(--accent);}
+  .note-input{
+    display:none;width:100%;margin-top:8px;font-family:inherit;font-size:13px;line-height:1.4;
+    color:var(--text-primary);background:var(--surface-muted);border:0.5px solid var(--border);
+    border-radius:8px;padding:8px 10px;resize:vertical;min-height:48px;
+  }
+  .note-input:focus{outline:none;border-color:var(--border-strong);}
+  .note-input.open{display:block;}
+  .note-saved{font-size:11px;color:var(--text-muted);margin-top:3px;opacity:0;transition:opacity .2s ease;}
+  .note-saved.show{opacity:1;}
+  .subitem-notewrap{margin-top:8px;}
+
+  .exit-note{
+    margin:0 18px 16px;padding:8px 10px;background:var(--surface-muted);
+    border-left:3px solid var(--text-muted);font-size:12.5px;color:var(--text-secondary);
+  }
+  .exit-note .lbl{font-weight:700;color:var(--text-primary);}
+
+  .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--text-secondary);margin-bottom:20px;}
+  .legend span{display:flex;align-items:center;gap:6px;}
+  .dot{width:10px;height:10px;border-radius:3px;flex-shrink:0;}
 
   .save-toast{
     position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(20px);
-    background:var(--text-primary);color:var(--surface-page);
-    font-size:13px;padding:8px 16px;border-radius:8px;
-    opacity:0;transition:opacity .2s ease, transform .2s ease;
-    pointer-events:none;
+    background:var(--text-primary);color:var(--surface-page);font-size:13px;padding:8px 16px;border-radius:8px;
+    opacity:0;transition:opacity .2s ease, transform .2s ease;pointer-events:none;
   }
   .save-toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 </style>
@@ -347,23 +262,24 @@
     </div>
   </div>
 </nav>
+
 <div class="wrap">
-  <h1>The Bear Guardian — pre-beta revision plan</h1>
-  <p class="subtitle">Check items off as you go. Notes and progress save automatically.</p>
-  <div class="deadline">🐻 Send to beta readers: September 30, 2026</div>
+  <h1>The Bear Guardian — revision passes</h1>
+  <p class="subtitle">Eight passes, in order. Do the passes in order — each has an entry condition, a fixed scope, and an exit condition.</p>
+  <p class="meta-line">PRE BETA MASTER · 71 chapters · 109,336 words · page numbers refer to the PDF of PRE BETA MASTER – 0826 (3) · chapter numbers count the Prologue as 0.</p>
 
   <div class="overall">
     <div class="overall-ring" id="overallRing" style="--pct:0">
       <div class="overall-ring-inner" id="overallPct">0%</div>
     </div>
-    <div class="overall-text" id="overallText">0 of 0 items complete</div>
+    <div class="overall-text" id="overallText">0 of 0 items addressed</div>
   </div>
 
   <div class="legend">
-    <span><span class="dot" style="background:var(--critical)"></span>Critical</span>
-    <span><span class="dot" style="background:var(--high)"></span>High</span>
-    <span><span class="dot" style="background:var(--medium)"></span>Medium</span>
-    <span><span class="dot" style="background:var(--text-muted)"></span>Scheduled date</span>
+    <span><span class="dot" style="background:var(--small);"></span>Small</span>
+    <span><span class="dot" style="background:var(--medium);"></span>Medium</span>
+    <span><span class="dot" style="background:var(--large);"></span>Large</span>
+    <span><span class="dot" style="background:var(--accent);"></span>Decision</span>
   </div>
 
   <div class="controls">
@@ -372,315 +288,425 @@
     <button class="tool" id="resetAll">Reset progress</button>
   </div>
 
-  <!-- Pinned: Fix Before Beta -->
-  <div class="fixbeta">
-    <div class="fixbeta-head">
-      <span class="pin">📌</span>
-      <span class="fixbeta-title">Fix before beta — continuity &amp; logic</span>
-      <span class="fixbeta-progress" id="fixbetaProgress">0/10</span>
-    </div>
-    <div class="fixbeta-sub">Pulled from the Continuity and Logic Audit. These specific beats — including the Rían/Orlíen Veil arrival and the moonstone reasoning — get fixed during Phase 1 (climax pass) and Phase 3 (continuity pass) below.</div>
-    <div class="bar" style="margin:10px 18px 0; width:auto;"><span class="bar-fill" id="fixbetaBar" style="width:0%"></span></div>
-    <div id="fixbetaList"></div>
+  <table class="overview-table">
+    <tr><th>Pass</th><th>What</th><th>Time</th><th>Gate to start</th></tr>
+    <tr><td>0</td><td>Decide three things. No drafting.</td><td>One sitting</td><td>—</td></tr>
+    <tr><td>1</td><td>Mechanical repair. No craft decisions.</td><td>Half day</td><td>—</td></tr>
+    <tr><td>2</td><td>Names and orthography.</td><td>1–2 hours</td><td>Pass 0 decisions</td></tr>
+    <tr><td>3</td><td>The climax and its plants.</td><td>The big one</td><td>Pass 0</td></tr>
+    <tr><td>4</td><td>Four surgical agency beats.</td><td>1–2 days</td><td>Pass 3</td></tr>
+    <tr><td>5</td><td>Rían, Fenriel, and the exposition load.</td><td>3–5 days</td><td>Pass 3</td></tr>
+    <tr><td>6</td><td>Ending staging and order.</td><td>1–2 days</td><td>Passes 3–5</td></tr>
+    <tr><td>7</td><td>Line pass: filters, bodies, voice.</td><td>The long one</td><td>All drafting done</td></tr>
+    <tr><td>8</td><td>Final proof. Re-run Pass 1 checks.</td><td>Half day</td><td>Everything</td></tr>
+  </table>
+
+  <div class="touchstone">
+    <h3>Three questions to carry through every pass</h3>
+    <ol>
+      <li>Does this scene put pressure on Maeren's invisibility, or let her keep it? Book One's emotional question is <em>can Maeren remain invisible and keep the people she loves safe</em> — and the answer is no. Every scene should be testable against that.</li>
+      <li>Is magic pointing, or deciding? Magic can say LOOK. Maeren decides I will look.</li>
+      <li>Can the reader tell when her silence, observation, mercy, restraint, or surrender is a decision? Not "is she active enough" — that question is now answered.</li>
+    </ol>
   </div>
 
-  <!-- Pinned: Decisions to implement -->
-  <div class="devrec">
-    <div class="devrec-head">
-      <span class="pin">📝</span>
-      <span class="devrec-title">Decisions to implement</span>
-      <span class="devrec-progress" id="devrecProgress">0/6</span>
-    </div>
-    <div class="devrec-sub">Specific creative direction settled in the revision notes — these need writing into the manuscript, not further deliberation. Bugs stay in Fix Before Beta above; this is craft/character work.</div>
-    <div class="bar" style="margin:10px 18px 0; width:auto;"><span class="bar-fill" id="devrecBar" style="width:0%"></span></div>
-    <div id="devrecList"></div>
-  </div>
+  <!-- Do Not Touch -->
+  <div id="doNotTouch"></div>
 
-  <div id="phaseList"></div>
+  <!-- Pass cards -->
+  <div id="passList"></div>
 
-  <div id="guardList"></div>
-
-  <div class="send-card">
-    <input type="checkbox" id="chk-send-final">
-    <div>
-      <div class="send-title">Send — September 30</div>
-      <div class="send-detail" id="sendDetail">Send the version you prepared. Do not reread Chapter One first. Do not make "one tiny change." Do not run another AI developmental report that morning.</div>
-    </div>
-  </div>
+  <!-- Carried over reference material -->
+  <div id="carriedOverList"></div>
 </div>
 
 <div class="save-toast" id="toast">Progress reset</div>
 
 <script>
-const FIXBETA = [
-  { id:"fb-journal", issue:"Rían's journal says \"three days ago, the order changed,\" but the surrounding Astralis story has advanced for weeks.", fix:"Replace with a timeline-consistent marker, or date the journal entries.", tag:"high" },
-  { id:"fb-huntdays", issue:"The hunt is called its third day, but Maeren later refers to \"four grueling days.\"", fix:"Verify the intended count and standardize.", tag:"medium" },
-  { id:"fb-elders", issue:"Elder Agon becomes \"Agin\"; the later seven-Elder roster adds Athos and drops Agon.", fix:"Establish one canonical roster and family relationship.", tag:"high" },
-  { id:"fb-ursa", issue:"Ursa is present entering the Bear's final stand, but isn't accounted for when the sisters leave together on Riven.", fix:"Show her fleeing, being killed, being taken, or deliberately left.", tag:"medium" },
-  { id:"fb-rianhand", issue:"Rían punches a door and believes his hand is likely broken; the injury has no later functional effect.", fix:"Follow it through, or soften \"likely broken\" to bruising/pain.", tag:"medium" },
-  { id:"fb-veil-arrival", issue:"Rían and Orlíen appear at the exact Veil Maeren chooses, with no clear interception beat.", fix:"Add one line connecting Orlíen's sight, or Rían's knowledge, to that location.", tag:"high" },
-  { id:"fb-moonstone", issue:"Rían's moonstone-removal reasoning at the climax is compressed — why he thinks the amulet is harming/trapping her isn't stated.", fix:"Decided approach: Orlien recognizes the magical pattern (Maeren's power deteriorating, something ancient constraining it, the shadow consuming her, the stone/amulet involved) without a full exposition dump. Rían connects that to the physical object using clues already planted (the amulet's heat during Rain Storm, his suspicion in 'Rían Feels' that it protects her from herself) and acts through nerve and sacrifice rather than complete understanding — he shouldn't become the one who finally understands her best. Write this as a beat, not an explanation.", tag:"critical" },
-  { id:"fb-laststand-headcount", issue:"Headcount contradiction in the Bear's last stand: four guards plus ten soldiers equals fourteen, but the manuscript later refers to fifteen remaining soldiers.", fix:"Settle on one total and adjust the scene's later references to match.", tag:"high" },
-  { id:"fb-prologue", issue:"The prologue's burned woman remains unidentified and isn't meaningfully echoed later.", fix:"Confirm this is a deliberate Book Two plant; otherwise add a Book One echo.", tag:"medium" },
-  { id:"fb-orderterm", issue:"\"Order of Divinity\" appears once against \"Divinity of Order.\"", fix:"Standardize to one term.", tag:"medium" },
-  { id:"fb-godric", issue:"\"Godric Moore\" becomes \"Godric Moor.\"", fix:"Choose one surname.", tag:"medium" }
-];
-
-const DEVREC = [
-  { id:"dev-journal-brynna", issue:"The journal reveal needs a specific line establishing that Rían identified Brynna — not just Maeren's physical capturability — as the actual lever: he knew she'd sacrifice herself for her sister, and documented it as something usable.", fix:"Add an operationally-worded entry (something like \"the easiest way to Maeren is through Brynna\" — exact wording TBD). Maeren should stop on this entry because she's looking for information about Brynna, not because she's investigating Rían — she isn't suspicious of him going in.", when:"Pass 1" },
-  { id:"dev-orderchanged", issue:"The Rish/journal betrayal reveal is delivered TO Maeren by Orlien rather than assembled BY her from clues she's gathered — she's the audience for the reveal, not its detective.", fix:"Let Maeren notice and recall Rían's evasiveness about \"the order changed three nights ago\" (already planted in Cordova's chapter) a beat before Orlien confirms it.", when:"Pass 1" },
-  { id:"dev-gala", issue:"Decided direction: the Gala needs a more explicit turning point for Rían, but not one that proves or defines his love.", fix:"Tighten the scene so Rían has a visible \"oh fuck\" moment — his internal alarm at realizing his feelings are endangering his mission and his obedience, made visible without narrating or categorizing what he feels. The kiss stays the major rupture; this is what makes it land.", when:"Pass 2" },
-  { id:"dev-shelltwig", issue:"The repeated shell/twig failure beats inside Training do the same job as the water-tornado beat — establishing that her power resists fine control — without adding a new capability, danger, or relationship beat.", fix:"Compress the shell/twig repetitions into 2–3 sentences of summary and spend the reclaimed space on the Orlien vision warning, which is the scene's actual payload.", when:"Pass 3" },
-  { id:"dev-brynnahurt", issue:"Maeren's own feelings about Brynna choosing not to save her get little page time once she's in Astralis — she processes it as leverage far more than as hurt. Decided: this is one strand of a larger \"she will never be chosen\" wound (mother's absence, Brynna's freeze, Rían's betrayal), not a standalone fix.", fix:"Thread several brief moments through Astralis rather than one explanatory scene, following hurt → suppression → compartmentalization → triggering → collapse: a raw flash of anger/grief right after capture, redirected toward survival · focusing on the practical leverage problem when the Elders invoke Brynna, not the wound underneath · a dangerous, quickly-shut-down thought during a quiet Rían moment that he came for her in a way Brynna didn't · full collapse of the compartments once Rían's betrayal breaks them apart. Maeren doesn't need to consciously see the whole pattern before the climax — the reader should feel it gathering while she keeps refusing to look at it directly.", when:"Pass 4" },
-  { id:"dev-laststand-blocking", issue:"The Bear's last stand needs clearer spatial blocking (separate from the headcount bug above): where each Blade group is positioned, that the dogs pivot into the soldiers beside them rather than sprinting past Brynna toward soldiers behind her, and how the Brynna/Godric duel resolves when the bear arrives.", fix:"Make explicit: the four initial Blade soldiers are attacked by the dogs, not written out of the scene. Give the Brynna/Godric duel one resolving beat — Godric breaks off at the bear's roar, or Brynna disarms him to reach Maeren. Hold figurative language until the plain geography (position, direction, movement) is established.", when:"Pass 1" }
-];
-
-const PHASES = [
-  {
-    id: "phase1",
-    title: "Phase 1 — Lock the story",
-    sub: "Aug 26 – Sep 2 · Developmental cleanup only — do not polish sentences yet.",
-    sections: [
-      {
-        label: "Build the master revision list — Aug 26",
-        items: [
-          { id:"p1-setup", text:"Set up the working files", detail:"Duplicate the manuscript as PRE-BETA MASTER; start a separate Book Two / parking-lot doc for ideas not required before beta; mark which chapters are affected by remaining developmental issues and leave the rest alone.", when:"Aug 26" },
-          { id:"p1-artifacts", text:"Remove drafting artifacts and finish unfinished passages", detail:"Embedded Q&A/dev tables, every <<>> / TODO / placeholder / drafting instruction, corrupted lines (Throne Room p.19), missing beats (Rían's surveillance ch. p.81–82, Maeren's approach to the Bear p.84, market/village transition p.104), stray brackets and editorial comments.", when:"Aug 26" },
-          { id:"p1-locked", text:"Confirm these decisions remain settled (unless the manuscript itself reveals a contradiction)", detail:"Maeren stays quiet/investigative and doesn't need added combat competence · Maeren/Brynna don't need Book One reconciliation · Rían doesn't need full redemption · the ending stays unresolved · the Bear transformation doesn't need to be triumphant · Order and Elders stay ideological mirrors · magic/listening/control relationship stays implicit · Riven/hydrangea ending stays · no pull toward romantasy convention.", when:"Aug 26" }
-        ]
-      },
-      {
-        label: "Maeren causality pass — Aug 27–28",
-        items: [
-          { id:"p1-maeren", text:"Read Maeren's chapters consecutively; verify want → question → knowledge → choice → consequence for each", detail:"Check: Bear investigation stays curiosity-driven · archive/prophecy research has a visible evidence chain · capture reads as strategic compliance once Brynna is threatened · Astralis compliance evolves rather than staying uniformly passive · she keeps observing Rían and Cordova · major revelations connect to questions she's already carrying · Gwyrionez's info revises her theories · she connects the betrayal evidence herself · the journal functions as evidence, not exposition · her final decision clearly originates in her. End-of-pass test: complete \"Because Maeren ___, ___ happens\" for every chapter — if you can't, look closer (don't auto-revise; some chapters exist for discovery or emotional processing).", when:"Aug 27–28" }
-        ]
-      },
-      {
-        label: "Astralis pass — Aug 29–30",
-        items: [
-          { id:"p1-astralis", text:"Track the investigation, captivity/control, and Rían engines simultaneously through the Astralis section", detail:"Does each revelation answer or complicate a question Maeren already has, and does she revise theories? Does her compliance have a clear reason, and does her willingness to test boundaries increase? Does trust in Rían rise for a specific, incremental reason each time, and does the later surveillance reveal specifically contaminate earlier intimacy?", when:"Aug 29–30" },
-          { id:"p1-training", text:"Audit training scenes for redundancy", detail:"For each: what's different after this scene (new knowledge / changed relationship / new danger / new capability / new failure / changed understanding of control)? Flag and compress only scenes doing genuinely the same job — don't cut a quiet scene just because it lacks external action.", when:"Aug 29–30" }
-        ]
-      },
-      {
-        label: "Sister & emotional continuity pass — Aug 31",
-        items: [
-          { id:"p1-sisters", text:"Track wound → response → suppression → resurfacing → changed behavior across Maeren/Brynna, Eamon, Nyara, their mother, and Riven", detail:"Eamon keeps affecting both sisters · Brynna's accusation stays consequential · Maeren's understanding of her mother changes once she learns the truth · Nyara's death stays emotionally present · Brynna carries guilt after the separation · Maeren carries the rupture into Astralis · Riven/hydrangea payoff stays intact. Do not manufacture reconciliation — the question is whether the wound stays alive, not whether it heals.", when:"Aug 31" }
-        ]
-      },
-      {
-        label: "Rían relationship pass — Sep 1",
-        items: [
-          { id:"p1-rian", text:"Track threat → captor → uncertainty → curiosity → recognition → safety → attraction → trust → warning → betrayal through every Maeren/Rían scene", detail:"Confirm each stage-shift has a specific cause: why she stops seeing him solely as a threat, why she becomes curious, why she feels safe, what he reveals vs. withholds, where his institutional loyalty starts weakening, Cordova's warning, the journal/surveillance setup, and that his guilt afterward doesn't accidentally read as full accountability. Do not redeem him further — accountability is Book Two's job.", when:"Sep 1" }
-        ]
-      },
-      {
-        label: "Climax pass — Sep 2",
-        items: [
-          { id:"p1-climax-choice", text:"Confirm Maeren's choice, the unchosen consequence, and Rían's choice stay distinct at the Veil", detail:"Maeren deliberately stops accepting containment and forces her power open/outward — that's her authored choice. Watch the verb here: she chooses to unleash, summon, ignite, or force the magic free, NOT to be consumed, rot, disappear, or lose herself — 'consume' makes it sound like she's choosing her own destruction, which isn't the intent. The power turning out to be already-rotting and beginning to consume her is the unchosen consequence. Rían's moonstone removal is his own separate, authored decision (see the Fix Before Beta item above for the decided mechanism). \"Forcing\" should read as meaningfully different from the earlier \"releasing\" during the rain scene.", when:"Sep 2" },
-          { id:"p1-climax-portal", text:"Clarify the portal confrontation / final transformation prose", detail:"Hardest sequence to visualize — imprecise verbs and stacked metaphors (fire/ice/stone/blood) currently arrive faster than the cause-and-effect. Highest-value clarity fix in the book, since it's also the climax.", when:"Sep 2" },
-          { id:"p1-climax-laststand", text:"Tighten spatial clarity in the Bear's last stand", detail:"Many simultaneous combatants blur positioning; be selective with figurative language here specifically. Full blocking notes (dog pivots, Brynna/Godric resolving beat) are in the Decisions to Implement card above; the headcount contradiction is in Fix Before Beta.", when:"Sep 2" }
-        ]
-      }
-    ],
-    note: "Developmental lock after Sep 2. No new structural revision after this point unless you discover a genuine contradiction."
-  },
-  {
-    id: "phase2",
-    title: "Phase 2 — Prose pass",
-    sub: "Sep 3 – 12 · The story is locked. Stop thinking about plot.",
-    sections: [
-      {
-        label: "Sentence-level clarity — do first",
-        items: [
-          { id:"p2-clarity", text:"Fix recurring sentence-level clarity issues throughout", detail:"Dangling/misattached modifiers, ambiguous pronouns, anatomically unclear language (\"shuttered\"→\"shuddered,\" \"gagged,\" the eyelids/eyeballs line), abstract verbs standing in for simple images (\"space to breach,\" \"reoriented her chin,\" \"shadow compiled\"), and agreement errors (\"like a swords\").", when:"Sep 3–5" }
-        ]
-      },
-      {
-        label: "Somatic language — Sep 3–5",
-        items: [
-          { id:"p2-somatic", text:"Audit heart / chest / stomach / gut / breath / throat / blood / heat / cold / tightening / burning / trembling / tears", detail:"For each: is this the strongest expression of the emotion, did the previous sentence already land it, and does it feel specific to this character? Keep strong bodily writing — remove or vary only the repetitions that have become default shorthand. Rough POV goals: Maeren = perception/environment/subtle sensation, Brynna = movement/muscle/spatial readiness, Aurelian = shame/self-judgment/recoil, Rían = restraint/observation/suppressed reaction breaking through. Tendencies, not rules.", when:"Sep 3–5" }
-        ]
-      },
-      {
-        label: "Interiority & rhetorical questions — Sep 6–7",
-        items: [
-          { id:"p2-questions", text:"Audit stacked internal questions (\"she wondered,\" \"what if,\" \"why,\" repeated ?)", detail:"For every cluster of internal questions, check whether each one advances the thought — if three questions communicate one uncertainty, keep the strongest. Goal isn't fewer questions, it's eliminating ones that just restate the one before. Protect Maeren's questioning mind.", when:"Sep 6–7" }
-        ]
-      },
-      {
-        label: "Emotional redundancy — Sep 8–9",
-        items: [
-          { id:"p2-redundancy", text:"Cut redundant channels wherever emotion shown → bodily reaction → metaphor → emotion named → rhetorical restatement all stack together", detail:"Ask whether the beat already landed before adding the next channel. Especially inspect: Eamon, Nyara, the sister rupture, the capture, the rain, Rían intimacy, the betrayal, the transformation, Riven. These scenes should keep their intensity — the goal is hierarchy, not minimalism.", when:"Sep 8–9" }
-        ]
-      },
-      {
-        label: "Gesture audit — Sep 10",
-        items: [
-          { id:"p2-gestures", text:"Audit recurring gestures: smirk, brow furrow, head tilt, crossed arms, clenched jaw/fist, sigh, shrug, eyes widen/narrow, swallowing, shoulder movement, nodding", detail:"Keep character-specific gestures. Change only the repetitions noticeable enough to flatten characters together.", when:"Sep 10" }
-        ]
-      },
-      {
-        label: "POV differentiation — Sep 11",
-        items: [
-          { id:"p2-pov", text:"Read 5–10 pages from each POV consecutively; check if you could identify the narrator with names removed", detail:"Focus especially on Maeren vs. Rían, the closest pair per the editorial report. Strengthen what's already there rather than manufacturing four radically different styles.", when:"Sep 11" }
-        ]
-      },
-      {
-        label: "Lyricism protection — Sep 12",
-        items: [
-          { id:"p2-lyricism", text:"Reread the hydrangea garden, forest, dreams, Astralis landscape, rain, Nyara's transformation, Maeren's transformation, and the Riven ending — restore anything cut merely for being descriptive", detail:"An entire pass whose job is partly not to cut things. Confirm atmosphere, rhythm, symbolic imagery, and strangeness that belongs to this book survived the earlier passes: sentient nature, animal specificity, hydrangea symbolism, rain-as-freedom, magic as ecological/perceptual, staccato terror rhythm, small physical gestures carrying grief, beauty/violence juxtaposition, dream/prophecy fragments.", when:"Sep 12" }
-        ]
-      }
-    ],
-    note: "Prose lock after Sep 12."
-  },
-  {
-    id: "phase3",
-    title: "Phase 3 — Continuity & manuscript hygiene",
-    sub: "Sep 13 – 19 · No developmental editing.",
-    sections: [
-      {
-        label: "Names & terminology — Sep 13–14",
-        items: [
-          { id:"p3-names", text:"Build a canonical spelling sheet and fix every name/term variant globally", detail:"Maeren, Brynna, Aurelian, Rían, Orlíen, Cydar, Nyara, Vaela, Gwyrionez, Minvaera/Maevira, Astrean, Sha'thi, Nymari, Velmora, Astralis, Eos, Talauvmor, Syrithien, Veil terminology — plus Godric Moore and \"Order of Divinity\" from the Fix Before Beta list above.", when:"Sep 13–14" }
-        ]
-      },
-      {
-        label: "Object continuity — Sep 15",
-        items: [
-          { id:"p3-objects", text:"Track where each object begins, who has it, and where it ends", detail:"Moonstone, Rían's journal, the prophecy/book, weapons, clothing where relevant, Riven, horses/lairs, the hydrangea charm, maps, injuries (including Rían's hand from the Fix Before Beta list).", when:"Sep 15" }
-        ]
-      },
-      {
-        label: "Knowledge continuity — Sep 16",
-        items: [
-          { id:"p3-knowledge", text:"For every major revelation, confirm who knows it, when they learned it, and how", detail:"Nyara = Bear, Maeren's power, the Bear Guardian lineage, the prophecy, Rían's surveillance, the Elders' motives, Order activity, Veil mechanics, family history. Watch for accidental clairvoyance — a character knowing something before their own scene reveals it.", when:"Sep 16" }
-        ]
-      },
-      {
-        label: "Timeline & geography — Sep 17",
-        items: [
-          { id:"p3-timeline", text:"Check days/nights, travel duration, healing time, moon/weather references, and parallel timelines against each other", detail:"Velmora → Syrithien travel, portal travel, Eos geography, Brynna's timeline vs. Maeren's vs. Aurelian's, the final parallel sequences — including the journal date and hunt day-count issues from the Fix Before Beta list. Doesn't need to be beautiful, needs to work.", when:"Sep 17" }
-        ]
-      },
-      {
-        label: "Magic continuity — Sep 18",
-        items: [
-          { id:"p3-magic", text:"Build a private ability/mechanism/cost/limits/first-demonstrated reference sheet and verify the manuscript against it", detail:"Extraction, healing, environmental manipulation, the shadow creature, the Veils, Bear transformation, the moonstone, magic's cost, Maeren's sensory abilities. This is for your own consistency — don't over-explain new rules to readers.", when:"Sep 18" }
-        ]
-      },
-      {
-        label: "Final manuscript hygiene sweep — Sep 19",
-        items: [
-          { id:"p3-hygiene", text:"Final search for any remaining artifacts or formatting breaks", detail:"<<, >>, TODO, NOTES, Q&A tables, chapter-development notes, placeholder text, duplicated paragraphs, broken formatting, corrupted characters, inconsistent chapter headings, accidental comments, missing scene breaks. This is the one hard prerequisite before outside readers see the manuscript.", when:"Sep 19" }
-        ]
-      }
-    ]
-  },
-  {
-    id: "phase4",
-    title: "Phase 4 — The reader pass",
-    sub: "Sep 20 – 25 · Stop editing while you read.",
-    sections: [
-      {
-        label: "Read like a reader — Sep 20–24",
-        items: [
-          { id:"p4-read", text:"Export to a format that feels different from your working doc and read ~20% per day, marking only", detail:"Different font/page size, ebook/PDF/tablet/print if possible. Mark: C = confused, B = bored, R = repetition, E = emotional beat didn't land, CONT = continuity issue, 🔥 = this works, don't touch it. No sentence polishing or rewriting while reading — you're collecting evidence.", when:"Sep 20–24" }
-        ]
-      },
-      {
-        label: "Triage your marks — Sep 25",
-        items: [
-          { id:"p4-triage", text:"Fix genuine confusion, continuity errors, obvious repetition, and broken transitions only", detail:"Do NOT fix \"maybe readers won't like this,\" \"maybe Maeren should be more...,\" \"maybe I should add...,\" \"what if the second act...\" — those go on the beta-question list below, not into the manuscript.", when:"Sep 25" }
-        ]
-      }
-    ]
-  },
-  {
-    id: "phase5",
-    title: "Phase 5 — Beta package",
-    sub: "Sep 26 – 29",
-    sections: [
-      {
-        label: "Final formatting — Sep 26",
-        items: [
-          { id:"p5-format", text:"Clean formatting pass", detail:"Title page, consistent chapter headings and scene breaks, readable font/spacing, page numbers if PDF, remove all comments/track changes, verify italics and accented characters, one final search for drafting artifacts.", when:"Sep 26" }
-        ]
-      },
-      {
-        label: "Beta questions — Sep 27",
-        items: [
-          { id:"p5-questions", text:"Draft ~12–15 beta questions across these categories, without revealing your intended answers", detail:"Maeren (what did you understand her to want, how did that change, any unclear choices) · Astralis (pacing, whether it still felt like one novel with Velmora, information overload) · Sisters (understanding of the conflict, feelings about the unresolved ending) · Rían (when did trust begin, how did the surveillance reveal reframe earlier scenes) · Climax (what was Maeren choosing, what was Rían choosing, what did the transformation mean) · Ending (what questions are you most eager to see answered, what pulls you into Book Two).", when:"Sep 27" }
-        ]
-      },
-      {
-        label: "Beta instructions — Sep 28",
-        items: [
-          { id:"p5-instructions", text:"Write reader instructions: what to mark, and what NOT to do", detail:"Ask them to flag confusion, boredom, emotional reactions, predictions, favorite characters, trust/distrust shifts. Tell them they don't need to line-edit unless something repeatedly distracts them. Most important: don't tell them what you're worried about before they read — you want independent evidence.", when:"Sep 28" }
-        ]
-      },
-      {
-        label: "Freeze — Sep 29",
-        items: [
-          { id:"p5-freeze", text:"Lock the beta file", detail:"Create the final beta file, back up the working manuscript separately, back up the beta version, label it clearly (\"THE BEAR GUARDIAN — BETA 1 — SEPT 2026\"), prepare the recipient list and instructions/questions, open only to verify the file works, then close it. No more editing after this.", when:"Sep 29" }
-        ]
-      }
-    ]
-  }
-];
-
-const STORAGE_KEY = "bear-guardian-revision-state";
-let checked = {};
-let notes = {};
+const STORAGE_KEY = "bear-guardian-passes-state";
+let checked = {};   // simple checkbox items: id -> bool
+let notes = {};     // id -> string
+let scope = {};     // graded items: id -> 'small'|'medium'|'large'
+let decision = {};  // pass 0 decisions: id -> option key
 let noteSaveTimers = {};
 
-function escapeHtml(str){
-  return String(str)
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;");
+function esc(str){
+  return String(str||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
 }
 
-function tagLabel(tag){
-  if(tag==="critical") return "Critical";
-  if(tag==="high") return "High";
-  if(tag==="medium") return "Medium";
-  return "Do last";
-}
+/* ============ DATA ============ */
 
-function allPassItems(){
-  const out = [];
-  PHASES.forEach(phase => phase.sections.forEach(sec => sec.items.forEach(it => out.push(it))));
-  return out;
-}
-function allItems(){
-  return [...FIXBETA, ...DEVREC, ...allPassItems()];
-}
+const DONOTTOUCH = {
+  title: "Do Not Touch",
+  sub: "A protect list. These are working and are at risk of being sanded off during a general pass.",
+  groups: [
+    { heading: "Structure and scene", items: [
+      "The Cook (ch. 4, p. 24) — your best new chapter. Do not cut it for pace.",
+      "The arrow (ch. 13, p. 80) · the vine trap (ch. 22, p. 123) · stepping over Cordova's sword (ch. 39, p. 203) · the silence before the Elders (ch. 43, p. 226) · lying to Gwyrionez (ch. 61, p. 376).",
+      "Maeren never masters her power. No competence beat before the end.",
+      "Rían un-redeemed. \"You don't.\" stands."
+    ]},
+    { heading: "Lines", items: [
+      "\"But she had to understand.\" (ch. 8)",
+      "\"She didn't command the storm. She simply stopped holding it back.\" (ch. 55, p. 336)",
+      "\"demanded it obey her\" and the black fire (ch. 68, p. 424)",
+      "\"MA - the way to Maeren, is through Brynna.\" (ch. 63, p. 394)",
+      "\"No Rian, you've already hurt her.\" (ch. 66, p. 414)"
+    ]},
+    { heading: "Prose habits", items: [
+      "The prologue's short-sentence cascade. Do not let anyone combine \"The bear moved. It did not roar or growl.\"",
+      "Smell as the lead sense.",
+      "The single-word echo device — Purged. Protection. Contain. Free. 56 instances. Flag these for any copyeditor so they aren't marked as fragments.",
+      "Dream sequences in present tense.",
+      "Plain dialogue tags. Said and asked dominate. Leave them."
+    ]}
+  ]
+};
 
-function buildRow(it, isFixbeta){
-  const hasNote = !!(notes[it.id] && notes[it.id].trim());
-  const row = document.createElement("div");
-  row.className = "item" + (checked[it.id] ? " done" : "");
-  const mainText = isFixbeta ? it.issue : it.text;
-  const detailText = isFixbeta ? it.fix : it.detail;
-  let badgeHtml = "";
-  if(it.tag){
-    badgeHtml = `<span class="badge ${it.tag}">${tagLabel(it.tag)}</span>`;
-  }else if(it.when){
-    badgeHtml = `<span class="badge date">${it.when}</span>`;
+const CARRIED_OVER = [
+  {
+    id: "carry-canon",
+    title: "🌍 World canon — Book Two/Three parking lot (carried over)",
+    groups: [
+      { heading: "The rot & magical imbalance", items: [
+        "The shadow is not an evil alternate transformation or a separate force attacking Maeren — it's magic rotting from within.",
+        "The Shai'thi are creating unnatural additional Veils because they can no longer access their power; these artificial Veils distort the flow of magic between realms, and the imbalance shows up as blight, rot, and magic deteriorating from within.",
+        "Maeren is especially vulnerable as the core of the Bear Guardian system — like frostbite, the core may survive but the damage has already spread through the tendrils (the Veils, the realms, the magic moving between them)."
+      ]},
+      { heading: "The amulet (background — see Pass 0.2 for the Book One decision)", items: [
+        "Developed by the Arios and passed to the firstborn daughter each generation to prevent the Bear Guardian from transforming. The original reason is lost to time.",
+        "It's generational protection that became harmful: suppressing the transformation the bloodline was meant to fulfill.",
+        "The amulet was never protecting Maeren from the shadow — its suppression of the transformation is part of what let the magic rot in the first place."
+      ]},
+      { heading: "Book Two opening", items: [
+        "Opens with Maeren visibly deteriorated — when Rían finds her near Seradon, roughly half her face is shadow.",
+        "As long as magic stays out of balance, she keeps turning to shadow. This leads to Aurelian's sacrifice, interrupting the generational pattern of women consumed by duty."
+      ]},
+      { heading: "Book Three direction", items: [
+        "Book One's Veil closure was a desperate survival act, not a solution. The prophecy's fuller meaning involves ripping open the seams between the Veils so the realms can reemerge and the original wound can heal."
+      ]},
+      { heading: "Vaela, the Fions & the Battle of Belmora (Book Two)", items: [
+        "Vaela stays in osprey form throughout the battle; her screeches signal Brynna's formations. She flies into Maeren's storm on arrival and emerges through it in front of Brynna, who already knows Vaela is a Fion.",
+        "Open question: scale of the reveal when Vaela transforms afterward — decide when this book is drafted."
+      ]}
+    ]
+  },
+  {
+    id: "carry-testbeta",
+    title: "Ask beta readers — don't preemptively fix (carried over)",
+    items: [
+      "Does Astralis feel too long?",
+      "Do the two realms feel disconnected while the characters are separated?",
+      "Does Maeren feel agentic?",
+      "Does the unresolved Maeren/Brynna relationship feel intentional?",
+      "Does Rían earn the betrayal, or does it feel unearned?",
+      "Is Aurelian sympathetic enough to follow?",
+      "Is the lore comprehensible?",
+      "Does the ending create Book Two desire?",
+      "Which mysteries are predictable?",
+      "Which emotional moments land hardest?"
+    ]
   }
+];
+
+// ---- Pass 0: Decide ----
+const PASS0 = {
+  id: "pass0", num: "0", title: "Decide", time: "One sitting", gate: "—",
+  intro: "No drafting. Write the answers down where you can see them. Everything downstream depends on these three — two of them change what sentences have to do; the third gates a find-and-replace.",
+  decisions: [
+    {
+      id: "d01", num: "0.1", title: "Is the transformation culmination or regression?",
+      body: `<strong>Recommendation: regression.</strong> The manuscript already argues this. At ch. 68 (p. 424) Maeren takes hold of a power that is visibly sick — "It weakly pulled back as if sick" — overrides its resistance, and commands it: "lit the black fire within her and demanded it obey her." She is doing exactly what the Order does to the druids and the Elders do to the rain. And she is breaking the only rule she was given, Kēlē at ch. 49 (p. 285): "When you feel that resistance, listen to it… If you fight it, it will drain you and the consequences will potentially be irreversible."<br><br>The wall she builds at the Veil is her chapter 1 belief at full strength. "It's not worth the risk" (ch. 1) → "They would not protect her. She would not let them in" (ch. 68).<br><br><span class="lbl">If you confirm regression, three things become obligatory</span> — they are Passes 3 and 6: Maeren must name what the storm taught her, or she cannot be seen to abandon it · the wall at the Veil should rhyme on the page with ch. 1 · she must be present, at length, for her own fall.`,
+      options: [
+        { key: "culmination", label: "Culmination" },
+        { key: "regression", label: "Regression", recommended: true }
+      ]
+    },
+    {
+      id: "d02", num: "0.2", title: "Who decodes the amulet?",
+      body: `Three options. Pick one before Pass 3. The clue is already planted and marked at ch. 48 (p. 271): "'My mother gave it to me,' Maeren said quietly… 'As protection.' Protection. The word landed heavily." The manuscript stops there — Option C picks it back up.`,
+      options: [
+        { key: "A", label: "A — Rían decodes and removes it (as written)", desc: "Works, but the mechanism of her transformation is not hers. He gets the deduction twice — ch. 57 (p. 346) and ch. 69 (p. 427); Maeren never." },
+        { key: "B", label: "B — Maeren decodes it and removes it herself, as release", desc: "Right gesture for culmination. Wrong for regression. Retired if you pick regression." },
+        { key: "C", label: "C — Maeren decodes it wrongly or partially; Rían still removes it", desc: "Recommended. Costs three paragraphs. Turns his act from supplying what she lacked into confirming what she suspected. She worked it out and it didn't save her.", recommended: true }
+      ]
+    },
+    {
+      id: "d03a", num: "0.3", title: "Maevira or Minvaera?",
+      body: `Maevira is used in the creation myth and the prophecy and is presumably canonical. Minvaera appears 6×, Minevaera 1×, Mineveara 1× — including in a chapter title (Minvaera Burns, ch. 67, p. 415) and in Cydar's self-introduction (p. 417): "I am a druid from Minevaera's Grove." Meanwhile ch. 42 is titled Maevira's Grove.`,
+      options: [
+        { key: "maevira", label: "Maevira", recommended: true },
+        { key: "minvaera", label: "Minvaera" }
+      ]
+    },
+    {
+      id: "d03b", num: "0.3", title: "Astraen or Astrean?",
+      body: `The prophecy says "A Bear, of the blood of Astraen and Maevira" (pp. 57, 71, 231, 408). The prose says Astrean 26× including every oath ("So is the will of Astrean," p. 239). A reader will assume two gods.`,
+      options: [
+        { key: "astraen", label: "Astraen (matches the prophecy)" },
+        { key: "astrean", label: "Astrean (matches the prose, 26 uses)" }
+      ]
+    },
+    {
+      id: "d03c", num: "0.3", title: "Accents: in or out?",
+      body: `Rían loses its accent 80× of 504 (16%). Orlíen loses it 95× of 134 — the unaccented form is now dominant. Diré loses it 4× of 21. Commit or drop. Half-commitment is the only wrong answer.`,
+      options: [
+        { key: "in", label: "Keep the accents (Rían, Orlíen, Diré)" },
+        { key: "out", label: "Drop the accents (Rian, Orlien, Dire)" }
+      ]
+    }
+  ]
+};
+
+// ---- Pass 1: Mechanical Repair ----
+const PASS1 = {
+  id: "pass1", num: "1", title: "Mechanical Repair", time: "Half day", gate: "—",
+  intro: "No craft decisions. Do this first — the broken sentences are actively misleading you about your own text. A global deletion of \"slightly\" was run without a read-back. It left 59 orphaned spaces and six sentences that no longer parse.",
+  exit: "Search for . , ? [ ] { } returns nothing unintended.",
+  items: [
+    { id:"p1-1", num:"1.1", text:"Fix the six broken sentences individually", detail:`<strong>p. 323 is the priority</strong> — it's the emotional hinge of the chapter and currently says the opposite of what you mean.`,
+      table: { headers:["p.","Chapter","As it now reads","Problem"], rows:[
+        ["224","42 Maevira's Grove","\u201CBrynna a wave of contentment washed over Brynna when she saw her sister\u2019s horse\u201D","Duplicated subject; no verb for the first Brynna"],
+        ["253","46 Aurelian Sees","\u201CAs Aurelian shielded his eyes from the blinding brightness.\u201D","Subordinate clause; no main clause"],
+        ["252","46 Aurelian Sees","\u201CHis stomach clenched he considered engaging with the world\u201D","Missing conjunction"],
+        ["360","59 Unexpected Ally","\u201CMaeren , imagining the tiny Shai\u2019thi rudely dismissing Cordova.\u201D","Verb deleted"],
+        ["346","57 R\u00EDan Feels","\u201CHe had told Maeren she shouldn\u2019t be contained. In the moment, the words had\u201D","Sentence abandoned mid-thought"],
+        ["323","54 Tightening Grip","\u201CShe would not let herself be coerced so easily again. She would tolerate this feeling again.\u201D","Lost its \u201Cnot.\u201D As printed, Maeren resolves to keep tolerating it \u2014 at the beat where defiance is born."]
+      ]}
+    },
+    { id:"p1-2", num:"1.2", text:"Orphaned spaces — global sweep", detail:`Search for space-before-punctuation ( . , ? ). 59 instances. Most want "slightly" restored or the sentence tightened. Confirmed examples: p. 213 — "his nostrils flared ." · p. 295 — "mostly just giggle ." (also: giggle is a typo for jiggle) · ch. 52 — "the yellow hairs on Glaide's neck darkened ." · ch. 55 — "made Maeren cringe ." · ch. 43 — "Maeren's heart sank ." · ch. 64 — "hoisting Vaela up ." Some are italic-spacing artifacts from the PDF (e.g. italicised titles like <em>The Coastal War</em>) — check before editing.` },
+    { id:"p1-3", num:"1.3", text:"Stray marks", detail:"",
+      table: { headers:["p.","Item"], rows:[
+        ["215","{person of interest] — unresolved author note, mismatched brackets"],
+        ["333","stray ] mid-paragraph in The Gala"],
+        ["311","\u201CThat is true,\u201D Maeren whispered.x\u201D"],
+        ["38","\u201Chis head stayed bowed..\u201D"],
+        ["69","\u201Cshe said more softly..\u201D"]
+      ]}
+    },
+    { id:"p1-4", num:"1.4", text:"Quotation marks", detail:`13 unclosed quotations — 1,523 opening curly quotes against 1,510 closing. Find them. · 34 straight quotes mixed with curly; 67 straight apostrophes against 2,062 curly. Normalise. · Missing space after dialogue: "Please, your highness,"Aurelian stepped closer (ch. 46).` },
+    { id:"p1-5", num:"1.5", text:"Homophones — global", detail:`Keep one: "Aurelian shuttered his mind's eye" — closing it like a shutter. That one is deliberate and good.`,
+      table: { headers:["Wrong","Count","Right"], rows:[
+        ["shuttered / shutter","12","shuddered — \u201Cits entire arm shuttered,\u201D \u201CR\u00EDan shuttered,\u201D \u201CA deep rumble shuttered the earth,\u201D \u201CSoft uneven breaths shuttered out of Vaela\u201D"],
+        ["viscous","3","vicious \u2014 \u201Csmiled viscously,\u201D \u201Ca viscous winter wind,\u201D \u201Cvoid of that viscous mockery\u201D"],
+        ["malled","2","mauled"],
+        ["giggle","1","jiggle"]
+      ]}
+    },
+    { id:"p1-6", num:"1.6", text:"Revert the two simpers", detail:`Simper means to smile coyly and self-consciously. It is not a synonym for smirk, and both uses land on Rían and give him a flirtatiousness you don't intend. p. 121 — "He looked over to Maeren with a pitying simper" · p. 326 — "'Bear Guardian,' he said, simpering." The third replacement, grin, is fine. Leave it.` },
+    { id:"p1-7", num:"1.7", text:"Single-instance typos", detail:`Weclome · daed · esacape · behld (×2) · descecrated · herecy · Fourty (×2) · masacre · hanful · submissed · runningthe · elegantletters · stumblng · investigaged · recongnized · flagulation (→ self-flagellation) · instructured · peated · Byrnna (×2) · Veala · Valea (×3) · Cider / Cyder (→ Cydar) · Ryan (→ Rían) · Orlirn · Gywnironez` },
+    { id:"p1-8", num:"1.8", text:"One anatomy error", detail:`p. 59, ch. 9 — "Aurelian's sternum collapsed inward, shielded by his ribcage." A sternum is part of the ribcage; it cannot be shielded by it. When the anatomy gets specific it has to be right.` }
+  ]
+};
+
+// ---- Pass 2: Names & Orthography ----
+const PASS2 = {
+  id: "pass2", num: "2", title: "Names & Orthography", time: "1–2 hours", gate: "Pass 0 decisions",
+  intro: "Executes Pass 0.3. Pure find-and-replace once the rulings are made.",
+  exit: "Every proper noun has exactly one spelling.",
+  table: { headers:["Name","Canonical","Fix","Error rate"], rows:[
+    ["Aurelian","379 correct","Aurlien (23) \u00B7 Aurelien (9) \u00B7 Aurliean (8)","9.5%"],
+    ["R\u00EDan","424","Rian (80) \u00B7 Ryan (1)","16%"],
+    ["Maevira","35","Minvaera (6) \u00B7 Minevaera (1) \u00B7 Mineveara (1)","19%"],
+    ["Astraen / Astrean","\u2014 decide \u2014","9 vs 26","74%"],
+    ["Orl\u00EDen","39","Orlien (95) \u00B7 Orlirn (1)","71%"],
+    ["Dir\u00E9","17","Dire (4)","19%"],
+    ["Gwyrionez","30","Gwyironez (2) \u00B7 Gwyrinez (1) \u00B7 Gywnironez (1)","12%"],
+    ["Syrithien","40","Syrthien (2)","5%"]
+  ]},
+  items: [
+    { id:"p2-titles", text:"Fix the two chapter titles once Maevira is settled", detail:`Ch. 42 "Maevira's Grove" and ch. 67 "Minvaera Burns" currently disagree.` },
+    { id:"p2-prophecy", text:"Check the prophecy wherever it appears", detail:"Pages 57, 71, 231, 408 — so the recited version matches the prose spelling." }
+  ]
+};
+
+// ---- Graded passes: 3, 4, 5, 6, 7 ----
+const GRADED_PASSES = [
+  {
+    id:"pass3", num:"3", title:"The Climax and Its Plants", time:"The big one", gate:"Pass 0",
+    intro:"Draft the Veil sequence under the Pass 0 decision, then work backward to place what it needs. Doing this first means every earlier fix has a known destination.",
+    subs: [
+      { id:"s31", num:"3.1", title:"Maeren must name the storm's lesson",
+        body:`<span class="lbl">Problem.</span> She does the thing at ch. 55 and enjoys it. She never concludes anything from it. You cannot dramatise the abandonment of an unarticulated lesson — and under the regression reading, the Veil is that abandonment.<br><span class="lbl">Lean on:</span> ch. 55, p. 336 — "She didn't command the storm. She simply stopped holding it back." That is the lesson. It is currently narration, not her thought.<br><span class="lbl">Where it goes:</span> anywhere between ch. 56 (p. 338) and ch. 63 (p. 390).`,
+        options:{ small:"One sentence in ch. 56 (Rain Storm), while she is standing in the rain. She names the principle to herself, in her own words, plainly.",
+                  medium:"She says it out loud to Cordova on the staircase (ch. 56, p. 342). Cordova is interrogating her about exactly this — \"You just severed their wards? You make it sound easy?\" — and Maeren's answer is currently mechanical. Let her articulate the principle, not the method.",
+                  large:"She uses the principle successfully once more, small, in ch. 59–61, so it reads as a working method before she throws it away." } },
+      { id:"s32", num:"3.2", title:"The amulet plant (executes Pass 0.2)",
+        body:`<span class="lbl">Problem.</span> Rían deduces the amulet's true function twice — ch. 57 (p. 346): "If the moonstone was designed to protect Maeren from others, it would be ineffective if it only worked by burning the assailants who touched it" — and ch. 69 (p. 427): "It had been protecting Maeren, but not from the world, as Maeren had believed." Maeren never once.<br><span class="lbl">Lean on:</span> ch. 48, p. 271 — "'My mother gave it to me,' Maeren said quietly… 'As protection.' Protection. The word landed heavily." She already has the data: fifteen years of heat, drag and cold; it went "deathly still" when Nyara died (ch. 24); it seared at the shadow creature (ch. 38); it burns Rían when he touches it (ch. 56); it hangs heavy at every Veil.`,
+        options:{ small:"Extend the ch. 48 beat by one paragraph. She turns the word over and lands on a wrong answer — a beacon, a leash, her mother's apology. Wrong is better than right.",
+                  medium:"The wrong answer recurs once, under pressure, in ch. 58 or 61 — and is still wrong.",
+                  large:"She gets it half-right before the Veil and decides to keep wearing it anyway. Then Rían tears off the thing she chose to keep." } },
+      { id:"s33", num:"3.3", title:"Make the regression legible",
+        body:`<span class="lbl">Problem.</span> Everything is on the page — the black fire, the sick magic, obey — except a signal that this is the lesson she is discarding.<br><span class="lbl">Lean on:</span> ch. 68, p. 424 — "Pulling violently on it as it resisted, she ripped free the lodged magic within. It weakly pulled back as if sick… Her rage flared and she tightened her grip." And Kēlē's rule at ch. 49, p. 285.`,
+        options:{ small:"One line of recognition between the wall going up and the grip closing. It does not have to be correct — she knows what Kēlē said and does it anyway is enough.",
+                  medium:"Echo ch. 1 deliberately. \"It's not worth the risk\" → the wall. Make the two rhyme in image or cadence so the reader feels the loop close rather than a new power arriving.",
+                  large:"Both, plus a beat where the magic's sickness registers as Nyara's sickness or the blight's — she is gripping the thing she was meant to heal." } }
+    ]
+  },
+  {
+    id:"pass4", num:"4", title:"Four Surgical Agency Beats", time:"1–2 days", gate:"Pass 3",
+    intro:"Small, local, high return. Do not expand scope.",
+    subs: [
+      { id:"s41", num:"4.1", title:"Cut one clause — ch. 11, p. 73",
+        body:`Your fix at the treeline is airtight: "A second cry pierced the cold air… Maeren's hands tightened over the reins. She kicked Riven's side, commanding him to plunge into the forest." But four pages earlier the chapter still opens on compulsion: "Her head clear of escape strategies, the primal pull yanked again." "And yet, she continued through the castle. Led by an invisible thread that was laced with curiosity and dread."`,
+        options:{ small:"Cut \"Led by an invisible thread that was laced with curiosity and dread.\" This is the only fully unearned attribution left in the first half of the book. Keep \"primal pull\" — a sensation is not a decision.",
+                  medium:"Replace the cut clause with the reason she actually has: the bear is wounded, alone, and starving, and she is the only person who knows it." } },
+      { id:"s42", num:"4.2", title:"Give defiance its own grammar — ch. 58, pp. 350 &amp; 355",
+        body:`Three instances of the same construction, doing opposite work. Because you cleaned this pattern everywhere else, this pair is now the most conspicuous thing of its kind in the manuscript.`,
+        table:{ headers:["p.","Beat","Line","Verdict"], rows:[
+          ["323","ch. 54, capitulating to Fenriel","\u201CWords formulated in her mouth and she spoke them as if puppeted by another being.\u201D","Correct. Keep exactly."],
+          ["350","ch. 58, defying him","\u201CAs if possessed, Maeren sat at her vanity without consciously thinking.\u201D","Defiance in the grammar of surrender"],
+          ["355","ch. 58, after the punishment","\u201COnce more, her body was taken over by subconscious movement as it walked her out of the room.\u201D","Costs the chapter its last beat of agency"]
+        ]},
+        options:{ small:"Rewrite p. 350 only. Something rises through her, not instead of her. Leave 323 and 355.",
+                  medium:"Rewrite 350 and cut 355 entirely.",
+                  large:"Let 350 rhyme with 323 deliberately — she notices her body is doing what it did when she surrendered, and that this time it is doing the opposite." } },
+      { id:"s43", num:"4.3", title:"The vine — recognition without exoneration — ch. 28, p. 151",
+        body:`The only note from the last read that did not get taken. <span class="lbl">Lean on:</span> ch. 28, p. 151 — "'You are a coward,' Brynna said… 'Just like mother.'" and Maeren's reply: "Nothing Brynna said was untrue… She had chosen their safety at that moment, and it cost them both." That line reads as agreement with Brynna's framing, not recognition of her own choice. And it has gotten louder. At ch. 63, p. 394, you now prove the charge false about Hana — "Her mother and Nyara, both women who she had called weak." The unanswered version of it about Maeren is now the only one left standing.`,
+        options:{ small:"Change the framing of the existing line so it is hers, not a concession. She does not defend it. She knows she chose — Eamon or Brynna — and refuses to let herself off.",
+                  medium:"Carry it. One recurrence in Astralis where she names the choice without softening it.",
+                  large:"Land it against the mother-reversal at ch. 63. Hana was not a coward; Maeren does not get the same acquittal, and knows it." } },
+      { id:"s44", num:"4.4", title:"The soft patch — chs. 50–54, pp. 292–323",
+        body:`<span class="lbl">Problem.</span> You switched Detective Maeren on at ch. 43 ("They needed Maeren here, alive, and she was going to find out why") and she goes quiet for five chapters under Orlíen's prohibition. It reads as dread rather than defeat, which is defensible — but it is the last place in the middle where the reader waits.`,
+        options:{ small:"One covert act. She does something small she was told not to, alone, and it works.",
+                  medium:"She keeps a written record. She has kept a dream log since ch. 1 (p. 6) — reusing that practice in Eos makes the invisible investigation visible without changing a single plot beat. It is also thematically exact: the survival tool becomes the investigative tool.",
+                  large:"She tests Orlíen's vision. She is the one character in the book who questions inherited stories; a seer telling her what she will become is the biggest inherited story she has ever been handed, and she accepts it at face value." } }
+    ]
+  },
+  {
+    id:"pass5", num:"5", title:"Rían, Fenriel, Exposition", time:"3–5 days", gate:"Pass 3",
+    intro:"Supporting-cast repairs that need new scene work.",
+    subs: [
+      { id:"s51", num:"5.1", title:"The reader never watches Rían choose",
+        body:`<span class="lbl">Problem.</span> He holds 4.0% of POV (4,383 words) across five short chapters. The reader is told he surveilled her for two years and reported on her constraint. The reader never watches him decide, and never watches him lie for her either. His confession at ch. 68 lands, but it carries weight the preceding 100,000 words didn't build.<br><span class="lbl">Lean on:</span> the journal voice, ch. 49, p. 282 — "M.A - vulnerable, unarmed, unguarded during nightly rides beyond walls… Weak point: empathy, no killer instinct, gentle with nature; could be used later." This is the only genuinely different voice in the manuscript.`,
+        options:{ small:"In his existing ch. 57 (p. 345) he thinks about \"soften[ing] the story for them.\" Show him write it. One paragraph of the false report.",
+                  medium:"One short surveillance-era chapter set in Velmora, before the capture. He watches her, files an entry, and goes home. You already have the register.",
+                  large:"Split ch. 44 (pp. 235–239) so the reader watches him accept the Elders' terms — \"should you fail to secure her loyalties, she will be eliminated\" — and then immediately go be kind to her. The gap between those two beats is his entire character." } },
+      { id:"s52", num:"5.2", title:"Fenriel is still a second Alai",
+        body:`<span class="lbl">Problem.</span> Both institutions share a beat sheet: false-warm greeting, doctrinal justification for purging, sudden rage, public spectacle. Rían's POV tells us "They were afraid of Maeren" and that he "could feel his weakness" (ch. 44, p. 235) — but Maeren, whose gift is reading people, only ever sees cruelty.<br><span class="lbl">Lean on:</span> she already registers the tells. Ch. 43, p. 230 — "It was a clumsy delivery." And p. 229 — "Cordova scoffed loudly. No one turned to her except Maeren." She notices and drops both.`,
+        options:{ small:"One physical tell in ch. 43 or 58 that she reads correctly — the effort it costs him to rise from the chair, a glance at the others for support.",
+                  medium:"She uses it. She is running an investigation; a frightened man is exploitable.",
+                  large:"Let Cordova's scoff pay. Maeren notices dissent among the Elders' own people and follows it — which is also how you get Cordova's defection earlier and more earned." } },
+      { id:"s53", num:"5.3", title:"Two monologues carrying too much",
+        body:`<span class="lbl">Problem.</span> Ch. 49 (Kēlē, 3,960 words — the longest chapter in the book) and ch. 63 (Betrayal) both carry long uninterrupted speeches because at 16.4% dialogue there is nowhere else for the material to live.`,
+        options:{ small:"Break both with physical business and interruption. Kēlē making tea; Orlíen closing the journal; Maeren getting a detail wrong and being corrected.",
+                  medium:"Convert one into an argument. Information delivered by someone who does not want to give it reads at a different speed.",
+                  large:"Move the journal into Maeren's hands without an intermediary — she goes to Rían's chambers, finds it herself. Ch. 63 becomes discovery rather than disclosure." } }
+    ]
+  },
+  {
+    id:"pass6", num:"6", title:"Ending Staging", time:"1–2 days", gate:"Passes 3–5",
+    intro:"Do after Passes 3–5 so you know what the ending has to hold.",
+    subs: [
+      { id:"s61", num:"6", title:"Ending staging and order",
+        body:`<span class="lbl">Problem.</span> The final seven chapters: Rescue (B) · Free (A) · What's Best (R) · Minvaera Burns (A) · Portal Closes (M, 1,072 words) · Watching her Disappear (R) · Burn (B). Maeren appears in one of the last seven chapters, for 1,072 words — fewer than Aurelian gets for a walk through a market (ch. 46, 2,486 words). The run of other POVs immediately before her climax is 5,799 words. The book's last line is Brynna's. Under the regression reading this is the difference between <em>she made a tragic choice</em> and <em>she failed and vanished</em> — and that difference lives entirely in interiority the reader isn't given.`,
+        options:{ small:"Reorder. Portal Closes and Watching her Disappear land last, after Burn. The war declaration is a strong ending; the disappearance of the title character is stronger.",
+                  medium:"Extend Portal Closes (p. 421). The transformation has been built for four hundred pages and gets a thousand words.",
+                  large:"Interleave. Put Rían's observation inside her POV so the reader has her fragmentary, non-comprehending experience of the amulet coming off. She does not have to understand. She has to be present." } }
+    ]
+  },
+  {
+    id:"pass7", num:"7", title:"Line Pass", time:"The long one", gate:"All drafting done",
+    intro:"Only after all drafting is finished.",
+    subs: [
+      { id:"s71", num:"7.1", title:"The filter sweep — the highest-value line work in the book",
+        body:`<span class="lbl">Problem.</span> Perception filters run at 50 per 10,000 words: could see/feel/hear/sense (173), seemed (89), saw (64), started to (64), watched (59), began to (34), plus as if / as though (122) and like a (56). Each one inserts the act of perceiving between the reader and the thing perceived. "She could see the flecks of shell" is one remove further than "Flecks of shell caught the light." You already do it right in her best scenes: the two-body deduction (ch. 7), reading Alai's body (ch. 8), the map discrepancy (ch. 59). None of those use "could see." Expect to cut 1–2% of total wordcount.`,
+        options:{ small:"Sweep could see / could feel (173) and delete the construction wherever the object is concrete. \"She could see the arrow had struck between the neck and right arm\" → \"The arrow had struck between the neck and right arm.\"",
+                  medium:"Add seemed (89). Roughly half are genuine POV uncertainty; the other half hedge things that simply are.",
+                  large:"Take the ten most filtered paragraphs in Maeren's POV and rewrite them with zero perception verbs. Diagnostic even where you revert." } },
+      { id:"s72", num:"7.2", title:"Body parts acting alone",
+        body:`<span class="lbl">Problem.</span> 118 instances of her/his [body part] + past-tense verb as an independent actor, eyes alone accounting for 43. Around 105 per 10,000 words in every POV. In a novel whose central craft problem has been whether Maeren's actions read as chosen, a narration in which her stomach, eyes, heart and lungs keep acting without her works against you at sentence level.`,
+        options:{ small:"Cap the eyes constructions. Forty-three instances of eyes darting, flicking, narrowing and widening is enough for three books.",
+                  medium:"Do this only in the decision beats — the fifteen turns in the agency ledger. Make Maeren the subject of the sentence where she decides; let the body react in the sentence after, not during.",
+                  large:"Make it a system. Dense when she is overwhelmed, absent when she is resolved. That turns a tic into grammar." } },
+      { id:"s73", num:"7.3", title:"Gesture vocabulary",
+        body:`<span class="lbl">Problem.</span> 557 beats, one per ~196 words — fine in volume, top-heavy in distribution: stare (80), head-shaking (48), sigh (47), tilt (35), nod (31), flinch (30), shrug (26).`,
+        options:{ small:"Cut the weakest third of the stare and head-shake beats. Most dialogue survives with no beat at all.",
+                  medium:"Give each POV three or four signature habits and stop sharing them. Brynna cracks her neck, grips a hilt. Aurelian's hands go to soil. Maeren wrings her hands — you already have this, and Eamon notices it (ch. 4). Rían rubs the bridge of his nose.",
+                  large:"In scenes of conflicting want, replace beats with action that advances the conflict." } },
+      { id:"s74", num:"7.4", title:"Four points of view, one voice",
+        body:`<span class="lbl">Problem.</span> Measured across all four POVs: mean sentence length 11.2–12.4 · fragments 12–17% · as if 9.5–13.7/10k · adverbs 125–137/10k · body-part subjects 102–115/10k. Statistically indistinguishable. The one thing already working, and you did not engineer it: Brynna asks the fewest questions in the book (28 per 10k), Rían the most (52). She acts because she is certain; he has stopped being able to answer anything.`,
+        options:{ small:"Strip the filter constructions from Brynna entirely. She does not perceive; she registers and acts. This single subtraction separates her chapters from everyone else's immediately, and it is the cheapest differentiation available.",
+                  medium:"Differentiate by syntax. Brynna in short declaratives and imperatives, minimal subordination, no hedging. Aurelian in longer self-interrupting sentences that circle back. Maeren in accumulating observation with the conclusion at the end. Rían in questions and negations.",
+                  large:"Assign each POV a metaphor domain. Aurelian's should be botanical — it is his expertise and he barely uses it. Maeren's should be textile: thread, weave, seam. You already reach for it — \"the fraying seam where the mystery of the bear… converged\" (ch. 8)." } }
+    ],
+    extraItems: [
+      { id:"p75-variety", text:"Sentence variety", detail:`Only 2.4% of sentences run 29+ words. You write almost entirely in the 6–18 band and have very few sentences that build, subordinate and release. There is no slow gear. <strong>Small:</strong> in the three or four most reflective passages, let one sentence run long.` },
+      { id:"p75-dashes", text:"Em dashes", detail:`Five in 109,000 words. You have effectively no interruptive punctuation — which is the natural tool for the self-interrupting interiority Aurelian's chapters keep reaching for. Decide whether that absence is a choice.` }
+    ]
+  }
+];
+
+// ---- Pass 8: Final Proof ----
+const PASS8 = {
+  id: "pass8", num: "8", title: "Final Proof", time: "Half day", gate: "Everything",
+  intro: "New drafting introduces new artifacts. Re-run the Pass 1 checks.",
+  items: [
+    { id:"p8-1", text:"Search . , ? — orphaned spaces." },
+    { id:"p8-2", text:"Search [ ] { } — author notes." },
+    { id:"p8-3", text:"Count \u201C against \u201D — they should match." },
+    { id:"p8-4", text:"Search straight \" and ' — should be zero." },
+    { id:"p8-5", text:"Re-run the name list from Pass 2 against any new material." },
+    { id:"p8-6", text:"Spellcheck the homophone list: shuttered \u00B7 viscous \u00B7 malled \u00B7 simper." },
+    { id:"p8-7", text:"Read the 56 single-word echo beats (Purged. Protection. Contain.) and confirm none have crept into a POV other than Maeren's." }
+  ]
+};
+
+/* ============ RENDER HELPERS ============ */
+
+function renderTable(t){
+  if(!t || !t.rows || !t.rows.length) return "";
+  let html = `<table class="mini"><tr>${t.headers.map(h=>`<th>${esc(h)}</th>`).join("")}</tr>`;
+  t.rows.forEach(row => {
+    html += `<tr>${row.map(c=>`<td>${c}</td>`).join("")}</tr>`;
+  });
+  html += `</table>`;
+  return html;
+}
+
+function buildNoteWidget(id, extraClass){
+  const hasNote = !!(notes[id] && notes[id].trim());
+  const wrap = document.createElement("div");
+  wrap.className = "subitem-notewrap" + (extraClass||"");
+  wrap.innerHTML = `
+    <button type="button" class="note-toggle${hasNote?" has-note":""}" data-id="${id}">${hasNote?"Edit note":"+ Note"}</button>
+    <textarea class="note-input${hasNote?" open":""}" data-id="${id}" placeholder="Add a note…">${esc(notes[id]||"")}</textarea>
+    <div class="note-saved" data-id="${id}">Saved</div>
+  `;
+  const toggle = wrap.querySelector(".note-toggle");
+  const input = wrap.querySelector(".note-input");
+  toggle.addEventListener("click", () => {
+    const open = input.classList.toggle("open");
+    if(open) input.focus();
+  });
+  input.addEventListener("input", () => {
+    notes[id] = input.value;
+    const hasText = !!input.value.trim();
+    toggle.classList.toggle("has-note", hasText);
+    toggle.textContent = hasText ? "Edit note" : "+ Note";
+    clearTimeout(noteSaveTimers[id]);
+    noteSaveTimers[id] = setTimeout(async () => {
+      await save();
+      const savedTag = wrap.querySelector(`.note-saved[data-id="${id}"]`);
+      savedTag.classList.add("show");
+      setTimeout(()=>savedTag.classList.remove("show"), 1200);
+    }, 500);
+  });
+  return wrap;
+}
+
+function buildSimpleItem(it){
+  const hasChecked = !!checked[it.id];
+  const row = document.createElement("div");
+  row.className = "item" + (hasChecked ? " done" : "");
   row.innerHTML = `
-    <input type="checkbox" id="chk-${it.id}" ${checked[it.id] ? "checked" : ""}>
+    <input type="checkbox" id="chk-${it.id}" ${hasChecked?"checked":""}>
     <div class="item-body">
       <div class="item-row">
-        <label for="chk-${it.id}" class="item-text">${mainText}${badgeHtml}</label>
-        <button type="button" class="note-toggle${hasNote ? " has-note" : ""}" data-id="${it.id}">${hasNote ? "Edit note" : "+ Note"}</button>
+        <label for="chk-${it.id}" class="item-text">${it.num?`<span style="color:var(--accent);font-family:ui-monospace,Menlo,monospace;font-weight:700;margin-right:6px;">${it.num}</span>`:""}${it.text}</label>
       </div>
-      ${detailText ? `<div class="item-detail">${isFixbeta ? "Fix: " : ""}${detailText}</div>` : ""}
-      <textarea class="note-input${hasNote ? " open" : ""}" data-id="${it.id}" placeholder="Add a note…">${escapeHtml(notes[it.id] || "")}</textarea>
-      <div class="note-saved" data-id="${it.id}">Saved</div>
+      ${it.detail ? `<div class="item-detail">${it.detail}</div>` : ""}
+      ${it.table ? renderTable(it.table) : ""}
     </div>
   `;
   const cb = row.querySelector("input");
@@ -690,258 +716,276 @@ function buildRow(it, isFixbeta){
     save();
     renderProgressOnly();
   });
-
-  const noteToggle = row.querySelector(".note-toggle");
-  const noteInput = row.querySelector(".note-input");
-  noteToggle.addEventListener("click", () => {
-    const isOpen = noteInput.classList.toggle("open");
-    if(isOpen) noteInput.focus();
-  });
-  noteInput.addEventListener("input", () => {
-    const id = it.id;
-    notes[id] = noteInput.value;
-    const hasText = !!noteInput.value.trim();
-    noteToggle.classList.toggle("has-note", hasText);
-    noteToggle.textContent = hasText ? "Edit note" : "+ Note";
-    clearTimeout(noteSaveTimers[id]);
-    noteSaveTimers[id] = setTimeout(async () => {
-      await save();
-      const savedTag = row.querySelector(`.note-saved[data-id="${id}"]`);
-      savedTag.classList.add("show");
-      setTimeout(() => savedTag.classList.remove("show"), 1200);
-    }, 500);
-  });
-
+  const noteRow = document.createElement("div");
+  noteRow.style.paddingLeft = "26px";
+  noteRow.appendChild(buildNoteWidget(it.id));
+  row.querySelector(".item-body").appendChild(noteRow);
   return row;
 }
 
-const GUARDRAILS = [
-  {
-    id: "guard-testbeta",
-    title: "Ask beta readers — don't preemptively fix",
-    items: [
-      "Does Astralis feel too long?",
-      "Do the two realms feel disconnected while the characters are separated?",
-      "Does Maeren feel agentic?",
-      "Does the unresolved Maeren/Brynna relationship feel intentional?",
-      "Does Rían earn the betrayal, or does it feel unearned?",
-      "Does Rían stay morally complicated rather than accidentally reading as redeemed?",
-      "Is Aurelian sympathetic enough to follow?",
-      "Is the lore comprehensible?",
-      "Does the climax read as intentional complexity rather than confusion?",
-      "Does the ending create Book Two desire?",
-      "Which mysteries are predictable?",
-      "Which emotional moments land hardest?"
-    ]
-  },
-  {
-    id: "guard-noreopen",
-    title: "Do not reopen before beta",
-    items: [
-      "Core concept",
-      "Maeren's fundamental personality",
-      "The four-POV architecture",
-      "The Bear Guardian premise",
-      "The two-realm concept",
-      "Order/Elders thematic mirroring",
-      "The Maeren/Brynna philosophical conflict",
-      "Rían's morally compromised role",
-      "The unresolved Book One ending",
-      "Magic-as-listening/release vs. control/force theme",
-      "The Riven ending",
-      "Fundamental series architecture"
-    ]
-  },
-  {
-    id: "guard-settled",
-    title: "🔒 Settled — do not revisit",
-    items: [
-      "Rían's earlier acts of care (hanaweed, The Ride, Rain Storm, the near-kiss) stay permanently ambiguous — never clarify which were strategy and which became real. Maeren's \"everything was a lie\" is psychologically true even though it isn't objectively complete, and that gap is the point.",
-      "No earlier \"how did you know that\" suspicion beat for Maeren about Rían. Her lack of suspicion is intentional characterization, not a plot hole — he's the one person she stops surveilling, and losing that vigilance is exactly what the betrayal should cost her.",
-      "The prophecy book's origin stays unrevealed in Book One. Only imply Nyara's connection to it (the watcher's relief when Maeren finds it is enough) — full origin, including a possible Shai'thi honeypot lineage older than Nyara, is Book Two/Three material.",
-      "The amulet's removal does not cure Maeren or resolve the magical imbalance. It only keeps her from being consumed before the transformation completes — the rot remains, and continues into Book Two.",
-      "Do not manufacture a Maeren/Brynna reconciliation scene (carried over from the emotional-continuity pass) — this wound is one strand of a larger \"she will never be chosen\" pattern (mother, Brynna, Rían) and stays unresolved by design."
-    ]
-  },
-  {
-    id: "guard-canon",
-    title: "🌍 World canon — Book Two/Three parking lot",
-    groups: [
-      {
-        heading: "The rot & magical imbalance",
-        items: [
-          "The shadow is not an evil alternate transformation or a separate force attacking Maeren — it's magic rotting from within.",
-          "The Shai'thi are creating unnatural additional Veils because they can no longer access their power; these artificial Veils distort the flow of magic between realms, and the imbalance shows up as blight, rot, and magic deteriorating from within.",
-          "Maeren is especially vulnerable as the core of the Bear Guardian system — like frostbite, the core may survive but the damage has already spread through the tendrils (the Veils, the realms, the magic moving between them)."
-        ]
-      },
-      {
-        heading: "The amulet",
-        items: [
-          "Developed by the Arios and passed to the firstborn daughter each generation to prevent the Bear Guardian from transforming. The original reason is lost to time; the family kept the belief that becoming the Bear Guardian was dangerous.",
-          "It's generational protection that became harmful: suppressing the transformation the bloodline was meant to fulfill. Hana's death and Nyara's near-immediate transformation when the amulet passed to Maeren establish that it hinders/prevents the transformation.",
-          "The amulet was never protecting Maeren from the shadow — its suppression of the transformation is part of what let the magic rot in the first place."
-        ]
-      },
-      {
-        heading: "Book One climax sequence (canon)",
-        items: [
-          "Maeren unleashes the power → the already-rotting magic begins consuming her → Rían removes the amulet → the Bear transformation occurs → Maeren survives, but the rot remains.",
-          "The ending light may represent release, rebalancing, rebirth, or the transformation completing — not healing."
-        ]
-      },
-      {
-        heading: "Book Two opening",
-        items: [
-          "Opens with Maeren visibly deteriorated — when Rían finds her near Seradon, roughly half her face is shadow. This is the physical continuation of Book One's unresolved rot.",
-          "As long as magic stays out of balance, she keeps turning to shadow. When she intervenes to help Brynna despite visible deterioration, the effort nearly kills her.",
-          "This leads to Aurelian's sacrifice: Brynna fears Maeren repeating their mother's and Nyara's self-destructive pattern, and Aurelian interrupts that generational pattern by sacrificing himself instead."
-        ]
-      },
-      {
-        heading: "Book Three direction",
-        items: [
-          "Book One's Veil closure was a desperate survival act, not a solution — it may worsen the separation between realms.",
-          "Neither creating more Veils nor simply closing them restores balance. The prophecy's fuller meaning involves ripping open the seams between the Veils so the realms can reemerge and the original wound can heal."
-        ]
-      },
-      {
-        heading: "Vaela, the Fions & the Battle of Belmora (Book Two)",
-        items: [
-          "Vaela stays in osprey form throughout the battle; her screeches signal Brynna's formations. She flies into Maeren's storm on arrival and emerges through it in front of Brynna, who already knows Vaela is a Fion — the transformation doesn't happen inside the storm itself.",
-          "Open question: scale of the reveal when Vaela transforms afterward — just Brynna and command staff, nearby soldiers, or the whole army. Ties to Seradon's larger arc from suspicion toward tolerance of magic; can be decided when this book is drafted."
-        ]
-      }
-    ]
-  }
-];
+function buildDecisionItem(d){
+  const wrap = document.createElement("div");
+  wrap.className = "subitem";
+  let html = `
+    <div class="subitem-head"><span class="subitem-num">${d.num}</span><span class="subitem-title">${d.title}</span></div>
+    <div class="subitem-body">${d.body}</div>
+  `;
+  wrap.innerHTML = html;
+  d.options.forEach(opt => {
+    const selected = decision[d.id] === opt.key;
+    const row = document.createElement("div");
+    row.className = "option-row" + (selected ? " selected" : "");
+    row.innerHTML = `
+      <span class="option-pill choice">${esc(opt.key).toUpperCase().slice(0,1)}</span>
+      <span class="option-text"><strong>${esc(opt.label)}</strong>${opt.recommended?'<span class="option-recommended">Recommended</span>':''}${opt.desc?`<br>${esc(opt.desc)}`:''}</span>
+    `;
+    row.addEventListener("click", () => {
+      decision[d.id] = (decision[d.id] === opt.key) ? null : opt.key;
+      save();
+      render();
+    });
+    wrap.appendChild(row);
+  });
+  wrap.appendChild(buildNoteWidget(d.id));
+  return wrap;
+}
 
-function renderGuardrails(){
-  const wrap = document.getElementById("guardList");
-  wrap.innerHTML = "";
-  GUARDRAILS.forEach((g, idx) => {
+function buildGradedSub(sub){
+  const wrap = document.createElement("div");
+  wrap.className = "subitem";
+  wrap.innerHTML = `
+    <div class="subitem-head"><span class="subitem-num">${sub.num}</span><span class="subitem-title">${sub.title}</span></div>
+    <div class="subitem-body">${sub.body}</div>
+    ${sub.table ? renderTable(sub.table) : ""}
+  `;
+  ["small","medium","large"].forEach(level => {
+    const text = sub.options[level];
+    if(!text) return;
+    const selected = scope[sub.id] === level;
+    const row = document.createElement("div");
+    row.className = "option-row" + (selected ? " selected" : "");
+    row.innerHTML = `
+      <span class="option-pill ${level}">${level.slice(0,1).toUpperCase()}</span>
+      <span class="option-text">${text}</span>
+    `;
+    row.addEventListener("click", () => {
+      scope[sub.id] = (scope[sub.id] === level) ? null : level;
+      save();
+      render();
+    });
+    wrap.appendChild(row);
+  });
+  wrap.appendChild(buildNoteWidget(sub.id));
+  return wrap;
+}
+
+function renderDoNotTouch(){
+  const el = document.getElementById("doNotTouch");
+  el.innerHTML = "";
+  const details = document.createElement("details");
+  details.className = "guard";
+  details.open = true;
+  const summary = document.createElement("summary");
+  summary.innerHTML = `<span class="chev">&#9656;</span><span class="pass-title">🛑 ${DONOTTOUCH.title}<span class="pass-sub">${DONOTTOUCH.sub}</span></span>`;
+  details.appendChild(summary);
+  const body = document.createElement("div");
+  body.className = "guard-list";
+  body.innerHTML = DONOTTOUCH.groups.map(g => `<h4>${g.heading}</h4><ul>${g.items.map(t=>`<li>${t}</li>`).join("")}</ul>`).join("");
+  details.appendChild(body);
+  el.appendChild(details);
+}
+
+function renderCarriedOver(){
+  const el = document.getElementById("carriedOverList");
+  el.innerHTML = "";
+  CARRIED_OVER.forEach(c => {
     const details = document.createElement("details");
     details.className = "guard";
     const summary = document.createElement("summary");
-    summary.innerHTML = `<span class="chev">&#9656;</span><span class="phase-title">${g.title}<span class="phase-sub">Reference only — not a task list</span></span>`;
+    summary.innerHTML = `<span class="chev">&#9656;</span><span class="pass-title">${c.title}<span class="pass-sub">Reference only — not addressed by the new pass structure</span></span>`;
     details.appendChild(summary);
     const body = document.createElement("div");
     body.className = "guard-list";
-    if(g.groups){
-      body.innerHTML = g.groups.map(grp =>
-        `<h4>${grp.heading}</h4><ul>${grp.items.map(t => `<li>${t}</li>`).join("")}</ul>`
-      ).join("");
+    if(c.groups){
+      body.innerHTML = c.groups.map(g => `<h4>${g.heading}</h4><ul>${g.items.map(t=>`<li>${t}</li>`).join("")}</ul>`).join("");
     }else{
-      body.innerHTML = `<ul>${g.items.map(t => `<li>${t}</li>`).join("")}</ul>`;
+      body.innerHTML = `<ul>${c.items.map(t=>`<li>${t}</li>`).join("")}</ul>`;
     }
     details.appendChild(body);
-    wrap.appendChild(details);
+    el.appendChild(details);
   });
 }
 
+function allTrackableIds(){
+  const ids = [];
+  PASS0.decisions.forEach(d => ids.push(d.id));
+  PASS1.items.forEach(i => ids.push(i.id));
+  PASS2.items.forEach(i => ids.push(i.id));
+  GRADED_PASSES.forEach(p => {
+    p.subs.forEach(s => ids.push(s.id));
+    if(p.extraItems) p.extraItems.forEach(i => ids.push(i.id));
+  });
+  PASS8.items.forEach(i => ids.push(i.id));
+  return ids;
+}
+
+function isAddressed(id){
+  if(decision.hasOwnProperty(id) && decision[id]) return true;
+  if(scope.hasOwnProperty(id) && scope[id]) return true;
+  if(checked.hasOwnProperty(id) && checked[id]) return true;
+  return false;
+}
+
 function render(){
-  const fixbetaList = document.getElementById("fixbetaList");
-  fixbetaList.innerHTML = "";
-  FIXBETA.forEach(it => fixbetaList.appendChild(buildRow(it, true)));
+  const passList = document.getElementById("passList");
+  passList.innerHTML = "";
 
-  const devrecList = document.getElementById("devrecList");
-  devrecList.innerHTML = "";
-  DEVREC.forEach(it => devrecList.appendChild(buildRow(it, true)));
-
-  const phaseList = document.getElementById("phaseList");
-  phaseList.innerHTML = "";
-  PHASES.forEach((phase, idx) => {
+  // Pass 0
+  {
     const details = document.createElement("details");
-    details.className = "phase";
-    if(idx === 0) details.open = true;
-
+    details.className = "pass";
+    details.open = true;
+    const doneCount = PASS0.decisions.filter(d => decision[d.id]).length;
     const summary = document.createElement("summary");
     summary.innerHTML = `
       <span class="chev">&#9656;</span>
-      <span class="phase-title">${phase.title}<span class="phase-sub">${phase.sub}</span></span>
-      <span class="phase-progress">
-        <span class="bar"><span class="bar-fill"></span></span>
-        <span class="phase-count"></span>
-      </span>
+      <span class="pass-title">Pass ${PASS0.num} — ${PASS0.title}<span class="pass-sub">${PASS0.time} · gate: ${PASS0.gate}</span></span>
+      <span class="pass-progress"><span class="bar"><span class="bar-fill" style="width:${Math.round(100*doneCount/PASS0.decisions.length)}%"></span></span><span>${doneCount}/${PASS0.decisions.length}</span></span>
     `;
     details.appendChild(summary);
+    const intro = document.createElement("p");
+    intro.className = "pass-intro";
+    intro.textContent = PASS0.intro;
+    details.appendChild(intro);
+    PASS0.decisions.forEach(d => details.appendChild(buildDecisionItem(d)));
+    passList.appendChild(details);
+  }
 
-    phase.sections.forEach(sec => {
+  // Pass 1
+  {
+    const details = document.createElement("details");
+    details.className = "pass";
+    const doneCount = PASS1.items.filter(i => checked[i.id]).length;
+    const summary = document.createElement("summary");
+    summary.innerHTML = `
+      <span class="chev">&#9656;</span>
+      <span class="pass-title">Pass ${PASS1.num} — ${PASS1.title}<span class="pass-sub">${PASS1.time} · gate: ${PASS1.gate}</span></span>
+      <span class="pass-progress"><span class="bar"><span class="bar-fill" style="width:${Math.round(100*doneCount/PASS1.items.length)}%"></span></span><span>${doneCount}/${PASS1.items.length}</span></span>
+    `;
+    details.appendChild(summary);
+    const intro = document.createElement("p");
+    intro.className = "pass-intro";
+    intro.textContent = PASS1.intro;
+    details.appendChild(intro);
+    PASS1.items.forEach(it => details.appendChild(buildSimpleItem(it)));
+    const exit = document.createElement("div");
+    exit.className = "exit-note";
+    exit.innerHTML = `<span class="lbl">Exit:</span> ${PASS1.exit}`;
+    details.appendChild(exit);
+    passList.appendChild(details);
+  }
+
+  // Pass 2
+  {
+    const details = document.createElement("details");
+    details.className = "pass";
+    const doneCount = PASS2.items.filter(i => checked[i.id]).length;
+    const summary = document.createElement("summary");
+    summary.innerHTML = `
+      <span class="chev">&#9656;</span>
+      <span class="pass-title">Pass ${PASS2.num} — ${PASS2.title}<span class="pass-sub">${PASS2.time} · gate: ${PASS2.gate}</span></span>
+      <span class="pass-progress"><span class="bar"><span class="bar-fill" style="width:${Math.round(100*doneCount/PASS2.items.length)}%"></span></span><span>${doneCount}/${PASS2.items.length}</span></span>
+    `;
+    details.appendChild(summary);
+    const intro = document.createElement("p");
+    intro.className = "pass-intro";
+    intro.textContent = PASS2.intro;
+    details.appendChild(intro);
+    const tableWrap = document.createElement("div");
+    tableWrap.style.padding = "0 18px 12px";
+    tableWrap.innerHTML = renderTable(PASS2.table);
+    details.appendChild(tableWrap);
+    PASS2.items.forEach(it => details.appendChild(buildSimpleItem(it)));
+    const exit = document.createElement("div");
+    exit.className = "exit-note";
+    exit.innerHTML = `<span class="lbl">Exit:</span> ${PASS2.exit}`;
+    details.appendChild(exit);
+    passList.appendChild(details);
+  }
+
+  // Graded passes 3-7
+  GRADED_PASSES.forEach(p => {
+    const details = document.createElement("details");
+    details.className = "pass";
+    const subIds = p.subs.map(s=>s.id).concat((p.extraItems||[]).map(i=>i.id));
+    const doneCount = subIds.filter(id => isAddressed(id)).length;
+    const summary = document.createElement("summary");
+    summary.innerHTML = `
+      <span class="chev">&#9656;</span>
+      <span class="pass-title">Pass ${p.num} — ${p.title}<span class="pass-sub">${p.time} · gate: ${p.gate}</span></span>
+      <span class="pass-progress"><span class="bar"><span class="bar-fill" style="width:${Math.round(100*doneCount/subIds.length)}%"></span></span><span>${doneCount}/${subIds.length}</span></span>
+    `;
+    details.appendChild(summary);
+    const intro = document.createElement("p");
+    intro.className = "pass-intro";
+    intro.textContent = p.intro;
+    details.appendChild(intro);
+    p.subs.forEach(s => details.appendChild(buildGradedSub(s)));
+    if(p.extraItems){
       const label = document.createElement("div");
       label.className = "section-label";
-      label.textContent = sec.label;
+      label.textContent = "Two smaller line notes";
       details.appendChild(label);
-      sec.items.forEach(it => details.appendChild(buildRow(it, false)));
-    });
-
-    if(phase.note){
-      const note = document.createElement("div");
-      note.className = "note";
-      note.innerHTML = `<strong>Lock:</strong> ${phase.note}`;
-      details.appendChild(note);
+      p.extraItems.forEach(it => details.appendChild(buildSimpleItem(it)));
     }
-
-    phaseList.appendChild(details);
+    passList.appendChild(details);
   });
 
-  renderGuardrails();
+  // Pass 8
+  {
+    const details = document.createElement("details");
+    details.className = "pass";
+    const doneCount = PASS8.items.filter(i => checked[i.id]).length;
+    const summary = document.createElement("summary");
+    summary.innerHTML = `
+      <span class="chev">&#9656;</span>
+      <span class="pass-title">Pass ${PASS8.num} — ${PASS8.title}<span class="pass-sub">${PASS8.time} · gate: ${PASS8.gate}</span></span>
+      <span class="pass-progress"><span class="bar"><span class="bar-fill" style="width:${Math.round(100*doneCount/PASS8.items.length)}%"></span></span><span>${doneCount}/${PASS8.items.length}</span></span>
+    `;
+    details.appendChild(summary);
+    const intro = document.createElement("p");
+    intro.className = "pass-intro";
+    intro.textContent = PASS8.intro;
+    details.appendChild(intro);
+    PASS8.items.forEach(it => details.appendChild(buildSimpleItem(it)));
+    passList.appendChild(details);
+  }
 
-  const sendCb = document.getElementById("chk-send-final");
-  sendCb.checked = !!checked["send-final"];
-  sendCb.onchange = () => {
-    checked["send-final"] = sendCb.checked;
-    save();
-    renderProgressOnly();
-  };
-
+  renderDoNotTouch();
+  renderCarriedOver();
   renderProgressOnly();
 }
 
 function renderProgressOnly(){
-  const items = [...allItems(), {id:"send-final"}];
-  const done = items.filter(it => checked[it.id]).length;
-  const pct = items.length ? Math.round((done/items.length)*100) : 0;
+  const ids = allTrackableIds();
+  const done = ids.filter(id => isAddressed(id)).length;
+  const pct = ids.length ? Math.round((done/ids.length)*100) : 0;
   document.getElementById("overallRing").style.setProperty("--pct", pct);
   document.getElementById("overallPct").textContent = pct + "%";
-  document.getElementById("overallText").innerHTML = `<strong>${done} of ${items.length}</strong> items complete`;
-
-  const fbDone = FIXBETA.filter(it => checked[it.id]).length;
-  const fbPct = FIXBETA.length ? Math.round((fbDone/FIXBETA.length)*100) : 0;
-  document.getElementById("fixbetaProgress").textContent = `${fbDone}/${FIXBETA.length}`;
-  document.getElementById("fixbetaBar").style.width = fbPct + "%";
-
-  const drDone = DEVREC.filter(it => checked[it.id]).length;
-  const drPct = DEVREC.length ? Math.round((drDone/DEVREC.length)*100) : 0;
-  document.getElementById("devrecProgress").textContent = `${drDone}/${DEVREC.length}`;
-  document.getElementById("devrecBar").style.width = drPct + "%";
-
-  document.querySelectorAll("details.phase").forEach((el, idx) => {
-    const phase = PHASES[idx];
-    const items = phase.sections.flatMap(s => s.items);
-    const doneCount = items.filter(it => checked[it.id]).length;
-    const pct = items.length ? Math.round((doneCount/items.length)*100) : 0;
-    el.querySelector(".bar-fill").style.width = pct + "%";
-    el.querySelector(".phase-count").textContent = `${doneCount}/${items.length}`;
-  });
+  document.getElementById("overallText").innerHTML = `<strong>${done} of ${ids.length}</strong> items addressed`;
 }
 
 async function save(){
-  const payload = JSON.stringify({ checked, notes });
+  const payload = JSON.stringify({ checked, notes, scope, decision });
   let savedViaClaude = false;
   try{
     if(window.storage && typeof window.storage.set === "function"){
       await window.storage.set(STORAGE_KEY, payload, false);
       savedViaClaude = true;
     }
-  }catch(e){
-    savedViaClaude = false;
-  }
+  }catch(e){ savedViaClaude = false; }
   if(!savedViaClaude){
-    try{
-      localStorage.setItem(STORAGE_KEY, payload);
-    }catch(e){
-      // no persistence available at all; state stays in-memory for this session
-    }
+    try{ localStorage.setItem(STORAGE_KEY, payload); }catch(e){ /* no persistence available */ }
   }
 }
 
@@ -952,30 +996,18 @@ async function load(){
       const res = await window.storage.get(STORAGE_KEY, false);
       if(res && res.value) raw = res.value;
     }
-  }catch(e){
-    raw = null;
-  }
+  }catch(e){ raw = null; }
   if(raw === null){
-    try{
-      raw = localStorage.getItem(STORAGE_KEY);
-    }catch(e){
-      raw = null;
-    }
+    try{ raw = localStorage.getItem(STORAGE_KEY); }catch(e){ raw = null; }
   }
   if(raw){
     try{
       const parsed = JSON.parse(raw);
-      if(parsed && (parsed.checked || parsed.notes)){
-        checked = parsed.checked || {};
-        notes = parsed.notes || {};
-      }else{
-        checked = parsed || {};
-        notes = {};
-      }
-    }catch(e){
-      checked = {};
-      notes = {};
-    }
+      checked = parsed.checked || {};
+      notes = parsed.notes || {};
+      scope = parsed.scope || {};
+      decision = parsed.decision || {};
+    }catch(e){ /* ignore */ }
   }
   render();
 }
@@ -988,15 +1020,14 @@ function showToast(msg){
 }
 
 document.getElementById("expandAll").addEventListener("click", () => {
-  document.querySelectorAll("details.phase, details.guard").forEach(d => d.open = true);
+  document.querySelectorAll("details.pass, details.guard").forEach(d => d.open = true);
 });
 document.getElementById("collapseAll").addEventListener("click", () => {
-  document.querySelectorAll("details.phase, details.guard").forEach(d => d.open = false);
+  document.querySelectorAll("details.pass, details.guard").forEach(d => d.open = false);
 });
 document.getElementById("resetAll").addEventListener("click", async () => {
-  if(!confirm("Reset all checked items and notes? This can't be undone.")) return;
-  checked = {};
-  notes = {};
+  if(!confirm("Reset all progress and notes? This can't be undone.")) return;
+  checked = {}; notes = {}; scope = {}; decision = {};
   await save();
   render();
   showToast("Progress reset");
